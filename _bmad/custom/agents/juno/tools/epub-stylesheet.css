@@ -1,0 +1,195 @@
+/* Juno Manuscript — EPUB Stylesheet */
+
+/* === Base Typography === */
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1em;
+  line-height: 1.6;
+  margin: 1em;
+  color: #1a1a1a;
+  orphans: 2;
+  widows: 2;
+}
+
+/* === Headings === */
+h1, h2, h3, h4 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: bold;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  page-break-after: avoid;
+}
+
+/* Chapter titles */
+h1 {
+  font-size: 1.8em;
+  text-align: center;
+  margin-top: 3em;
+  margin-bottom: 1.5em;
+  page-break-before: always;
+}
+
+/* First chapter shouldn't add a blank page before */
+body > h1:first-child,
+section:first-child > h1:first-child {
+  page-break-before: avoid;
+}
+
+h2 {
+  font-size: 1.3em;
+  margin-top: 1.5em;
+}
+
+h3 {
+  font-size: 1.1em;
+  font-style: italic;
+}
+
+/* === Paragraphs === */
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: justify;
+  text-indent: 1.5em;
+}
+
+/* No indent after headings, breaks, or at start */
+h1 + p, h2 + p, h3 + p, h4 + p,
+hr + p,
+blockquote + p {
+  text-indent: 0;
+}
+
+/* === Scene Breaks === */
+hr {
+  border: none;
+  text-align: center;
+  margin: 1.5em 0;
+  page-break-after: avoid;
+}
+
+hr::after {
+  content: "* * *";
+  font-size: 1em;
+  letter-spacing: 0.5em;
+  color: #666;
+}
+
+/* === Block Quotes (for letters, excerpts, internal monologue) === */
+blockquote {
+  margin: 1em 1.5em;
+  font-style: italic;
+  border-left: 2px solid #ccc;
+  padding-left: 1em;
+}
+
+blockquote p {
+  text-indent: 0;
+}
+
+/* === Emphasis === */
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+/* === Chapter First Paragraph — Drop Cap Effect via Small Caps === */
+h1 + p::first-line {
+  font-variant: small-caps;
+  font-size: 1.05em;
+}
+
+/* === Front/Back Matter === */
+.title-page {
+  text-align: center;
+  margin-top: 30%;
+}
+
+.title-page h1 {
+  font-size: 2.2em;
+  margin-bottom: 0.5em;
+  page-break-before: avoid;
+}
+
+.title-page .author {
+  font-size: 1.3em;
+  font-style: italic;
+  margin-top: 1em;
+}
+
+/* === Lists (for table of contents, etc.) === */
+ul, ol {
+  margin: 1em 0;
+  padding-left: 2em;
+}
+
+li {
+  margin-bottom: 0.3em;
+}
+
+/* === Code / Special Text === */
+code {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.9em;
+}
+
+pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.85em;
+  margin: 1em 0;
+  padding: 0.5em;
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  white-space: pre-wrap;
+}
+
+/* === Images === */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1em auto;
+}
+
+/* === Footnotes === */
+.footnotes {
+  font-size: 0.85em;
+  margin-top: 2em;
+  border-top: 1px solid #ccc;
+  padding-top: 0.5em;
+}
+
+/* === Poetry / Verse === */
+.verse, .poetry {
+  font-style: italic;
+  margin: 1em 2em;
+  white-space: pre-wrap;
+}
+
+/* === Screenplay formatting === */
+.slug-line {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 1.5em;
+}
+
+.dialogue-character {
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 1em;
+  margin-bottom: 0.2em;
+}
+
+.dialogue {
+  margin: 0 15%;
+  text-indent: 0;
+}
+
+.parenthetical {
+  margin: 0 20%;
+  font-style: italic;
+  text-indent: 0;
+}

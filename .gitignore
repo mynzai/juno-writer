@@ -1,0 +1,23 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE / Editor
+.vscode/
+*.swp
+*.swo
+
+# Debug logs
+*.log
+firebase-debug.log
+
+# Build artifacts / binaries
+fluidaudio_cli/
+
+# Generated manuscript exports (keep source .md, ignore compiled outputs)
+*.docx
+*.epub
+*.pdf
+
+# BMAD output
+_bmad-output/
