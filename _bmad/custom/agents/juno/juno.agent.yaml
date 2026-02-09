@@ -843,8 +843,88 @@ agent:
         </guidance>
 
     # ================================================================
-    # PROGRESS & ACCOUNTABILITY
+    # IMPORT & PROGRESS
     # ================================================================
+
+    - id: import-work
+      content: |
+        <instructions>Import existing writing into a Juno project — handling format conversion, chapter splitting for large works, and reverse-engineering project structure from imported content</instructions>
+        <process>
+        1. Ask the writer:
+           a. **What are you importing?** — A complete manuscript, partial draft, outline, character notes, world-building doc, research, or reference material?
+           b. **New or existing project?** — Should this create a new project or be added to the current one?
+           c. **Where is the file?** — Get the file path (relative to workspace or absolute)
+
+        2. **Analyze the file** — Run the import script in info mode to assess:
+           ```bash
+           bash "_bmad/custom/agents/juno/tools/manuscript-import.sh" "<file-path>" "<output-dir>" --info
+           ```
+           Report: format, word count, estimated pages, and whether splitting is recommended.
+
+        3. **Determine import strategy based on content type:**
+
+           **A. Complete manuscript or long draft (novel, novella, memoir):**
+           - Run the import script with --split to convert and split into chapters:
+             ```bash
+             bash "_bmad/custom/agents/juno/tools/manuscript-import.sh" "<file-path>" "{project}/05-drafts/" --split
+             ```
+           - If chapter detection fails, ask the writer what pattern their chapter headings use and pass --split-pattern
+           - After splitting, read each chapter file and progressively build project docs (see Reverse Genesis below)
+
+           **B. Article, essay, blog post, short story, or poem:**
+           - Convert without splitting (these fit in a single file):
+             ```bash
+             bash "_bmad/custom/agents/juno/tools/manuscript-import.sh" "<file-path>" "{project}/05-drafts/"
+             ```
+           - Read the converted file and generate appropriate project docs
+
+           **C. Outline, notes, or world-building material:**
+           - Convert the file, then analyze its contents
+           - Route to the appropriate project folder:
+             - Character notes → 02-characters/
+             - World/setting docs → 01-world/
+             - Plot outlines → 03-plot/ or 04-outline/
+             - Research material → _research/
+           - Restructure into Juno's format if the writer agrees
+
+           **D. Reference material (published works, articles for research):**
+           - Convert and place in _research/ with source attribution
+           - Do NOT treat as the writer's own work
+
+        4. **Reverse Genesis** — For manuscripts and drafts, offer to analyze the imported content and auto-generate project scaffolding:
+           - Read through the content (chapter by chapter for large works)
+           - Generate skeleton docs the writer can refine:
+             - 00-genesis/vision.md — Extract the core premise, genre, themes
+             - 02-characters/ — Profile each named character found (name, role, key traits observed)
+             - 01-world/ — Document settings, time periods, world rules
+             - 03-plot/ — Reconstruct plot structure, identify act breaks
+             - 04-outline/ — Build a scene-by-scene outline from what exists
+           - Present findings as a summary: "I found X chapters, Y named characters, Z distinct settings. Here's what I've reconstructed."
+           - Ask the writer to review and correct before finalizing
+
+        5. **Register the project** — If this is a new project:
+           - Create the full folder structure (00-genesis through 06-editing, _research)
+           - Register in projects-registry.md
+           - Set as active project in project-memory.md
+           - Determine the appropriate starting phase based on what was imported
+
+        6. **Report gaps** — After import, identify what's missing:
+           - "I see 15 chapters but no character profiles yet — want me to draft them from what I've read?"
+           - "The manuscript references historical events I could fact-check with [FC]"
+           - "No voice profile exists — want me to run [CV] Capture on this text to extract your writing DNA?"
+           - Recommend next steps using [NX] logic
+        </process>
+        <important>
+        - Always preserve the original file — import creates copies, never moves or modifies the source
+        - For large works, process chapter by chapter to stay within context limits
+        - Reverse Genesis produces SKELETON docs — always present them for writer review before finalizing
+        - The writer's existing structure and creative decisions take priority over Juno's analysis
+        - If the file format is not supported by the import script, attempt manual conversion or advise the writer on format
+        </important>
+        <supported-formats>
+        Via Pandoc: DOCX, EPUB, PDF, RTF, ODT, HTML, TXT, Markdown
+        The import script handles conversion automatically. Pandoc must be installed (brew install pandoc).
+        </supported-formats>
 
     - id: word-count-goals
       content: |
@@ -1077,8 +1157,8 @@ agent:
       description: '[RV] Gatekeeper review for current phase'
 
     - trigger: IM or fuzzy match on import
-      action: 'Parse uploaded document, detect type (outline, lore, character), convert to structured format, identify gaps'
-      description: '[IM] Import existing work into project'
+      action: '#import-work'
+      description: '[IM] Import — Import existing work into project'
 
     - trigger: WC or fuzzy match on word-count
       action: '#word-count-goals'

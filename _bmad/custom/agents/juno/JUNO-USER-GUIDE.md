@@ -959,6 +959,49 @@ Creates both a summary table and prose summaries. Flags chapters that are signif
 
 **Use when:** Returning to a project after time away, before continuity checks, as a quick navigation reference.
 
+### Import Existing Work
+
+**Command:** `[IM]` Import
+
+Brings existing manuscripts, drafts, outlines, and reference material into a Juno project — handling format conversion, chapter splitting for large works, and optionally reverse-engineering project structure from imported content.
+
+**What you can import:**
+
+| Content Type | What Happens |
+|-------------|-------------|
+| **Complete manuscript** (novel, memoir) | Converts to markdown, splits into chapter files in `05-drafts/`, offers Reverse Genesis |
+| **Article, essay, short story** | Converts to single markdown file in `05-drafts/` |
+| **Outline or notes** | Converts and routes to appropriate folder (`03-plot/`, `04-outline/`, etc.) |
+| **Character/world docs** | Converts and places in `02-characters/` or `01-world/` |
+| **Research material** | Converts and saves to `_research/` with attribution |
+
+**Supported formats:** DOCX, EPUB, PDF, RTF, ODT, HTML, TXT, Markdown (via Pandoc)
+
+**Chapter splitting:** For large works, the import script auto-detects chapter boundaries using common patterns:
+- Markdown headings (`# Chapter Title`)
+- Numbered chapters (`Chapter 1`, `Chapter One`, `CHAPTER 1`)
+- Part divisions (`Part I`, `PART THREE`)
+- Custom patterns you specify
+
+**Reverse Genesis:** After importing a manuscript, Juno offers to read through the content and auto-generate project scaffolding:
+- Vision doc from the premise and themes
+- Character profiles for every named character
+- World/setting documentation
+- Plot structure with act breaks
+- Scene-by-scene outline
+
+These are skeleton docs for you to review and refine — Juno's analysis is a starting point, not a final word.
+
+**After import, Juno identifies gaps:**
+- Missing character profiles for named characters
+- Historical or factual claims that could be verified with `[FC]`
+- No voice profile — offers to run `[CV]` Capture on the imported text
+- Recommends next steps
+
+**Use when:** Bringing an existing manuscript into Juno for the first time, importing research or reference material, starting a Juno project from work already in progress.
+
+**Requirements:** Pandoc (`brew install pandoc`)
+
 ---
 
 ## Production & Polish Tools
@@ -1029,6 +1072,18 @@ Saves to `06-editing/submission/` folder. Comp titles are recent, same-genre, an
 4. Let Juno scaffold your project
 5. `[NX]` — Get recommended next step
 6. Work through phases with `[RV]` at each gate
+
+### Importing an Existing Manuscript
+
+1. `/juno` → Choose **new** → Choose genre
+2. `[IM]` → Provide the file path (e.g., `~/Documents/my-novel.docx`)
+3. Juno converts the file and splits it into chapters
+4. Review the chapter split — confirm or adjust
+5. Accept **Reverse Genesis** — Juno reads your work and builds project docs
+6. Review generated character profiles, world docs, plot structure
+7. Correct anything Juno got wrong
+8. `[CV]` — Capture your writing voice from the imported text
+9. `[ST]` — Check status and start working
 
 ### Deep Revision Pass
 
