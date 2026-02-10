@@ -52,10 +52,12 @@ claude --version
 
 ### Optional but Recommended
 
-| Tool | Purpose |
-|------|---------|
-| **Git** | Version control for your writing projects |
-| **VS Code** | IDE with Claude Code extension for visual editing |
+| Tool | Purpose | Install |
+|------|---------|---------|
+| **Pandoc** | Required for `[IM]` Import and `[EX]` Export (format conversion) | `brew install pandoc` |
+| **WeasyPrint** | Required only for PDF export | `brew install weasyprint` |
+| **Git** | Version control for your writing projects | `brew install git` |
+| **VS Code** | IDE with Claude Code extension for visual editing | [code.visualstudio.com](https://code.visualstudio.com) |
 
 ---
 
@@ -63,21 +65,25 @@ claude --version
 
 Juno consists of three components that must be installed together:
 
-### 1. Slash Command (Required)
+### 1. Project Configuration (Required)
 
 ```
-.claude/commands/juno.md
+CLAUDE.md                          # Project instructions for Claude Code
+.claude/commands/juno.md           # Slash command — enables /juno
 ```
-
-This file enables the `/juno` activation command.
 
 ### 2. Agent Definition (Required)
 
 ```
 _bmad/custom/agents/juno/
-├── juno.agent.yaml        # Core agent definition
-├── JUNO-USER-GUIDE.md     # User documentation
-└── JUNO-INSTALLATION-GUIDE.md  # This file
+├── juno.agent.yaml                # Core agent definition (41 commands, 28 prompts)
+├── JUNO-USER-GUIDE.md             # User documentation
+├── JUNO-INSTALLATION-GUIDE.md     # This file
+└── tools/
+    ├── manuscript-import.sh       # Import & format conversion script
+    ├── manuscript-export.sh       # Export & compilation script
+    ├── epub-stylesheet.css        # EPUB typography styles
+    └── pdf-stylesheet.css         # PDF print layout styles
 ```
 
 Plus the module configuration:
@@ -89,13 +95,14 @@ _bmad/custom/module.yaml
 
 ```
 _bmad/_memory/juno-sidecar/
-├── project-memory.md       # Active project context
-├── projects-registry.md    # All projects tracker
-├── active-voice-profile.md # Current writing voice
-├── instructions.md         # User preferences
-├── README.md               # Sidecar documentation
+├── project-memory.md              # Active project context
+├── projects-registry.md           # All projects tracker
+├── active-voice-profile.md        # Current writing voice
+├── instructions.md                # User preferences
+├── writing-directives.md          # Global writing rules Juno follows
+├── README.md                      # Sidecar documentation
 └── voice-profiles/
-    └── default.md          # Default voice profile
+    └── default.md                 # Default voice profile
 ```
 
 ---
@@ -131,37 +138,48 @@ cp -r /path/to/source/_bmad ~/creative-writing/
     │   └── agents/juno/
     │       ├── juno.agent.yaml
     │       ├── JUNO-USER-GUIDE.md
-    │       └── JUNO-INSTALLATION-GUIDE.md
+    │       ├── JUNO-INSTALLATION-GUIDE.md
+    │       └── tools/
+    │           ├── manuscript-import.sh
+    │           ├── manuscript-export.sh
+    │           ├── epub-stylesheet.css
+    │           └── pdf-stylesheet.css
     └── _memory/juno-sidecar/
         ├── project-memory.md
         ├── projects-registry.md
         ├── active-voice-profile.md
         ├── instructions.md
+        ├── writing-directives.md
         ├── README.md
         └── voice-profiles/
             └── default.md
 ```
 
-### Step 3: Install the Slash Command
+### Step 3: Install the Slash Command and Project Config
 
-The slash command must be placed in your `.claude/commands/` directory:
+The slash command and CLAUDE.md must be placed in your creative writing directory:
 
 **Option A: Project-level (recommended)**
 
 Install in your creative writing directory so it's available when you're in that folder:
 
 ```bash
+# Slash command
 mkdir -p ~/creative-writing/.claude/commands
 cp /path/to/source/.claude/commands/juno.md ~/creative-writing/.claude/commands/
+
+# Project config
+cp /path/to/source/CLAUDE.md ~/creative-writing/
 ```
 
-**Option B: Global installation**
+**Option B: Global slash command**
 
-Install in your home directory so it's available everywhere:
+Install the slash command in your home directory so it's available everywhere (CLAUDE.md should still go in the project directory):
 
 ```bash
 mkdir -p ~/.claude/commands
 cp /path/to/source/.claude/commands/juno.md ~/.claude/commands/
+cp /path/to/source/CLAUDE.md ~/creative-writing/
 ```
 
 ### Step 4: Reset Memory Files (Fresh Start)
@@ -245,11 +263,12 @@ Projects are stored in subfolders under the working directory.
 
 ### Step 5: Verify File Permissions
 
-Ensure all files are readable:
+Ensure all files are readable and scripts are executable:
 
 ```bash
 chmod -R u+rw ~/creative-writing/_bmad
 chmod -R u+rw ~/creative-writing/.claude
+chmod +x ~/creative-writing/_bmad/custom/agents/juno/tools/*.sh
 ```
 
 ---
@@ -260,6 +279,7 @@ After installation, your creative writing workspace should look like this:
 
 ```
 ~/creative-writing/                    # Your project root
+├── CLAUDE.md                          # Project instructions for Claude Code
 ├── .claude/
 │   └── commands/
 │       └── juno.md                    # Slash command
@@ -269,12 +289,18 @@ After installation, your creative writing workspace should look like this:
 │   │   └── agents/juno/
 │   │       ├── juno.agent.yaml        # Agent definition
 │   │       ├── JUNO-USER-GUIDE.md     # Documentation
-│   │       └── JUNO-INSTALLATION-GUIDE.md
+│   │       ├── JUNO-INSTALLATION-GUIDE.md
+│   │       └── tools/
+│   │           ├── manuscript-import.sh   # Import script
+│   │           ├── manuscript-export.sh   # Export script
+│   │           ├── epub-stylesheet.css    # EPUB styles
+│   │           └── pdf-stylesheet.css     # PDF styles
 │   └── _memory/juno-sidecar/
 │       ├── project-memory.md          # Session memory
 │       ├── projects-registry.md       # Project list
 │       ├── active-voice-profile.md    # Voice settings
 │       ├── instructions.md            # Preferences
+│       ├── writing-directives.md      # Global writing rules
 │       └── voice-profiles/
 │           └── default.md             # Default voice
 │
@@ -400,15 +426,23 @@ Replace all Juno files while preserving your memory:
 cp -r ~/creative-writing/_bmad/_memory/juno-sidecar ~/juno-sidecar-backup
 
 # Copy new agent files (not memory)
-cp /path/to/new/_bmad/custom/agents/juno/* ~/creative-writing/_bmad/custom/agents/juno/
+cp /path/to/new/_bmad/custom/agents/juno/*.yaml ~/creative-writing/_bmad/custom/agents/juno/
+cp /path/to/new/_bmad/custom/agents/juno/*.md ~/creative-writing/_bmad/custom/agents/juno/
+cp -r /path/to/new/_bmad/custom/agents/juno/tools/ ~/creative-writing/_bmad/custom/agents/juno/
+
+# Copy updated slash command and project config
 cp /path/to/new/.claude/commands/juno.md ~/creative-writing/.claude/commands/
+cp /path/to/new/CLAUDE.md ~/creative-writing/
+
+# Ensure scripts are executable
+chmod +x ~/creative-writing/_bmad/custom/agents/juno/tools/*.sh
 
 # Your memory is preserved in place
 ```
 
 ### Migrating Memory Templates
 
-If you are updating from a version with fewer commands (23 commands) to the expanded version (40 commands), your `project-memory.md` template may be missing new tracking sections. To add them manually, append these sections after "Quick Context" in your existing `project-memory.md`:
+If you are updating from a version with fewer commands (23 commands) to the current version (41 commands), your `project-memory.md` template may be missing new tracking sections. To add them manually, append these sections after "Quick Context" in your existing `project-memory.md`:
 
 - **Word Count Tracking** — target, current total, daily goal, session log table
 - **Subplot Tracking** — thread status table (populated by `[SB]`)
@@ -417,7 +451,7 @@ If you are updating from a version with fewer commands (23 commands) to the expa
 
 See the fresh `project-memory.md` template for the exact format. Your `instructions.md` also has new preference sections for session management and genre defaults.
 
-**Note:** The agent YAML (`juno.agent.yaml`) has grown significantly to support 40 commands with 26 detailed prompts. This is expected and does not affect performance since prompts are loaded on demand.
+**Note:** The agent YAML (`juno.agent.yaml`) has grown significantly to support 41 commands with 28 detailed prompts. This is expected and does not affect performance since prompts are loaded on demand.
 
 ### Partial Update (Agent Only)
 
@@ -436,10 +470,13 @@ If you want to start completely fresh:
 # Remove old installation
 rm -rf ~/creative-writing/_bmad
 rm -rf ~/creative-writing/.claude/commands/juno.md
+rm -f ~/creative-writing/CLAUDE.md
 
 # Copy everything new
 cp -r /path/to/new/_bmad ~/creative-writing/
 cp -r /path/to/new/.claude ~/creative-writing/
+cp /path/to/new/CLAUDE.md ~/creative-writing/
+chmod +x ~/creative-writing/_bmad/custom/agents/juno/tools/*.sh
 ```
 
 ---
@@ -459,6 +496,11 @@ DEST="${2:-~/creative-writing}"
 
 echo "Installing Juno to $DEST..."
 
+# Check for Pandoc (recommended)
+if ! command -v pandoc &>/dev/null; then
+  echo "Note: Pandoc not found. Install with 'brew install pandoc' for Import/Export features."
+fi
+
 # Create destination
 mkdir -p "$DEST"
 
@@ -471,9 +513,13 @@ cp -r "$SOURCE/_bmad/_memory" "$DEST/_bmad/"
 mkdir -p "$DEST/.claude/commands"
 cp "$SOURCE/.claude/commands/juno.md" "$DEST/.claude/commands/"
 
+# Copy project config
+cp "$SOURCE/CLAUDE.md" "$DEST/"
+
 # Set permissions
 chmod -R u+rw "$DEST/_bmad"
 chmod -R u+rw "$DEST/.claude"
+chmod +x "$DEST/_bmad/custom/agents/juno/tools/"*.sh
 
 echo "Installation complete!"
 echo ""
