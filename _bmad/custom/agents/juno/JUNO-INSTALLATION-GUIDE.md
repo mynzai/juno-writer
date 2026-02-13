@@ -70,6 +70,7 @@ Juno consists of three components that must be installed together:
 ```
 CLAUDE.md                          # Project instructions for Claude Code
 .claude/commands/juno.md           # Slash command — enables /juno
+.claude/settings.json              # Project permissions (WebSearch, WebFetch for sub-agents)
 ```
 
 ### 2. Agent Definition (Required)
@@ -181,9 +182,9 @@ cp -r /path/to/source/_bmad ~/creative-writing/
             └── default.md
 ```
 
-### Step 3: Install the Slash Command and Project Config
+### Step 3: Install the Slash Command, Project Config, and Permissions
 
-The slash command and CLAUDE.md must be placed in your creative writing directory:
+The slash command, CLAUDE.md, and project settings must be placed in your creative writing directory:
 
 **Option A: Project-level (recommended)**
 
@@ -196,16 +197,20 @@ cp /path/to/source/.claude/commands/juno.md ~/creative-writing/.claude/commands/
 
 # Project config
 cp /path/to/source/CLAUDE.md ~/creative-writing/
+
+# Project permissions (enables WebSearch/WebFetch for sub-agents like Raven)
+cp /path/to/source/.claude/settings.json ~/creative-writing/.claude/
 ```
 
 **Option B: Global slash command**
 
-Install the slash command in your home directory so it's available everywhere (CLAUDE.md should still go in the project directory):
+Install the slash command in your home directory so it's available everywhere (CLAUDE.md and settings should still go in the project directory):
 
 ```bash
 mkdir -p ~/.claude/commands
 cp /path/to/source/.claude/commands/juno.md ~/.claude/commands/
 cp /path/to/source/CLAUDE.md ~/creative-writing/
+cp /path/to/source/.claude/settings.json ~/creative-writing/.claude/
 ```
 
 ### Step 4: Reset Memory Files (Fresh Start)
@@ -341,6 +346,7 @@ After installation, your creative writing workspace should look like this:
 ~/creative-writing/                    # Your project root
 ├── CLAUDE.md                          # Project instructions for Claude Code
 ├── .claude/
+│   ├── settings.json                  # Project permissions (WebSearch, WebFetch)
 │   └── commands/
 │       └── juno.md                    # Slash command
 ├── _bmad/
@@ -505,6 +511,28 @@ ls -la ~/creative-writing/_bmad/_memory/juno-sidecar/
 2. Juno will register it in `projects-registry.md`
 3. Or manually add to the registry table
 
+### Sub-agent web search denied (Raven can't search)
+
+**Cause:** Project-level permissions missing WebSearch/WebFetch
+
+**Fix:**
+Ensure `.claude/settings.json` exists in your creative writing directory with:
+```json
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch"
+    ]
+  }
+}
+```
+
+If the file was not copied during installation, copy it from source:
+```bash
+cp /path/to/source/.claude/settings.json ~/creative-writing/.claude/
+```
+
 ### Wrong directory structure created
 
 **Cause:** Genre not detected or wrong genre selected
@@ -534,8 +562,9 @@ cp /path/to/new/_bmad/custom/agents/juno/*.md ~/creative-writing/_bmad/custom/ag
 cp -r /path/to/new/_bmad/custom/agents/juno/sub-agents/ ~/creative-writing/_bmad/custom/agents/juno/
 cp -r /path/to/new/_bmad/custom/agents/juno/tools/ ~/creative-writing/_bmad/custom/agents/juno/
 
-# Copy updated slash command and project config
+# Copy updated slash command, project config, and permissions
 cp /path/to/new/.claude/commands/juno.md ~/creative-writing/.claude/commands/
+cp /path/to/new/.claude/settings.json ~/creative-writing/.claude/
 cp /path/to/new/CLAUDE.md ~/creative-writing/
 
 # Ensure scripts are executable
@@ -594,6 +623,7 @@ If you want to start completely fresh:
 # Remove old installation
 rm -rf ~/creative-writing/_bmad
 rm -rf ~/creative-writing/.claude/commands/juno.md
+rm -f ~/creative-writing/.claude/settings.json
 rm -f ~/creative-writing/CLAUDE.md
 
 # Copy everything new
@@ -633,9 +663,10 @@ mkdir -p "$DEST/_bmad"
 cp -r "$SOURCE/_bmad/custom" "$DEST/_bmad/"
 cp -r "$SOURCE/_bmad/_memory" "$DEST/_bmad/"
 
-# Copy slash command
+# Copy slash command and project settings
 mkdir -p "$DEST/.claude/commands"
 cp "$SOURCE/.claude/commands/juno.md" "$DEST/.claude/commands/"
+cp "$SOURCE/.claude/settings.json" "$DEST/.claude/"
 
 # Copy project config
 cp "$SOURCE/CLAUDE.md" "$DEST/"
