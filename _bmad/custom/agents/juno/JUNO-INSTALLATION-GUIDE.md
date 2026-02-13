@@ -76,7 +76,7 @@ CLAUDE.md                          # Project instructions for Claude Code
 
 ```
 _bmad/custom/agents/juno/
-├── juno.agent.yaml                # Core agent definition (49 commands, 31 prompts)
+├── juno.agent.yaml                # Core agent definition (50 commands, 32 prompts)
 ├── JUNO-USER-GUIDE.md             # User documentation
 ├── JUNO-INSTALLATION-GUIDE.md     # This file
 ├── sub-agents/                    # Specialist sub-agents Juno can summon
@@ -102,12 +102,18 @@ _bmad/custom/module.yaml
 
 ```
 _bmad/_memory/juno-sidecar/
-├── project-memory.md              # Active project context
+├── project-memory.md              # Live State + active project context
 ├── projects-registry.md           # All projects tracker
 ├── active-voice-profile.md        # Current writing voice
-├── instructions.md                # User preferences
+├── instructions.md                # User preferences + context management
 ├── writing-directives.md          # Global writing rules Juno follows
+├── session-archive.md             # Past session history (not loaded on startup)
 ├── README.md                      # Sidecar documentation
+├── directive-templates/           # Pre-built writing directive templates
+│   ├── starter-pack.md
+│   ├── literary-fiction.md
+│   ├── genre-thriller.md
+│   └── nonfiction-blog.md
 └── voice-profiles/
     └── default.md                 # Default voice profile
 ```
@@ -164,7 +170,13 @@ cp -r /path/to/source/_bmad ~/creative-writing/
         ├── active-voice-profile.md
         ├── instructions.md
         ├── writing-directives.md
+        ├── session-archive.md
         ├── README.md
+        ├── directive-templates/
+        │   ├── starter-pack.md
+        │   ├── literary-fiction.md
+        │   ├── genre-thriller.md
+        │   └── nonfiction-blog.md
         └── voice-profiles/
             └── default.md
 ```
@@ -204,24 +216,50 @@ If you want a clean slate (no previous project history), reset the memory files:
 ```markdown
 # Project Memory
 
+## Live State
+<!-- UPDATED: — | STATUS: idle | CMD: — -->
+
+**Session:** — | **Tasks this session:** 0
+**Current task:** idle
+**Last completed:** —
+**Files touched this session:** —
+**Words this session:** +0 (total: 0)
+**Decisions:**
+- (none)
+**Open threads:**
+- (none)
+**Pickup point:** No active project. Use [GS] Genesis to start or [LP] to list existing projects.
+
+---
+
 ## Active Project
 
 **Project:** (none yet)
 **Path:** —
 **Phase:** —
+**Genre:** —
 **Last Session:** —
 
 ---
 
-## Quick Context
+## Word Count
 
-**Current Focus:** —
-**Open Threads:** —
-**Pending Decisions:** —
+**Target:** —
+**Current Total:** 0
+**Next Milestone:** —
 
 ---
 
-## Session History
+## Story Tracking
+
+### Subplots
+(none yet)
+
+### Themes & Motifs
+(none yet)
+
+### Foreshadowing
+(none yet)
 
 ---
 
@@ -233,8 +271,16 @@ If you want a clean slate (no previous project history), reset the memory files:
 
 ---
 
+## Previous Session Summary
+<!-- Only the LAST session's compact recap lives here. Older sessions in session-archive.md -->
+
+(no sessions yet)
+
+---
+
 ## See Also
 
+- **Full session history:** See `session-archive.md`
 - **All projects:** See `projects-registry.md` for full project list
 - **Switch projects:** Use `[LP]` to list and switch
 ```
@@ -317,11 +363,17 @@ After installation, your creative writing workspace should look like this:
 │   │           ├── epub-stylesheet.css    # EPUB styles
 │   │           └── pdf-stylesheet.css     # PDF styles
 │   └── _memory/juno-sidecar/
-│       ├── project-memory.md          # Session memory
+│       ├── project-memory.md          # Live State + session memory
 │       ├── projects-registry.md       # Project list
 │       ├── active-voice-profile.md    # Voice settings
-│       ├── instructions.md            # Preferences
+│       ├── instructions.md            # Preferences + context management
 │       ├── writing-directives.md      # Global writing rules
+│       ├── session-archive.md         # Past session history
+│       ├── directive-templates/       # Pre-built writing directive sets
+│       │   ├── starter-pack.md
+│       │   ├── literary-fiction.md
+│       │   ├── genre-thriller.md
+│       │   └── nonfiction-blog.md
 │       └── voice-profiles/
 │           └── default.md             # Default voice
 │
@@ -494,14 +546,13 @@ chmod +x ~/creative-writing/_bmad/custom/agents/juno/tools/*.sh
 
 ### Migrating Memory Templates
 
-If you are updating from an earlier version, your `project-memory.md` template may be missing tracking sections. To add them manually, append these sections after "Quick Context" in your existing `project-memory.md`:
+If you are updating from an earlier version, your `project-memory.md` template may be missing tracking sections. The current format uses a **Live State** block at the top for incremental session saving. To migrate:
 
-- **Word Count Tracking** — target, current total, daily goal, session log table
-- **Subplot Tracking** — thread status table (populated by `[SB]`)
-- **Theme & Motif Tracking** — element tracking table (populated by `[TH]`)
-- **Foreshadowing Ledger** — setup/payoff status table (populated by `[FL]`)
+1. Replace your `project-memory.md` with the fresh template from Step 4 above
+2. Re-enter your active project details in the "Active Project" section
+3. Story tracking sections (Subplots, Themes, Foreshadowing) remain the same format
 
-See the fresh `project-memory.md` template for the exact format. Your `instructions.md` also has new preference sections for session management and genre defaults.
+Your `instructions.md` also has new sections for Context Management Preferences, session management, and genre defaults.
 
 ### Migrating to Sub-Agent Support
 
@@ -512,7 +563,17 @@ If updating from a version without sub-agents (pre-49 commands), note:
 - **New projects** created with `[GS]` Genesis will scaffold these folders automatically.
 - **New commands:** `[KB]`, `[RN]`, `[TS]`, `[LX]`, `[MQ]`, `[LM]`, `[VY]`, `[AP]` — see the User Guide for details.
 
-**Note:** The agent YAML (`juno.agent.yaml`) supports 49 commands with 31 detailed prompts. This is expected and does not affect performance since prompts are loaded on demand.
+**Note:** The agent YAML (`juno.agent.yaml`) supports 50 commands with 32 detailed prompts. This is expected and does not affect performance since prompts are loaded on demand.
+
+### Migrating to Session Continuity
+
+If updating from a version without session continuity (pre-50 commands), note:
+
+- **New file:** `session-archive.md` in the sidecar. Create an empty one or copy from source — Juno's `[SR]` Session Recap will populate it.
+- **New folder:** `directive-templates/` in the sidecar with 4 pre-built templates (starter-pack, literary-fiction, genre-thriller, nonfiction-blog). Copy from source to enable `[WD]` > Load Template.
+- **project-memory.md format changed:** The new format uses a Live State block at the top for incremental saves. If your existing project-memory.md uses the old format, replace it with the fresh template from Step 4 and re-enter your project details, or let Juno reformat it on first activation.
+- **instructions.md updated:** Now includes Context Management Preferences section. Copy fresh or add manually.
+- **New command:** `[SA]` Session Archive — browse past session history without loading the full archive.
 
 ### Partial Update (Agent Only)
 
@@ -587,6 +648,17 @@ chmod +x "$DEST/_bmad/custom/agents/juno/tools/"*.sh
 # Verify sub-agents were copied
 AGENT_COUNT=$(ls "$DEST/_bmad/custom/agents/juno/sub-agents/"*.yaml 2>/dev/null | wc -l)
 echo "Installed $AGENT_COUNT sub-agents"
+
+# Verify directive templates were copied
+TEMPLATE_COUNT=$(ls "$DEST/_bmad/_memory/juno-sidecar/directive-templates/"*.md 2>/dev/null | wc -l)
+echo "Installed $TEMPLATE_COUNT directive templates"
+
+# Verify session archive exists
+if [ -f "$DEST/_bmad/_memory/juno-sidecar/session-archive.md" ]; then
+  echo "Session archive: ready"
+else
+  echo "Note: session-archive.md not found — Juno will create it on first [SR]"
+fi
 
 echo "Installation complete!"
 echo ""

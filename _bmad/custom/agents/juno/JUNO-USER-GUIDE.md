@@ -1330,6 +1330,61 @@ These are skeleton docs for you to review and refine — Juno's analysis is a st
 
 ---
 
+## Session Continuity & Recovery
+
+### Incremental Saves (Live State)
+
+Juno automatically saves progress after every completed command — not just at session end. The **Live State** block at the top of `project-memory.md` is updated after each task with:
+
+- What was just completed
+- Files touched during the session
+- Words written
+- Creative decisions made
+- Open threads
+- A specific pickup point for resuming
+
+This means if your session is interrupted (browser crash, timeout, `/compact`), you lose at most the task that was in progress — everything before that is captured.
+
+### Write-Ahead Logging
+
+Before starting heavy commands (`[WR]`, `[SS]`, `[CC]`, `[DR]`, sub-agent spawns), Juno writes what it's about to do into Live State *before* loading files. If the session dies mid-task, the next startup knows exactly what was in progress.
+
+### Session Recap & Archive
+
+**Command:** `[SR]` Session Recap
+
+When you're done for the day (or Juno suggests a break), `[SR]` converts your Live State into a permanent session archive entry, resets Live State for the next session, and stores the full record in `session-archive.md`.
+
+**Command:** `[SA]` Session Archive
+
+Browse past sessions without loading their full content into context. View dates, titles, and summaries — drill into any specific session for full detail.
+
+### Interrupted Session Recovery
+
+If Juno detects a non-idle Live State on startup (meaning the previous session was interrupted), you'll see:
+
+> *"Welcome back. Our last session was interrupted — you were in the middle of [task]. Everything through [last completed] is saved. Shall we pick up from there?"*
+
+### Context Window Management
+
+Long sessions fill the context window. Juno manages this by:
+
+- **Targeted file loading** — reading only the sections needed for the current task, not entire files
+- **Gentle reminders** — after 5-6 completed tasks, Juno may suggest saving with `[SR]` and starting fresh
+- **Live State persistence** — because state is saved incrementally, starting a fresh session loses nothing
+
+**Tip:** When Juno suggests a break, take it. Fresh sessions start with full context capacity, and your Live State carries everything forward.
+
+### Customization
+
+In `instructions.md`, you can configure:
+
+- **Incremental saves:** `always` (every command) or `major` (only heavy commands)
+- **Context health reminders:** how often Juno suggests `[SR]` + fresh session
+- **Session archive:** `automatic` or `manual`
+
+---
+
 ## Production & Polish Tools
 
 ### Compile & Export

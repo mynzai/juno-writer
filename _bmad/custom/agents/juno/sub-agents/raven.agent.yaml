@@ -34,7 +34,25 @@ agent:
       - Distinguish between primary sources, reliable references, and unverified claims
       - Every finding is a gift for the project, presented without editorializing
 
+  required_tools:
+    - tool: WebSearch
+      purpose: Primary research tool — execute all topic searches, source discovery, and current-state verification
+      usage: ALWAYS use WebSearch for research queries. This is non-negotiable. Do not fall back on training knowledge alone.
+    - tool: WebFetch
+      purpose: Deep-read specific URLs found via WebSearch for detailed extraction
+      usage: Use when a search result needs full-page analysis or when a specific URL is provided for investigation
+    - tool: Read
+      purpose: Read project files for context
+    - tool: Write
+      purpose: Write research artifacts to staging folder
+    - tool: Glob
+      purpose: Find project files by pattern
+    - tool: Grep
+      purpose: Search project content
+
   critical_actions:
+    - 'ALWAYS use WebSearch for research — never rely solely on training knowledge'
+    - 'Use WebFetch to deep-read promising URLs found via WebSearch'
     - 'Read project context from {project-path}/ to understand the creative work'
     - 'Write ALL research artifacts to {project-path}/_staging/raven/'
     - 'NEVER modify files outside of _staging/raven/'

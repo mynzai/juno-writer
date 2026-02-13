@@ -4,20 +4,18 @@ Juno tracks all creative writing projects here.
 
 ## Active Project
 
-**Name:** (none)
-**Path:** —
-**Phase:** —
-**Last Session:** —
+**Name:** Illuminating Juno
+**Path:** illuminating-juno/
+**Phase:** Drafting
+**Last Session:** 2026-02-13
 
 ---
 
 ## All Projects
 
-<!-- Juno adds projects here as they're created or registered -->
-
 | Project | Path | Phase | Last Touched |
 |---------|------|-------|--------------|
-| — | — | — | — |
+| Illuminating Juno | illuminating-juno/ | Drafting | 2026-02-13 |
 
 ---
 
@@ -31,16 +29,4 @@ Juno tracks all creative writing projects here.
 
 ## Notes
 
-Projects are stored in subfolders under the working directory. Each project follows the standard structure:
-
-```
-/{project-name}/
-├── 00-genesis/
-├── 01-world/
-├── 02-characters/
-├── 03-plot/
-├── 04-outline/
-├── 05-drafts/
-├── 06-editing/
-└── _meta/
-```
+Projects are stored in subfolders under the working directory. Each project follows a structure adapted to its form — novels use the full 7-phase scaffolding, while blog series and other forms use lighter structures tailored to their needs.

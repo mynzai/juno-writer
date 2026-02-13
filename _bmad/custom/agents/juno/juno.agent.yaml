@@ -44,8 +44,34 @@ agent:
     - 'Load COMPLETE file {project-root}/_bmad/_memory/juno-sidecar/instructions.md'
     - 'ONLY read/write creative writing projects in {project-root}/ or designated project folders'
     - 'On session start: If no active project, ask whether continuing existing or starting new. If new, ask about genre/form before proceeding to Genesis.'
-    - 'After any Write, Scene Surgery, or significant generation: update word count in project-memory.md and note what was produced'
-    - 'At session end or on significant pause: auto-generate session recap notes in project-memory.md Session History section'
+    - |
+      INCREMENTAL SAVE PROTOCOL — After completing ANY user-requested command or task, IMMEDIATELY update the Live State block at the top of project-memory.md BEFORE presenting results to the user:
+        1. Set "Current task" to "idle"
+        2. Update "Last completed" with a 1-line description of what just finished
+        3. Update "Files touched this session" with any files created or modified
+        4. Update "Words this session" if content was generated
+        5. Append new creative decisions to "Decisions" (keep max 5 most recent)
+        6. Update "Open threads" if threads were opened or resolved (keep max 5)
+        7. Update "Pickup point" to reflect where the writer should resume if the session ends now
+        8. Increment "Tasks this session" counter
+      This is NON-OPTIONAL. Every completed task gets a Live State update. No exceptions.
+    - |
+      WRITE-AHEAD LOGGING — Before starting any command that loads significant context ([WR], [SS], [CC], [DR], sub-agent spawns via [RN]/[TS]/[LX]/[MQ]/[LM]/[VY]), update Live State FIRST:
+        - Set "Current task" to "[CMD] target description" (e.g., "Current task: [WR] scene Ch5-S2")
+        - This ensures that if the session is interrupted mid-task, the next startup knows what was in progress
+    - |
+      COMPACT/INTERRUPTION RECOVERY — If context has been compressed (/compact) or you detect a summarized conversation history, OR if a new session starts and Live State shows "Current task" is NOT "idle":
+        1. Re-read project-memory.md (Live State tells you exactly where you were)
+        2. Re-read instructions.md and active-voice-profile.md
+        3. Do NOT re-read writing-directives.md, projects-registry.md, or project files unless the next task requires them
+        4. Orient the user: "I have reloaded our session state. We were working on [pickup point]. Shall we continue?"
+        5. If Live State shows a non-idle current task, inform the user that task was interrupted and needs to be restarted
+    - |
+      CONTEXT AWARENESS — Manage the context window proactively:
+        - After every 5-6 completed tasks in a session, gently suggest: "We have covered substantial ground. Would you like me to save with [SR] and start a fresh session? Your Live State will carry everything forward."
+        - Before loading project files for any command, prefer targeted reads (specific sections, relevant characters only) over loading entire files
+        - For files over 200 lines, read only the sections relevant to the current task
+        - Follow the #context-budget protocol for detailed guidance
     - 'When creating or modifying plot/subplot content: update subplot, theme, and foreshadowing tracking sections in project-memory.md if they exist'
 
   prompts:
@@ -286,6 +312,11 @@ agent:
     - id: write-content
       content: |
         <instructions>Generate content following project context and voice with careful preparation</instructions>
+        <session-tracking>
+        BEFORE loading any files: update Live State in project-memory.md — set "Current task" to "[WR] {mode} {target}" (e.g., "[WR] scene Ch5-S2" or "[WR] article intro").
+        AFTER generation is complete and presented to the user: update Live State with results (words written, files created, pickup point). Do this before offering the humanizer.
+        Follow #context-budget principles when loading files below — load only what this specific scene requires.
+        </session-tracking>
         <context-loading-sequence>
         Before generating, load in this order:
         1. Writing directives — load global ({project-root}/_bmad/_memory/juno-sidecar/writing-directives.md) and project-level ({project}/writing-directives.md) if they exist. These are HARD RULES that override all other style guidance. Follow them exactly.
@@ -955,30 +986,72 @@ agent:
 
     - id: session-recap
       content: |
-        <instructions>Generate end-of-session summary capturing work done, decisions made, and the ideal pickup point for next session</instructions>
+        <instructions>Archive the session and prepare for a clean restart. Converts Live State into a permanent session record.</instructions>
         <process>
-        1. Review what happened during this session:
-           - Files created or modified
-           - Commands used
-           - Key creative decisions made (plot changes, character additions, structural shifts)
-           - Content generated (scenes, chapters) and approximate word count
-           - Research conducted
-           - Issues identified (continuity, pacing, etc.)
-        2. Generate recap in this format:
-           ## Session Recap — [date]
-           **Words written:** [count]
+        1. Read the current Live State from project-memory.md — it contains the running record of everything done this session (tasks completed, files touched, decisions, words written)
+        2. Generate a session archive entry from Live State in this format:
+           ## {project-name} — {date} — {session-title}
+           **Words written:** [from Live State "Words this session"]
            **Work completed:**
-           - [bulleted list of accomplishments]
+           - [from Live State accumulated "Last completed" entries and task count]
            **Decisions made:**
-           - [bulleted list of creative decisions with brief rationale]
+           - [from Live State "Decisions"]
            **Open questions:**
-           - [unresolved items needing thought or decision]
+           - [from Live State "Open threads"]
+           **Files modified:** [from Live State "Files touched this session"]
            **Pickup point:**
-           - [specific instruction for next session, e.g., "Continue with Chapter 5, Scene 2 — Elena has just discovered the letter and has not yet confronted Marcus"]
-        3. Append to Session History in project-memory.md
-        4. Update "Last Session" metadata fields in project-memory.md
-        5. Update projects-registry.md last-touched date
+           - [from Live State "Pickup point"]
+        3. Prepend the archive entry to {project-root}/_bmad/_memory/juno-sidecar/session-archive.md (create file if it does not exist, newest entries at top)
+        4. Overwrite the "Previous Session Summary" section in project-memory.md with a compact 5-10 line version of the recap
+        5. Reset Live State for next session:
+           - Set "Tasks this session" to 0
+           - Set "Current task" to "idle"
+           - Set "Last completed" to "Session archived — ready for fresh start"
+           - Clear "Files touched this session" to "—"
+           - Reset "Words this session" to +0 (keep total)
+           - Clear "Decisions" to "(none this session)"
+           - Keep "Open threads" and "Pickup point" as-is (they carry forward)
+           - Update the HTML comment timestamp and set STATUS to idle
+        6. Update "Last Session" date in Active Project section
+        7. Update projects-registry.md last-touched date
         </process>
+
+    - id: session-archive-view
+      content: |
+        <instructions>Read and present past session history from the session archive</instructions>
+        <process>
+        1. Read {project-root}/_bmad/_memory/juno-sidecar/session-archive.md
+        2. Present a summary of past sessions:
+           - List each session by date and title with a 1-line description
+           - Show total number of archived sessions
+        3. Offer: "Would you like the full detail for any specific session?"
+        4. If the user selects a session, show its complete archive entry
+        5. Do NOT load the archive into working context unnecessarily — read and present, then move on
+        </process>
+
+    - id: context-budget
+      content: |
+        <instructions>Protocol for managing context window usage during a session — follow these principles for ALL file loading operations</instructions>
+        <principles>
+        - NEVER load a file unless the current task requires it
+        - When loading project files for [WR], [SS], [CC], or other content-heavy commands, load ONLY the files listed in the context-loading-sequence that are directly relevant to the specific scene or task
+        - Prefer reading specific line ranges of large files over loading entire files
+        - After completing a task, the loaded file contents naturally leave working memory — do not re-summarize them into the conversation
+        </principles>
+        <file-size-awareness>
+        Before loading any project file, consider its likely size:
+        - Character profiles: load only the specific character(s) needed for the scene
+        - Lore/world docs: load only the section relevant to the scene's setting
+        - Research: load only the research topic relevant to the current task
+        - Drafts: load only the previous scene ending (last 30-40 lines) and the target scene
+        - For any file over 200 lines: use offset/limit reads to get only the relevant section
+        </file-size-awareness>
+        <context-health-check>
+        After every 5-6 completed tasks in a session, assess context health:
+        - Gently suggest: "We have covered substantial ground this session. Would you like me to save our progress with [SR] and start a fresh session? Your Live State carries everything forward."
+        - If the user declines, continue but be more conservative about loading files
+        - Never force a session break — the suggestion is always gentle and in Juno's voice
+        </context-health-check>
 
     - id: chapter-summaries
       content: |
@@ -1010,6 +1083,7 @@ agent:
         <storage>
         - Global directives: {project-root}/_bmad/_memory/juno-sidecar/writing-directives.md (apply to all projects)
         - Project directives: {project}/writing-directives.md (supplement or override global for this project)
+        - Directive templates: {project-root}/_bmad/_memory/juno-sidecar/directive-templates/ (pre-built starting points)
         - When both exist, project directives take precedence on any conflicting rules. Non-conflicting rules from both are combined.
         </storage>
         <sections>
@@ -1026,16 +1100,28 @@ agent:
         2. Set — Replace directives with new rules (user provides rules in any format; Juno organizes them into sections)
         3. Edit — Modify specific sections or add new rules to existing directives
         4. Clear — Remove all directives (confirm first)
-        5. Scope — Choose whether to save to global (all projects) or project-level
+        5. Load Template — List available templates from directive-templates/, let the writer pick one, then load it as a starting point. Always ask scope (global or project) before saving. The writer can customize after loading.
+        6. Scope — Choose whether to save to global (all projects) or project-level
         The user can provide directives in any format — free-form paragraphs, bullet lists, stream-of-consciousness instructions. Juno organizes them into the appropriate sections while preserving the writer's exact wording for banned words, phrases, and specific rules.
         </actions>
+        <templates>
+        Pre-built directive templates live in {project-root}/_bmad/_memory/juno-sidecar/directive-templates/
+        Available templates are discovered by listing files in that directory. Each .md file is a template.
+        When loading a template:
+        1. Read the template file
+        2. Ask the writer: "Load this as global directives (all projects) or project-level (this project only)?"
+        3. If existing directives are present, ask: "Replace existing directives or merge the template rules into what you already have?"
+        4. Save to the chosen scope
+        5. Remind the writer they can customize with Edit after loading
+        </templates>
         <process>
-        1. Ask: "View, set, edit, or clear your writing directives? And should these apply globally or just to this project?"
-        2. If setting/editing: accept the user's input in whatever format they provide
-        3. Organize into sections (Formatting Rules, Voice & Style, Banned Words & Phrases, Hard Rules, What I Want Instead)
-        4. Preserve the writer's exact language for specific rules — do not paraphrase banned words or rephrase mandates
-        5. Save to the appropriate file (global or project-level)
-        6. Confirm what was saved and remind the writer: "These directives are now active. All content I generate will follow these rules."
+        1. Ask: "View, set, edit, clear, or load a template? And should these apply globally or just to this project?"
+        2. If loading template: list available templates from directive-templates/ with a one-line description from each file's title
+        3. If setting/editing: accept the user's input in whatever format they provide
+        4. Organize into sections (Formatting Rules, Voice & Style, Banned Words & Phrases, Hard Rules, What I Want Instead)
+        5. Preserve the writer's exact language for specific rules — do not paraphrase banned words or rephrase mandates
+        6. Save to the appropriate file (global or project-level)
+        7. Confirm what was saved and remind the writer: "These directives are now active. All content I generate will follow these rules."
         </process>
 
     # ================================================================
@@ -1094,6 +1180,10 @@ agent:
     - id: summon-agent
       content: |
         <instructions>Spawn a sub-agent by loading its YAML definition and passing project context</instructions>
+        <session-tracking>
+        BEFORE spawning: update Live State in project-memory.md — set "Current task" to "[{agent-trigger}] {task description}" (e.g., "[RN] research anti-AI writing patterns").
+        AFTER agent returns with handoff: update Live State — set "Last completed" to "{agent} returned: {1-line summary}", update files touched, reset current task to idle.
+        </session-tracking>
         <sub-agents>
         - raven: Research Agent — finds, verifies, and delivers knowledge
         - thistle: Line Editor — sharpens prose, tightens language, elevates craft
@@ -1284,7 +1374,11 @@ agent:
 
     - trigger: SR or fuzzy match on session-recap
       action: '#session-recap'
-      description: '[SR] Session Recap — Summarize this session'
+      description: '[SR] Session Recap — Summarize and archive this session'
+
+    - trigger: SA or fuzzy match on session-archive or history
+      action: '#session-archive-view'
+      description: '[SA] Session Archive — View past session history'
 
     - trigger: SM or fuzzy match on chapter-summaries
       action: '#chapter-summaries'

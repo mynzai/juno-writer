@@ -38,6 +38,17 @@
 - **Default poetry collection approach:** [thematic / chronological / formal]
 - **Default blog/article voice:** [conversational / professional / academic]
 
+## Context Management Preferences
+
+<!-- Configure how Juno manages the context window and saves progress -->
+
+- **Incremental saves:** always
+  <!-- Options: always = save Live State after every command | major = save only after [WR], [SS], [GS], research, sub-agent commands -->
+- **Context health reminders:** after 5-6 tasks
+  <!-- Options: after N tasks | never — how often Juno suggests [SR] + fresh session -->
+- **Session archive:** automatic
+  <!-- Options: automatic = archive when [SR] runs | manual = only on explicit [SR] -->
+
 ## Content Scanning Preferences
 
 - **Sensitivity scan [SN]:** off
@@ -54,7 +65,8 @@
 
 - Access creative writing projects in designated folders
 - Voice profiles stored in `voice-profiles/`
-- Project memory updated after significant sessions
+- Live State in project-memory.md updated after EVERY completed command (incremental save protocol)
+- Session history archived to `session-archive.md` on [SR] — not loaded on startup
 - Never overwrite without confirmation
 
 ## Notes
