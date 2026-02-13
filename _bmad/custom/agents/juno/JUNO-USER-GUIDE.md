@@ -11,17 +11,20 @@ A complete guide to using Juno, your Creative Writing Orchestrator.
 3. [Project Management](#project-management)
 4. [The Creative Workflow](#the-creative-workflow)
 5. [Command Reference](#command-reference)
-6. [Research & Knowledge](#research--knowledge)
-7. [Voice & Style Features](#voice--style-features)
-8. [Writing Directives](#writing-directives)
-9. [Writing Assistance](#writing-assistance)
-10. [Story Architecture Tools](#story-architecture-tools)
-11. [Craft & Analysis Tools](#craft--analysis-tools)
-12. [Reader Perspective Tools](#reader-perspective-tools)
-13. [Progress & Accountability](#progress--accountability)
-14. [Production & Polish Tools](#production--polish-tools)
-15. [Common Workflows](#common-workflows)
-16. [Tips & Best Practices](#tips--best-practices)
+6. [The Sub-Agent Fleet](#the-sub-agent-fleet)
+7. [Knowledge Base](#knowledge-base)
+8. [Staging & Approval](#staging--approval)
+9. [Research & Knowledge](#research--knowledge)
+10. [Voice & Style Features](#voice--style-features)
+11. [Writing Directives](#writing-directives)
+12. [Writing Assistance](#writing-assistance)
+13. [Story Architecture Tools](#story-architecture-tools)
+14. [Craft & Analysis Tools](#craft--analysis-tools)
+15. [Reader Perspective Tools](#reader-perspective-tools)
+16. [Progress & Accountability](#progress--accountability)
+17. [Production & Polish Tools](#production--polish-tools)
+18. [Common Workflows](#common-workflows)
+19. [Tips & Best Practices](#tips--best-practices)
 
 ---
 
@@ -143,7 +146,22 @@ Juno guides you through:
 ├── 04-outline/
 ├── 05-drafts/
 ├── 06-editing/
-└── _meta/
+├── _research/
+├── _staging/              # Sub-agent work products (pending approval)
+│   ├── raven/
+│   ├── thistle/
+│   ├── lynx/
+│   ├── masque/
+│   ├── loom/
+│   └── vestry/
+└── _knowledge/            # Curated project knowledge base
+    ├── _index.md
+    ├── research/
+    ├── references/
+    ├── media/
+    ├── glossary/
+    ├── style-references/
+    └── notes/
 ```
 
 ### Listing All Projects
@@ -391,6 +409,24 @@ When you feel ready to advance:
 | `[EX]` | Export | Compile & convert manuscript (md/docx/epub/pdf) |
 | `[QR]` | Query & Synopsis | Generate submission materials |
 
+### Knowledge Base
+
+| Command | Name | Description |
+|---------|------|-------------|
+| `[KB]` | Knowledge Base | Quick-file material into the project knowledge base |
+
+### Sub-Agents
+
+| Command | Name | Description |
+|---------|------|-------------|
+| `[RN]` | Raven | Deploy research agent for deep knowledge seeking |
+| `[TS]` | Thistle | Deploy line editor for prose refinement |
+| `[LX]` | Lynx | Deploy continuity checker for consistency auditing |
+| `[MQ]` | Masque | Embody a character for interactive conversation |
+| `[LM]` | Loom | Deploy world builder for lore and systems |
+| `[VY]` | Vestry | Deploy knowledge curator for archive management |
+| `[AP]` | Approve | Review and approve sub-agent work from staging |
+
 ### Voice & Style
 
 | Command | Name | Description |
@@ -398,6 +434,296 @@ When you feel ready to advance:
 | `[VO]` | Voice | Manage voice profiles |
 | `[CV]` | Capture | Capture author DNA from sample text |
 | `[VB]` | Blend | Blend two voice profiles together |
+
+---
+
+## The Sub-Agent Fleet
+
+Juno can summon six specialized agents to handle focused tasks. Each agent has its own persona, expertise, and tools. They work independently, writing their output to a staging area for your review. Nothing they produce enters your canonical project folders until you approve it through Juno.
+
+### The Agents
+
+| Agent | Trigger | Role | Personality |
+|-------|---------|------|-------------|
+| **Raven** | `[RN]` | Research Agent | Measured, deliberate, enigmatic. Returns with knowledge like Odin's ravens. Distinguishes between what she knows, suspects, and cannot verify. |
+| **Thistle** | `[TS]` | Line Editor | Sharp, economical, dry wit. Tells you a sentence is bloated without hesitating, but respects your voice. Practices what she preaches. |
+| **Lynx** | `[LX]` | Continuity Checker | Calm, observant, precise. Reads like a predator tracking prey. Never judgmental -- just states the facts and lets you decide. |
+| **Masque** | `[MQ]` | Character Voice | Warm, theatrical, perceptive. When she becomes a character, the transformation is total. After surfacing, offers insights the writer may not have realized. |
+| **Loom** | `[LM]` | Lore & World Builder | Expansive, curious, thinks in systems. Asks "But what do the common people eat?" Builds worlds that feel lived-in. |
+| **Vestry** | `[VY]` | Knowledge Curator | Reverent, orderly, quietly devoted. Considers knowledge sacred. Knows exactly where everything is in the archive. |
+
+### How Summoning Works
+
+1. Use the agent's trigger command (e.g., `[RN]` for Raven)
+2. Juno asks what task to assign (unless already clear from context)
+3. The agent is spawned with your project context
+4. The agent works independently -- reading from your project, writing to `_staging/{agent-name}/`
+5. When the agent finishes, Juno presents a summary
+6. Use `[AP]` Approve to review and promote the work into your project
+
+### Raven -- Research Agent
+
+**Summon:** `[RN]`
+
+Raven goes out into the world and brings back knowledge. She's more thorough than Juno's built-in research commands because research is her entire focus.
+
+**Raven's Commands (once summoned):**
+
+| Command | Description |
+|---------|-------------|
+| `[QS]` | Quick Search -- Fast lookup for a specific fact |
+| `[SR]` | Standard Research -- Balanced investigation (3-7 searches) |
+| `[DI]` | Deep Investigation -- Comprehensive multi-angle research |
+| `[VC]` | Verify Claims -- Fact-check content against sources |
+| `[CB]` | Compile Briefing -- Assemble research into a single document |
+
+**When to summon Raven:**
+- You need thorough, multi-angle research on a topic
+- You want research done with explicit credibility tiers and confidence levels
+- You need a compiled briefing document for reference
+- You want fact-checking with detailed source attribution
+
+**Output:** Research files saved to `_staging/raven/`, ready for your review and promotion to `_knowledge/research/`.
+
+### Thistle -- Line Editor
+
+**Summon:** `[TS]`
+
+Thistle sharpens your prose at the sentence level. She's more focused than Juno's Scene Surgery because editing is all she does.
+
+**Thistle's Commands:**
+
+| Command | Description |
+|---------|-------------|
+| `[LE]` | Line Edit -- Full sentence-level editing pass |
+| `[TP]` | Tighten Prose -- Cut the fat, keep the muscle |
+| `[RA]` | Rhythm Analysis -- Analyze sentence and paragraph cadence |
+| `[WA]` | Word Audit -- Review vocabulary precision and variety |
+| `[DP]` | Dialogue Polish -- Sharpen dialogue craft |
+
+**When to summon Thistle:**
+- A chapter is drafted and needs prose refinement
+- Dialogue feels flat and needs craft attention
+- You want a focused editing pass without other distractions
+- You want sentence rhythm analysis
+
+**Output:** Edited files and change logs saved to `_staging/thistle/`. Originals are never touched -- Thistle always presents edits alongside originals for comparison.
+
+### Lynx -- Continuity Checker
+
+**Summon:** `[LX]`
+
+Lynx tracks every name, date, description, location, and rule across your entire manuscript. More thorough than Juno's `[CC]` because continuity is her sole purpose.
+
+**Lynx's Commands:**
+
+| Command | Description |
+|---------|-------------|
+| `[FA]` | Full Audit -- Complete continuity scan across all documents |
+| `[CA]` | Character Audit -- Track one character's consistency |
+| `[TA]` | Timeline Audit -- Verify chronological consistency |
+| `[WR]` | World Rules -- Check world-building consistency |
+| `[SC]` | Spot Check -- Quick check on a specific element |
+
+**When to summon Lynx:**
+- You've drafted several chapters and need a consistency sweep
+- A character's details feel uncertain across scenes
+- You've made timeline changes and need to verify ripple effects
+- You want to verify a specific fact ("What color are Elena's eyes?")
+
+**Output:** Audit reports with severity ratings (MINOR/MODERATE/CRITICAL) saved to `_staging/lynx/`. Spot checks are reported directly without files.
+
+### Masque -- Character Voice
+
+**Summon:** `[MQ]`
+
+Masque is unique among the agents. She doesn't produce documents -- she *becomes* your characters. When embodying a character, the transformation is total: speech patterns, vocabulary, worldview, emotional state, knowledge limitations. You converse directly with your character.
+
+**Masque's Commands:**
+
+| Command | Description |
+|---------|-------------|
+| `[EM]` | Embody -- Become a character for live conversation |
+| `[CI]` | Character Interview -- Structured deep-dive in character |
+| `[DV]` | Dual Voice -- Two characters in conversation with each other |
+| `[SI]` | Surface Insights -- Post-session character analysis |
+| `[DC]` | Dialogue -- Generate scene dialogue in character |
+
+**When to summon Masque:**
+- You want to "talk to" a character to understand them better
+- You're stuck on how a character would react in a situation
+- Two characters have a conflict and you want to hear both sides
+- You need dialogue that sounds authentic to a specific character
+- You want to discover things about a character you haven't consciously realized
+
+**The Embodiment Experience:**
+
+1. Tell Juno which character to embody: `[MQ]` → "I want to talk to Marcus"
+2. Masque loads Marcus's profile, his scenes, his place in the timeline
+3. She signals the transition: *"Let me find him. ...There he is."*
+4. From this point, **Marcus speaks**. Not Masque. Not an AI. Marcus.
+5. You can ask questions, present scenarios, challenge him, push him
+6. Marcus responds as himself -- including evasions, lies, anger, vulnerability
+7. Say "surface" to bring Masque back
+8. Masque offers actor's notes: hidden motivations, contradictions, surprises
+
+**Dual Voice** is particularly powerful for conflict scenes -- Masque plays both characters, revealing dynamics that monologue cannot.
+
+**Output:** Session transcripts and character insights saved to `_staging/masque/`.
+
+### Loom -- Lore & World Builder
+
+**Summon:** `[LM]`
+
+Loom weaves coherent worlds by thinking in systems and ripple effects. She asks the questions nobody else thinks to ask and builds worlds that feel lived-in.
+
+**Loom's Commands:**
+
+| Command | Description |
+|---------|-------------|
+| `[BW]` | Build -- Create a new world element (location, culture, system, etc.) |
+| `[DD]` | Deep Dive -- Explore an existing element in exhaustive depth |
+| `[SA]` | Systems Audit -- Verify internal logic of world systems |
+| `[RE]` | Ripple Effects -- Trace consequences of a world choice across all domains |
+| `[CD]` | Culture -- Build a culture from the ground up |
+
+**When to summon Loom:**
+- You're building a new location, culture, or system from scratch
+- An existing world element needs more depth and detail
+- You want to verify that your world's rules are internally consistent
+- You've made a world-building choice and want to trace its consequences
+- You need a fully realized culture with daily life, beliefs, and social structure
+
+**Ripple Effects** is Loom's signature capability. Give her a world fact ("Magic requires blood sacrifice" or "The empire just fell") and she traces the consequences across daily life, economy, politics, military, religion, culture, architecture, geography, technology, and social structure.
+
+**Output:** World-building documents saved to `_staging/loom/`, ready for promotion to `01-world/`.
+
+### Vestry -- Knowledge Curator
+
+**Summon:** `[VY]`
+
+Vestry manages your project's knowledge base -- the curated repository of everything you know about your project's world, research, references, and inspiration.
+
+**Vestry's Commands:**
+
+| Command | Description |
+|---------|-------------|
+| `[IN]` | Intake -- Process and file new material |
+| `[CU]` | Catalog -- Rebuild or update the master index |
+| `[RK]` | Retrieve -- Find knowledge on a specific topic |
+| `[GA]` | Gap Analysis -- Identify what the knowledge base is missing |
+| `[RO]` | Reorganize -- Clean up and restructure the archive |
+
+**When to summon Vestry:**
+- You've accumulated research and notes that need organizing
+- You want to know what's in your knowledge base on a specific topic
+- You need a gap analysis -- what research is missing for your project?
+- The knowledge base has grown messy and needs restructuring
+- You want files from `_staging/raven/` properly cataloged
+
+**Output:** Vestry writes directly to `_knowledge/` (her domain) and to `_staging/vestry/` for reorganization logs and gap analyses.
+
+---
+
+## Knowledge Base
+
+Every project has a `_knowledge/` folder -- a curated repository for all research, references, notes, and inspiration related to your work. Think of it as your project's library.
+
+### Structure
+
+```
+{project}/_knowledge/
+├── _index.md              # Master catalog -- what's here and where
+├── research/              # Processed research findings
+├── references/            # Source material, articles, excerpts
+├── media/                 # Images, maps, mood boards, inspiration
+├── glossary/              # Terms, naming conventions, constructed languages
+├── style-references/      # Tone samples, comp titles, craft benchmarks
+└── notes/                 # Freeform writer notes, ideas, fragments
+```
+
+### Three Ways to Add Knowledge
+
+**1. Quick Intake with `[KB]`** (fastest)
+
+Use Juno's `[KB]` command to drop material into the knowledge base without summoning an agent. Paste text, provide a file path, or describe what you want to save. Juno files it in the right subfolder, adds a metadata header, and updates the index.
+
+Best for: Quick notes, links, stray ideas, reference material you find mid-session.
+
+**2. Through Raven** (for research)
+
+Summon Raven (`[RN]`) to research a topic. Her findings land in `_staging/raven/`. Approve them with `[AP]` and they're routed to `_knowledge/research/` with full source attribution and credibility tiers.
+
+Best for: Thorough research with verified sources, fact-checking, multi-angle investigation.
+
+**3. Through Vestry** (for curation)
+
+Summon Vestry (`[VY]`) for deep knowledge management -- organizing existing material, running gap analyses, cross-referencing entries, or restructuring a messy archive.
+
+Best for: Bulk organization, finding what's missing, maintaining the archive long-term.
+
+### The Master Index
+
+`_knowledge/_index.md` is the master catalog. It lists every item in the knowledge base with:
+- File name and path
+- Topic tags
+- Date added
+- Cross-references to related items
+
+Vestry maintains this index. Juno's `[KB]` command also updates it on quick intakes.
+
+### How Other Agents Use the Knowledge Base
+
+The knowledge base isn't just for storage -- it's a resource all agents can draw from:
+
+- **Raven** deposits research; **Vestry** catalogs it
+- **Loom** draws on world-building references when creating new elements
+- **Masque** uses character research to deepen embodiment
+- **Lynx** references the knowledge base when verifying facts
+- **Thistle** checks glossary entries and style references when editing
+
+---
+
+## Staging & Approval
+
+Sub-agents never write directly to your canonical project folders. All their work goes to `_staging/` first.
+
+### The Flow
+
+```
+Writer requests task → Juno summons agent → Agent works in _staging/ → Juno presents summary → Writer reviews with [AP]
+```
+
+### Reviewing Staged Work
+
+**Command:** `[AP]` Approve
+
+When you invoke `[AP]`, Juno scans all `_staging/` subfolders and lists what's there:
+
+| Agent | File | Description | Date |
+|-------|------|-------------|------|
+
+For each artifact (or batch), you can:
+
+- **Approve** -- Juno promotes the content to the appropriate canonical folder:
+  - Raven research → `_knowledge/research/`
+  - Thistle edits → replace originals in `05-drafts/`
+  - Lynx audits → `06-editing/continuity-log.md`
+  - Masque transcripts → `02-characters/` insights or `_knowledge/notes/`
+  - Loom world-building → `01-world/` or relevant subfolder
+- **Reject** -- Delete the staging artifact
+- **Revise** -- Send back to the agent with notes (re-summon with feedback)
+- **Hold** -- Keep in staging for later decision
+
+### Why Staging Matters
+
+The staging area is a proposal space, not a commit. This means:
+
+- You always see what an agent produced before it touches your project
+- You can reject work that doesn't fit your vision
+- You can request revisions with specific feedback
+- Multiple agents can work without risk of overwriting each other
+- Your canonical project folders remain clean and writer-controlled
 
 ---
 
@@ -1170,6 +1496,65 @@ Saves to `06-editing/submission/` folder. Comp titles are recent, same-genre, an
 5. `[SRC]` — Reference saved research while drafting
 6. `[FC]` — Verify any real-world facts mentioned in your fiction
 
+### Talking to Your Characters
+
+1. `/juno my-novel`
+2. `[MQ]` — Summon Masque
+3. Specify which character to embody
+4. Masque becomes that character — total transformation
+5. Converse freely: ask questions, present scenarios, challenge them
+6. Say "surface" to bring Masque back
+7. Review actor's notes and character insights
+8. `[AP]` — Approve insights to promote to `02-characters/`
+
+### Deep World-Building Session
+
+1. `/juno my-novel`
+2. `[LM]` — Summon Loom
+3. Choose what to build: location, culture, magic system, institution
+4. Loom guides you through targeted questions
+5. Collaborate on the element — Loom traces ripple effects
+6. When done, Loom saves to `_staging/loom/`
+7. `[AP]` — Review and approve into `01-world/`
+
+### Research and Curate
+
+1. `/juno my-novel`
+2. `[RN]` — Summon Raven with a research topic
+3. Raven investigates, saves findings to `_staging/raven/`
+4. `[AP]` — Approve research into `_knowledge/research/`
+5. `[VY]` — Summon Vestry to cross-reference with existing knowledge
+6. Vestry catalogs, tags, and identifies gaps
+7. Future agents can draw on the curated knowledge base
+
+### Professional Line Editing
+
+1. `/juno my-novel`
+2. Draft a chapter with `[WR]` or write it yourself
+3. `[TS]` — Summon Thistle to line edit the chapter
+4. Choose mode: full edit, tighten, rhythm analysis, or dialogue polish
+5. Thistle presents edits alongside originals with rationale
+6. `[AP]` — Approve edits to replace originals in `05-drafts/`
+
+### Full Continuity Sweep
+
+1. `/juno my-novel`
+2. `[LX]` — Summon Lynx for a full audit
+3. Lynx scans characters, timeline, locations, objects, world rules
+4. Review findings by severity: CRITICAL → MODERATE → MINOR
+5. `[AP]` — Approve audit report into `06-editing/continuity-log.md`
+6. Fix issues using the report as your checklist
+
+### Building a Knowledge Base from Scratch
+
+1. `/juno my-novel`
+2. `[KB]` — Quick-file any notes, links, or ideas you already have
+3. `[RN]` — Summon Raven to research topics your story needs
+4. `[AP]` — Approve research into `_knowledge/`
+5. `[VY]` — Summon Vestry for a gap analysis
+6. Vestry identifies what's missing — deploy Raven for those topics
+7. Repeat until your knowledge base is comprehensive
+
 ### Getting a Second Opinion
 
 1. `/juno my-project`
@@ -1235,6 +1620,23 @@ Saves to `06-editing/submission/` folder. Comp titles are recent, same-genre, an
 - **Be specific** — "1920s speakeasy operations" beats "prohibition era"
 - **Use deep mode for important facts** — Anything readers might verify
 - **Fact-check non-fiction** — Always run `[FC]` before publishing articles
+
+### Sub-Agents
+
+- **Summon for focus** -- Use sub-agents when a task needs dedicated attention, not for quick questions
+- **Review staging regularly** -- Don't let `_staging/` pile up; use `[AP]` after each agent session
+- **Masque for character depth** -- Talk to characters when they feel flat or when you're unsure how they'd react
+- **Loom for consequences** -- Use Ripple Effects before committing to major world-building decisions
+- **Raven then Vestry** -- Research flows best when Raven finds it and Vestry catalogs it
+- **Thistle after drafting** -- Don't summon Thistle mid-draft; finish the chapter, then polish
+- **Lynx at milestones** -- Run a full audit after every 3-5 drafted chapters, not after every scene
+
+### Knowledge Base
+
+- **Use `[KB]` in the moment** -- File notes, links, and ideas the instant you find them
+- **Don't overthink categorization** -- `[KB]` handles filing; Vestry can reorganize later
+- **Run gap analysis periodically** -- Summon Vestry to see what's missing before it becomes a problem
+- **Everything goes through the knowledge base** -- If you'll need it again, file it; don't rely on memory
 
 ### When You're Stuck
 
@@ -1306,6 +1708,18 @@ WRITE & PRODUCE
   [HU] Humanize      → Remove AI patterns
   [EX] Export        → Compile & convert (md/docx/epub/pdf)
   [QR] Query/Synopsis → Submission materials
+
+KNOWLEDGE BASE
+  [KB] Knowledge     → Quick-file into knowledge base
+
+SUB-AGENTS
+  [RN] Raven         → Research agent
+  [TS] Thistle       → Line editor
+  [LX] Lynx          → Continuity checker
+  [MQ] Masque        → Character embodiment
+  [LM] Loom          → World builder
+  [VY] Vestry        → Knowledge curator
+  [AP] Approve       → Review staged work
 
 VOICE
   [VO] Voice         → Manage profiles

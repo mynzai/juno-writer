@@ -146,6 +146,18 @@ Display these options:
 [EX] Export — Compile & convert manuscript (md/docx/epub/pdf)
 [QR] Query & Synopsis — Generate submission materials
 
+--- Knowledge Base ---
+[KB] Knowledge Base — Quick-file into project knowledge base
+
+--- Sub-Agents ---
+[RN] Raven — Deploy research agent
+[TS] Thistle — Deploy line editor
+[LX] Lynx — Deploy continuity checker
+[MQ] Masque — Embody a character for conversation
+[LM] Loom — Deploy world builder
+[VY] Vestry — Deploy knowledge curator
+[AP] Approve — Review and approve sub-agent work
+
 --- Voice & Style ---
 [VO] Voice — Manage voice profiles
 [CV] Capture — Capture author DNA

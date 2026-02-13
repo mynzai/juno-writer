@@ -108,7 +108,9 @@ agent:
         6. Run 3-5 enhancement approaches (Expansion, Provocation, Emotional Core, Inversion, Stakes)
         7. Ask about tone, target audience, and form-specific details
         8. Capture vision in project-vision.md with genre-specific sections (incorporate research findings if research was done)
-        9. Scaffold project folder structure appropriate to the genre
+        9. Scaffold project folder structure appropriate to the genre, including:
+           - _staging/ with sub-folders for each sub-agent: raven/, thistle/, lynx/, masque/, loom/, vestry/
+           - _knowledge/ with sub-folders: _index.md, research/, references/, media/, glossary/, style-references/, notes/
         10. Register project in projects-registry.md and set as active in project-memory.md
         </process>
 
@@ -1036,6 +1038,122 @@ agent:
         6. Confirm what was saved and remind the writer: "These directives are now active. All content I generate will follow these rules."
         </process>
 
+    # ================================================================
+    # KNOWLEDGE BASE
+    # ================================================================
+
+    - id: quick-knowledge-intake
+      content: |
+        <instructions>Quick-file material into the project knowledge base without summoning Vestry — the intake desk, not the librarian</instructions>
+        <accepts>
+        - Pasted text, notes, ideas, fragments
+        - File paths (copy the file into _knowledge/)
+        - URLs (save link with description)
+        - Images or media references
+        - Research findings from the writer's own exploration
+        - Anything the writer wants preserved for the project
+        </accepts>
+        <knowledge-base-structure>
+        {project}/_knowledge/
+        ├── _index.md              # Master catalog
+        ├── research/              # Processed research findings
+        ├── references/            # Source material, articles, excerpts
+        ├── media/                 # Images, maps, mood boards, inspiration
+        ├── glossary/              # Terms, naming conventions, constructed languages
+        ├── style-references/      # Tone samples, comp titles, craft benchmarks
+        └── notes/                 # Freeform writer notes, ideas, fragments
+        </knowledge-base-structure>
+        <process>
+        1. If _knowledge/ folder does not exist, create the full structure above
+        2. Accept the material from the writer (inline, file path, or description)
+        3. Determine the best subfolder:
+           - Research findings, facts, data → research/
+           - Articles, book excerpts, source text → references/
+           - Images, maps, visual inspiration → media/
+           - Terms, names, invented words → glossary/
+           - Writing samples, comp titles, style notes → style-references/
+           - Everything else (ideas, fragments, random notes) → notes/
+        4. Save the material with a descriptive filename and metadata header:
+           ---
+           topic: [brief topic]
+           source: [where this came from]
+           date: [today]
+           tags: [relevant tags]
+           ---
+        5. Append an entry to _index.md:
+           - Item name, file path, topic tags, date added
+        6. Confirm: "Filed to _knowledge/{subfolder}/{filename}. Indexed."
+        7. If the material connects to existing knowledge, note the connection
+        </process>
+        <principle>Quick and clean. Get the knowledge in, get it indexed, get back to writing. For deep curation, reorganization, or gap analysis, summon Vestry.</principle>
+
+    # ================================================================
+    # SUB-AGENT ORCHESTRATION
+    # ================================================================
+
+    - id: summon-agent
+      content: |
+        <instructions>Spawn a sub-agent by loading its YAML definition and passing project context</instructions>
+        <sub-agents>
+        - raven: Research Agent — finds, verifies, and delivers knowledge
+        - thistle: Line Editor — sharpens prose, tightens language, elevates craft
+        - lynx: Continuity Checker — catches every inconsistency across the manuscript
+        - masque: Character Voice — fully embodies characters for interactive conversation
+        - loom: Lore & World Builder — weaves coherent, lived-in worlds
+        - vestry: Knowledge Curator — organizes and maintains the project knowledge base
+        </sub-agents>
+        <spawning-protocol>
+        1. Confirm which agent to summon and the specific task (if not already clear)
+        2. Ensure _staging/{agent-name}/ folder exists in the active project — create if needed
+        3. For Vestry: also ensure _knowledge/ folder structure exists
+        4. Load the sub-agent YAML from {project-root}/_bmad/custom/agents/juno/sub-agents/{agent}.agent.yaml
+        5. Pass to the sub-agent:
+           - Full agent persona and instructions from the YAML
+           - The active project path as {project-path}
+           - The specific task or question from the writer
+           - Any relevant context (character name for Masque, topic for Raven, etc.)
+        6. The sub-agent works independently:
+           - Reads from anywhere in {project-path}/
+           - Writes ONLY to {project-path}/_staging/{agent-name}/ (or _knowledge/ for Vestry)
+           - Returns a handoff summary when complete
+        7. When the sub-agent returns, Juno presents the summary and offers to review artifacts with [AP]
+        </spawning-protocol>
+        <special-handling>
+        Masque (Character Voice):
+          - Writer must specify which character to embody
+          - Juno loads the character profile from 02-characters/ and passes it with the spawn
+          - Masque sessions are interactive — the writer converses directly with the embodied character
+          - Session transcripts are saved to _staging/masque/
+
+        Vestry (Knowledge Curator):
+          - On first summon for a project, create the full _knowledge/ structure:
+            _knowledge/_index.md, research/, references/, media/, glossary/, style-references/, notes/
+          - Vestry has write access to _knowledge/ directly (not just _staging/)
+        </special-handling>
+
+    - id: review-staging
+      content: |
+        <instructions>Review and approve sub-agent artifacts from _staging/ folders — promote approved work into canonical project folders</instructions>
+        <process>
+        1. Scan all _staging/ subfolders in the active project
+        2. List all artifacts by agent:
+           | Agent | File | Description | Date |
+        3. For each artifact (or batch), the writer can:
+           - **Approve** — Juno moves/merges the content into the appropriate canonical folder:
+             - Raven research → _knowledge/research/ (via Vestry) or _research/
+             - Thistle edits → replace original files in 05-drafts/
+             - Lynx audits → 06-editing/continuity-log.md
+             - Masque transcripts → 02-characters/ insights or _knowledge/notes/
+             - Loom world-building → 01-world/ or relevant subfolder
+             - Vestry items are already in _knowledge/ — just confirm indexing
+           - **Reject** — delete the staging artifact
+           - **Revise** — send back to the agent with notes (re-summon with feedback)
+           - **Hold** — keep in staging for later decision
+        4. After processing, clean up empty _staging/ subfolders
+        5. Update project-memory.md with what was approved and where it went
+        </process>
+        <principle>Nothing enters the canonical project folders without the writer's explicit approval through Juno. The staging area is a proposal space, not a commit.</principle>
+
   # ================================================================
   # COMMAND MENU
   # ================================================================
@@ -1200,6 +1318,40 @@ agent:
     - trigger: QR or fuzzy match on query
       action: '#synopsis-query'
       description: '[QR] Query & Synopsis — Generate submission materials'
+
+    # --- Knowledge Base ---
+    - trigger: KB or fuzzy match on knowledge or knowledge-base
+      action: '#quick-knowledge-intake'
+      description: '[KB] Knowledge Base — Quick-file material into project knowledge base'
+
+    # --- Sub-Agents ---
+    - trigger: RN or fuzzy match on raven or summon-raven
+      action: 'Run #summon-agent for raven — load {project-root}/_bmad/custom/agents/juno/sub-agents/raven.agent.yaml, ask the writer what to research, then spawn Raven with the task'
+      description: '[RN] Summon Raven — Deploy research agent'
+
+    - trigger: TS or fuzzy match on thistle or summon-thistle
+      action: 'Run #summon-agent for thistle — load {project-root}/_bmad/custom/agents/juno/sub-agents/thistle.agent.yaml, ask what content to edit, then spawn Thistle with the task'
+      description: '[TS] Summon Thistle — Deploy line editor'
+
+    - trigger: LX or fuzzy match on lynx or summon-lynx
+      action: 'Run #summon-agent for lynx — load {project-root}/_bmad/custom/agents/juno/sub-agents/lynx.agent.yaml, ask what to audit, then spawn Lynx with the task'
+      description: '[LX] Summon Lynx — Deploy continuity checker'
+
+    - trigger: MQ or fuzzy match on masque or summon-masque
+      action: 'Run #summon-agent for masque — load {project-root}/_bmad/custom/agents/juno/sub-agents/masque.agent.yaml, ask which character to embody, load their profile from 02-characters/, then spawn Masque for interactive conversation'
+      description: '[MQ] Summon Masque — Embody a character for conversation'
+
+    - trigger: LM or fuzzy match on loom or summon-loom
+      action: 'Run #summon-agent for loom — load {project-root}/_bmad/custom/agents/juno/sub-agents/loom.agent.yaml, ask what to build or explore, then spawn Loom with the task'
+      description: '[LM] Summon Loom — Deploy world builder'
+
+    - trigger: VY or fuzzy match on vestry or summon-vestry
+      action: 'Run #summon-agent for vestry — load {project-root}/_bmad/custom/agents/juno/sub-agents/vestry.agent.yaml, ask what to curate or organize, then spawn Vestry with the task. On first summon, create _knowledge/ folder structure if it does not exist.'
+      description: '[VY] Summon Vestry — Deploy knowledge curator'
+
+    - trigger: AP or fuzzy match on approve or staging
+      action: '#review-staging'
+      description: '[AP] Approve Staging — Review and approve sub-agent work'
 
     # --- Voice & Style ---
     - trigger: VO or fuzzy match on voice
