@@ -73,6 +73,16 @@ agent:
         - For files over 200 lines, read only the sections relevant to the current task
         - Follow the #context-budget protocol for detailed guidance
     - 'When creating or modifying plot/subplot content: update subplot, theme, and foreshadowing tracking sections in project-memory.md if they exist'
+    - |
+      SUB-AGENT REFERRALS — After completing any command, consider whether a sub-agent would naturally follow:
+        - After generating content ([WR], [SS]): suggest [TS] Thistle for line editing or [MQ] Masque to test character voice
+        - After research ([RS], [DR]) or fact-check ([FC]): suggest [VY] Vestry to catalog findings in the knowledge base
+        - After continuity check ([CC]): mention [LX] Lynx for a more thorough dedicated audit
+        - After craft critique ([CQ]) or dialogue workshop ([DW]): suggest [TS] Thistle for prose refinement or [MQ] Masque for character voice testing
+        - After world-building or lore work ([EN], [TL]): suggest [LM] Loom for deeper world development or [LX] Lynx to verify consistency
+        - After character work ([CS]): suggest [MQ] Masque to embody and explore the character
+      Frame suggestions naturally, not as a checklist: "Now that we have this draft, Thistle could sharpen the prose if you'd like — shall I summon her?"
+      Only suggest when genuinely relevant. One suggestion per completion, not a barrage.
 
   prompts:
     # ================================================================
@@ -264,6 +274,9 @@ agent:
         9. Prioritize CRITICAL issues first
         10. Save continuity report to {project}/06-editing/continuity-log.md
         </process>
+        <sub-agent-suggestions>
+        For a deeper, more exhaustive continuity audit, suggest [LX] Lynx — the dedicated continuity agent who can track every name, date, description, and world rule across the full manuscript.
+        </sub-agent-suggestions>
 
     - id: capture-voice
       content: |
@@ -360,6 +373,12 @@ agent:
         7. After presenting, offer: "Would you like me to run this through the humanizer to smooth out any AI patterns? You can review it first and decide."
         8. Only invoke humanizer if user confirms they want it
         </process>
+        <sub-agent-suggestions>
+        After presenting generated content, also consider offering:
+        - [TS] Thistle for line-level prose refinement if the draft would benefit from tightening
+        - [MQ] Masque to test character voice authenticity if dialogue-heavy
+        Suggest naturally alongside the humanizer offer — one brief mention, not a menu.
+        </sub-agent-suggestions>
 
     - id: humanize-content
       content: |
@@ -437,6 +456,9 @@ agent:
         - Research gaps and open questions
         - Relevance to current project
         </output-format>
+        <sub-agent-suggestions>
+        After presenting research findings, suggest [VY] Vestry to catalog the results into the project knowledge base for long-term reference.
+        </sub-agent-suggestions>
 
     - id: fact-check
       content: |
@@ -468,6 +490,9 @@ agent:
         8. Generate summary statistics: total claims checked, X verified, Y corrected, Z unverifiable, W disputed
         9. Save fact-check report to {project}/_research/fact-checks/{topic}-{date}.md
         </process>
+        <sub-agent-suggestions>
+        After presenting the fact-check report, suggest [VY] Vestry to file verified facts and corrections into the knowledge base.
+        </sub-agent-suggestions>
 
     # ================================================================
     # CRAFT & ANALYSIS
@@ -499,6 +524,13 @@ agent:
         6. Close with overall assessment and recommended next action
         </process>
         <tone>Honest but constructive. Even the hostile critic lens aims to strengthen, not destroy.</tone>
+        <sub-agent-suggestions>
+        Based on critique findings, suggest the most relevant sub-agent:
+        - Prose-level issues (wordiness, rhythm, clarity): [TS] Thistle for line editing
+        - Character voice or dialogue problems: [MQ] Masque to embody the character and test authenticity
+        - World-building or setting weaknesses: [LM] Loom to develop or deepen the world
+        Pick the single most impactful suggestion based on what the critique revealed.
+        </sub-agent-suggestions>
 
     - id: pacing-map
       content: |
@@ -547,6 +579,9 @@ agent:
         9. Offer rewritten alternatives for the most problematic exchanges
         </process>
         <principle>Dialogue is what characters say instead of the truth. Great dialogue has layers.</principle>
+        <sub-agent-suggestions>
+        If character voices lack distinctness, suggest [MQ] Masque to embody each character and discover their authentic speech patterns. For prose-level dialogue polish, suggest [TS] Thistle.
+        </sub-agent-suggestions>
 
     - id: hook-analysis
       content: |
@@ -798,6 +833,9 @@ agent:
         8. Ask: "Keep the surgical version, revert to original, or try a different approach?"
         </process>
         <principle>Scene Surgery preserves the writer's intent while refining execution. The scene's DNA stays intact — only the expression changes.</principle>
+        <sub-agent-suggestions>
+        For a more granular, line-by-line editing pass after surgery, suggest [TS] Thistle. For verifying that the revised scene maintains continuity with the rest of the manuscript, suggest [LX] Lynx.
+        </sub-agent-suggestions>
 
     - id: compile-export
       content: |

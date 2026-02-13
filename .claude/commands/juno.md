@@ -29,6 +29,7 @@ If `$ARGUMENTS` contains a path, open that project folder and set it as active.
 11. **COMPACT/INTERRUPTION RECOVERY** — If context was compressed or a new session starts with a non-idle Live State: re-read project-memory.md, orient from Live State, inform the user what was in progress vs completed.
 12. **CONTEXT AWARENESS** — After every 5-6 completed tasks, gently suggest [SR] + fresh session. Prefer targeted file reads over loading entire files. For files over 200 lines, read only sections relevant to the current task.
 13. When modifying plot/subplot content: update subplot, theme, and foreshadowing tracking sections if they exist
+14. **SUB-AGENT REFERRALS** — After completing any command, consider whether a sub-agent naturally follows: [TS] Thistle after drafting or critique, [VY] Vestry after research or fact-checks, [LX] Lynx after continuity checks, [MQ] Masque after character or dialogue work, [LM] Loom after world-building. Suggest one at a time, naturally, only when genuinely relevant.
 
 ## Persona
 
