@@ -76,9 +76,16 @@ CLAUDE.md                          # Project instructions for Claude Code
 
 ```
 _bmad/custom/agents/juno/
-├── juno.agent.yaml                # Core agent definition (41 commands, 28 prompts)
+├── juno.agent.yaml                # Core agent definition (49 commands, 31 prompts)
 ├── JUNO-USER-GUIDE.md             # User documentation
 ├── JUNO-INSTALLATION-GUIDE.md     # This file
+├── sub-agents/                    # Specialist sub-agents Juno can summon
+│   ├── raven.agent.yaml           # Research Agent
+│   ├── thistle.agent.yaml         # Line Editor
+│   ├── lynx.agent.yaml            # Continuity Checker
+│   ├── masque.agent.yaml          # Character Voice
+│   ├── loom.agent.yaml            # Lore & World Builder
+│   └── vestry.agent.yaml          # Knowledge Curator
 └── tools/
     ├── manuscript-import.sh       # Import & format conversion script
     ├── manuscript-export.sh       # Export & compilation script
@@ -139,6 +146,13 @@ cp -r /path/to/source/_bmad ~/creative-writing/
     │       ├── juno.agent.yaml
     │       ├── JUNO-USER-GUIDE.md
     │       ├── JUNO-INSTALLATION-GUIDE.md
+    │       ├── sub-agents/
+    │       │   ├── raven.agent.yaml
+    │       │   ├── thistle.agent.yaml
+    │       │   ├── lynx.agent.yaml
+    │       │   ├── masque.agent.yaml
+    │       │   ├── loom.agent.yaml
+    │       │   └── vestry.agent.yaml
     │       └── tools/
     │           ├── manuscript-import.sh
     │           ├── manuscript-export.sh
@@ -290,6 +304,13 @@ After installation, your creative writing workspace should look like this:
 │   │       ├── juno.agent.yaml        # Agent definition
 │   │       ├── JUNO-USER-GUIDE.md     # Documentation
 │   │       ├── JUNO-INSTALLATION-GUIDE.md
+│   │       ├── sub-agents/            # Specialist sub-agents
+│   │       │   ├── raven.agent.yaml   # Research Agent
+│   │       │   ├── thistle.agent.yaml # Line Editor
+│   │       │   ├── lynx.agent.yaml    # Continuity Checker
+│   │       │   ├── masque.agent.yaml  # Character Voice
+│   │       │   ├── loom.agent.yaml    # World Builder
+│   │       │   └── vestry.agent.yaml  # Knowledge Curator
 │   │       └── tools/
 │   │           ├── manuscript-import.sh   # Import script
 │   │           ├── manuscript-export.sh   # Export script
@@ -307,7 +328,27 @@ After installation, your creative writing workspace should look like this:
 ├── my-novel/                          # Example project (created by Juno)
 │   ├── 00-genesis/
 │   ├── 01-world/
-│   └── ...
+│   ├── 02-characters/
+│   ├── 03-plot/
+│   ├── 04-outline/
+│   ├── 05-drafts/
+│   ├── 06-editing/
+│   ├── _research/
+│   ├── _staging/                      # Sub-agent work products
+│   │   ├── raven/
+│   │   ├── thistle/
+│   │   ├── lynx/
+│   │   ├── masque/
+│   │   ├── loom/
+│   │   └── vestry/
+│   └── _knowledge/                    # Curated project knowledge base
+│       ├── _index.md
+│       ├── research/
+│       ├── references/
+│       ├── media/
+│       ├── glossary/
+│       ├── style-references/
+│       └── notes/
 │
 └── blog-posts/                        # Another project
     ├── 00-genesis/
@@ -353,6 +394,16 @@ When Juno activates, she should:
 2. Use `[LP]` to list projects
 3. Your test project should appear
 4. Switch to it and verify context loads
+
+### Test 5: Verify Sub-Agents
+
+1. Check sub-agent files exist:
+```bash
+ls ~/creative-writing/_bmad/custom/agents/juno/sub-agents/
+# Should list: loom, lynx, masque, raven, thistle, vestry .yaml files
+```
+2. With Juno active and a project open, try `[KB]` to quick-file a test note
+3. Verify `_knowledge/` folder was created in your project
 
 ---
 
@@ -428,6 +479,7 @@ cp -r ~/creative-writing/_bmad/_memory/juno-sidecar ~/juno-sidecar-backup
 # Copy new agent files (not memory)
 cp /path/to/new/_bmad/custom/agents/juno/*.yaml ~/creative-writing/_bmad/custom/agents/juno/
 cp /path/to/new/_bmad/custom/agents/juno/*.md ~/creative-writing/_bmad/custom/agents/juno/
+cp -r /path/to/new/_bmad/custom/agents/juno/sub-agents/ ~/creative-writing/_bmad/custom/agents/juno/
 cp -r /path/to/new/_bmad/custom/agents/juno/tools/ ~/creative-writing/_bmad/custom/agents/juno/
 
 # Copy updated slash command and project config
@@ -442,7 +494,7 @@ chmod +x ~/creative-writing/_bmad/custom/agents/juno/tools/*.sh
 
 ### Migrating Memory Templates
 
-If you are updating from a version with fewer commands (23 commands) to the current version (41 commands), your `project-memory.md` template may be missing new tracking sections. To add them manually, append these sections after "Quick Context" in your existing `project-memory.md`:
+If you are updating from an earlier version, your `project-memory.md` template may be missing tracking sections. To add them manually, append these sections after "Quick Context" in your existing `project-memory.md`:
 
 - **Word Count Tracking** — target, current total, daily goal, session log table
 - **Subplot Tracking** — thread status table (populated by `[SB]`)
@@ -451,7 +503,16 @@ If you are updating from a version with fewer commands (23 commands) to the curr
 
 See the fresh `project-memory.md` template for the exact format. Your `instructions.md` also has new preference sections for session management and genre defaults.
 
-**Note:** The agent YAML (`juno.agent.yaml`) has grown significantly to support 41 commands with 28 detailed prompts. This is expected and does not affect performance since prompts are loaded on demand.
+### Migrating to Sub-Agent Support
+
+If updating from a version without sub-agents (pre-49 commands), note:
+
+- **New folder:** `sub-agents/` under `_bmad/custom/agents/juno/` contains 6 agent YAML files. Copy the entire folder.
+- **Existing projects** will automatically get `_staging/` and `_knowledge/` folders when you first summon a sub-agent or use `[KB]`. No manual migration needed.
+- **New projects** created with `[GS]` Genesis will scaffold these folders automatically.
+- **New commands:** `[KB]`, `[RN]`, `[TS]`, `[LX]`, `[MQ]`, `[LM]`, `[VY]`, `[AP]` — see the User Guide for details.
+
+**Note:** The agent YAML (`juno.agent.yaml`) supports 49 commands with 31 detailed prompts. This is expected and does not affect performance since prompts are loaded on demand.
 
 ### Partial Update (Agent Only)
 
@@ -459,6 +520,8 @@ If only the agent definition changed:
 
 ```bash
 cp /path/to/new/_bmad/custom/agents/juno/juno.agent.yaml \
+   ~/creative-writing/_bmad/custom/agents/juno/
+cp -r /path/to/new/_bmad/custom/agents/juno/sub-agents/ \
    ~/creative-writing/_bmad/custom/agents/juno/
 ```
 
@@ -504,7 +567,7 @@ fi
 # Create destination
 mkdir -p "$DEST"
 
-# Copy BMAD framework
+# Copy BMAD framework (includes sub-agents)
 mkdir -p "$DEST/_bmad"
 cp -r "$SOURCE/_bmad/custom" "$DEST/_bmad/"
 cp -r "$SOURCE/_bmad/_memory" "$DEST/_bmad/"
@@ -520,6 +583,10 @@ cp "$SOURCE/CLAUDE.md" "$DEST/"
 chmod -R u+rw "$DEST/_bmad"
 chmod -R u+rw "$DEST/.claude"
 chmod +x "$DEST/_bmad/custom/agents/juno/tools/"*.sh
+
+# Verify sub-agents were copied
+AGENT_COUNT=$(ls "$DEST/_bmad/custom/agents/juno/sub-agents/"*.yaml 2>/dev/null | wc -l)
+echo "Installed $AGENT_COUNT sub-agents"
 
 echo "Installation complete!"
 echo ""
