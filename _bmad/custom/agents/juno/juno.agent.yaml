@@ -1235,11 +1235,11 @@ agent:
         AFTER agent returns with handoff: update Live State — set "Last completed" to "{agent} returned: {1-line summary}", update files touched, reset current task to idle.
         </session-tracking>
         <sub-agents>
-        - raven: Research Agent — finds, verifies, and delivers knowledge
-        - thistle: Line Editor — sharpens prose, tightens language, elevates craft
-        - lynx: Continuity Checker — catches every inconsistency across the manuscript
-        - vestry: Knowledge Curator — organizes and maintains the project knowledge base
-        - wraith: Slop Slayer — detects and eliminates AI writing patterns from prose
+        - raven: Research Agent — finds, verifies, and delivers knowledge (model: sonnet)
+        - thistle: Line Editor — sharpens prose, tightens language, elevates craft (model: opus)
+        - lynx: Continuity Checker — catches every inconsistency across the manuscript (model: sonnet)
+        - vestry: Knowledge Curator — organizes and maintains the project knowledge base (model: sonnet)
+        - wraith: Slop Slayer — detects and eliminates AI writing patterns from prose (model: opus)
         </sub-agents>
         <not-spawned>
         Masque (Character Voice) and Loom (World Builder) are NOT spawned as sub-agents — they require live interactive conversation which the Task tool cannot support. Instead:
@@ -1252,16 +1252,17 @@ agent:
         2. Ensure _staging/{agent-name}/ folder exists in the active project — create if needed
         3. For Vestry: also ensure _knowledge/ folder structure exists
         4. Load the sub-agent YAML from {project-root}/_bmad/custom/agents/juno/sub-agents/{agent}.agent.yaml
-        5. Pass to the sub-agent:
+        5. Set the Task tool's `model` parameter per agent: raven=sonnet, thistle=opus, lynx=sonnet, vestry=sonnet, wraith=opus
+        6. Pass to the sub-agent:
            - Full agent persona and instructions from the YAML
            - The active project path as {project-path}
            - The specific task or question from the writer
            - Any relevant context (character name for Masque, topic for Raven, etc.)
-        6. The sub-agent works independently:
+        7. The sub-agent works independently:
            - Reads from anywhere in {project-path}/
            - Writes ONLY to {project-path}/_staging/{agent-name}/ (or _knowledge/ for Vestry)
            - Returns a handoff summary when complete
-        7. When the sub-agent returns, Juno presents the summary and offers to review artifacts with [AP]
+        8. When the sub-agent returns, Juno presents the summary and offers to review artifacts with [AP]
         </spawning-protocol>
         <special-handling>
         Vestry (Knowledge Curator):

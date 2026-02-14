@@ -1,24 +1,25 @@
 # Project Memory
 
 ## Live State
-<!-- UPDATED: 2026-02-13 | STATUS: idle | CMD: [TS] complete -->
+<!-- UPDATED: 2026-02-13 | STATUS: idle | CMD: [AP] Thistle edits approved -->
 
-**Session:** 2026-02-13 | **Tasks this session:** 5
+**Session:** 2026-02-13 | **Tasks this session:** 6
 **Current task:** idle
-**Last completed:** [TS] Thistle line-edit pass — 28 edits, ~65 words cut, staged for review
-**Files touched this session:** 02-drafts/writers-workspace-draft.md (created, then polished)
-**Words this session:** +4,000 (total: ~8,200)
+**Last completed:** [AP] Approved all 28 Thistle edits — canonical draft updated
+**Files touched this session:** 02-drafts/writers-workspace-draft.md (created, polished, Thistle pass applied)
+**Words this session:** +4,000 (total: ~8,200, net ~3,570 after Thistle tightening)
 **Decisions:**
 - Title: "Where Do I Actually Type? A Writer's Guide to the Juno Workspace"
 - Merged Advantages section into body (demonstrated throughout rather than listed separately)
 - Closed with callback to Article 1's "front door stuck" example
 - "What's Next" teaser points to Genesis (Article 3)
-- Polish: broke all rule-of-three instances, cut importance inflation, reduced em dashes from ~25 to ~10, cut "honest" overuse, fixed negation formula, reshaped summarizing close
+- Polish: broke all rule-of-three instances, cut importance inflation, reduced em dashes, cut "honest" overuse, fixed negation formula, reshaped summarizing close
+- Thistle line-edit: approved all 28 edits (filler cuts, cliche replacements, repetition fixes, Thinking Levels tightened)
 **Open threads:**
-- Article 2 ready for author review (may need further passes)
+- Article 2 ready for final author review
 - Confirm Article 3 is Genesis in the series arc
 - Consider generating live [WR] output examples for Article 1
-**Pickup point:** Article 2 polished draft at 02-drafts/writers-workspace-draft.md. First draft + self-audit + polish complete. Ready for author review or next round.
+**Pickup point:** Article 2 at 02-drafts/writers-workspace-draft.md — first draft + self-audit + polish + Thistle line-edit all complete. Ready for final review or next article.
 
 ---
 
