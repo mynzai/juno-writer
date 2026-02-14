@@ -946,6 +946,7 @@ Options:
 - **Set** -- Replace directives with new rules
 - **Edit** -- Modify specific sections or add rules
 - **Clear** -- Remove all directives
+- **Load Template** -- Choose from pre-built directive templates (see below)
 - **Scope** -- Choose global (all projects) or project-level
 
 You can provide directives in any format -- free-form paragraphs, bullet lists, stream-of-consciousness. Juno organizes them into sections while preserving your exact wording.
@@ -983,6 +984,33 @@ A writer pastes rules like this into `[WD]`:
 > No em dashes. Write like a human, not a narrator performing good writing. Never use "echoed through," "hung heavy," "a testament to." Give me concrete, ugly, specific sensory details. Surprise me structurally.
 
 Juno organizes this into sections and saves it. From that point forward, every piece of content Juno generates or edits follows those rules exactly.
+
+### Directive Templates
+
+Don't want to write directives from scratch? Juno ships with pre-built templates you can load as a starting point and customize. Access them via `[WD]` > **Load Template**.
+
+| Template | Best For | Rules | Focus |
+|----------|----------|-------|-------|
+| **Starter Pack** | Any genre | 12 | Lean starting point targeting the most common AI writing patterns -- banned words, show-don't-tell, pacing |
+| **Literary Fiction** | Novels, novellas, short stories | 24 | Interiority, subtext, close psychic distance, earned ambiguity, Anglo-Saxon word preference |
+| **Genre Thriller** | Thrillers, suspense, crime | 22 | Forward momentum, tight POV, controlled information, physical cost, ticking clocks |
+| **Nonfiction / Blog** | Articles, essays, blog posts | 16 | Clarity, authority, conversational voice, no corporate-speak, specific evidence |
+
+**How templates work:**
+
+1. Invoke `[WD]` and choose **Load Template**
+2. Pick a template from the list
+3. Choose scope: **global** (all projects) or **project-level** (this project only)
+4. If you already have directives, choose to **replace** or **merge**
+5. Customize with `[WD]` > **Edit** anytime after loading
+
+**When are templates offered?**
+
+- During **Genesis** (`[GS]`) -- when creating a new project, Juno suggests a genre-matched template if you don't have directives set yet
+- On **first session** -- if no directives are active, the startup greeting includes a gentle reminder that templates are available
+- Anytime via `[WD]` -- you can load, swap, or merge templates whenever you want
+
+Templates live in `_bmad/_memory/juno-sidecar/directive-templates/`. You can add your own `.md` files there and they'll appear in the template list automatically.
 
 ---
 

@@ -148,6 +148,16 @@ agent:
            - _staging/ with sub-folders for each sub-agent: raven/, thistle/, lynx/, masque/, loom/, vestry/
            - _knowledge/ with sub-folders: _index.md, research/, references/, media/, glossary/, style-references/, notes/
         10. Register project in projects-registry.md and set as active in project-memory.md
+        11. **Writing directives gate:** After scaffolding, check if global writing directives are active (non-empty). If not, offer a genre-matched directive template:
+            - novel/novella/short-story/short-story-collection → Suggest **Literary Fiction** template (or **Starter Pack** as a lighter option)
+            - screenplay/stage-play → Suggest **Starter Pack** template
+            - blog-post/article/essay → Suggest **Nonfiction / Blog** template (or **Starter Pack** as a lighter option)
+            - memoir → Suggest **Literary Fiction** template (or **Starter Pack** as a lighter option)
+            - poetry-collection → Suggest **Starter Pack** template
+            - For thriller/suspense/crime genres (detected from seed idea or explicit genre tags) → Suggest **Genre Thriller** template
+            Present it naturally: "Before we begin writing — I have pre-built writing directive templates that shape how I generate prose. They target common AI patterns and enforce craft rules. I'd recommend [template name] for this project. Want me to load it, show you what's inside, or skip for now?"
+            If the writer accepts: load the template as project-level directives ({project}/writing-directives.md) and confirm. Remind them they can customize anytime with [WD].
+            If global directives already exist: skip this offer (the writer already has preferences set).
         </process>
 
     - id: enhance-idea
@@ -1424,7 +1434,7 @@ agent:
     # --- Writing & Production ---
     - trigger: WD or fuzzy match on writing-directives
       action: '#writing-directives'
-      description: '[WD] Writing Directives — Set rules Juno follows when writing'
+      description: '[WD] Writing Directives — Set rules or load pre-built templates for writing'
 
     - trigger: WR or fuzzy match on write
       action: '#write-content'

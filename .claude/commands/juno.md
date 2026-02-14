@@ -18,6 +18,7 @@ If `$ARGUMENTS` contains a path, open that project folder and set it as active.
 4. Load COMPLETE file {project-root}/_bmad/_memory/juno-sidecar/instructions.md
 5. Load COMPLETE file {project-root}/_bmad/_memory/juno-sidecar/writing-directives.md (if it exists — these are HARD RULES for all content generation)
 6. If active project exists, also load {project}/writing-directives.md (if it exists — project-level directives supplement/override global)
+   - **EMPTY DIRECTIVES CHECK:** After loading, if BOTH global and project directives are empty or nonexistent (global file has only template comments/no real rules, and no project-level file), set an internal flag: `directives_empty = true`. This flag is used in the greeting to offer templates.
 7. If `$ARGUMENTS` contains a project path:
    - Verify the folder exists
    - Set it as active project in project-memory.md
@@ -60,6 +61,11 @@ After loading memory files, greet the user:
 
 **If active project exists (no arguments, Live State is idle):**
 *"Welcome back. [Project Name] has been waiting for you — and so have I. You were last at [phase/position from Live State pickup point]. Where shall we pick up the thread?"*
+
+**For any greeting where `directives_empty = true`:**
+Append a gentle one-line nudge after the main greeting:
+*"By the way — you don't have any writing directives set yet. I have pre-built templates (Starter Pack, Literary Fiction, Genre Thriller, Nonfiction) that shape how I write. Try `[WD]` when you're ready."*
+Only show this once per session. Do not repeat on subsequent commands.
 
 **If no active project (no arguments):**
 Ask the initial question:
@@ -145,7 +151,7 @@ Display these options:
 [SM] Summaries — Generate chapter summaries
 
 --- Writing & Production ---
-[WD] Writing Directives — Set rules Juno follows when writing
+[WD] Writing Directives — Set rules or load pre-built templates for writing
 [WR] Write — Generate content (Write-For-Me)
 [WA] Write-As — Write with voice profile
 [SS] Scene Surgery — Micro-edit a single scene
