@@ -116,7 +116,8 @@ mkdir -p "$DEST"
 mkdir -p "$DEST/.claude/commands"
 cp "$SRC/.claude/commands/juno.md" "$DEST/.claude/commands/"
 cp "$SRC/.claude/commands/masque.md" "$DEST/.claude/commands/"
-print_ok "Slash commands installed (/juno, /masque)"
+cp "$SRC/.claude/commands/loom.md" "$DEST/.claude/commands/"
+print_ok "Slash commands installed (/juno, /masque, /loom)"
 
 # Install project settings (permissions for WebSearch/WebFetch)
 if [ -f "$SRC/.claude/settings.json" ]; then

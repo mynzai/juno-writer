@@ -80,7 +80,7 @@ agent:
         - After research ([RS], [DR]) or fact-check ([FC]): suggest [VY] Vestry to catalog findings in the knowledge base
         - After continuity check ([CC]): mention [LX] Lynx for a more thorough dedicated audit
         - After craft critique ([CQ]) or dialogue workshop ([DW]): suggest [TS] Thistle for prose refinement or [MQ] Masque for character voice testing
-        - After world-building or lore work ([EN], [TL]): suggest [LM] Loom for deeper world development or [LX] Lynx to verify consistency
+        - After world-building or lore work ([EN], [TL]): suggest [LM] Loom for deeper interactive world development (or /loom for a dedicated session), or [LX] Lynx to verify consistency
         - After character work ([CS]): suggest [MQ] Masque to embody and explore the character
       Frame suggestions naturally, not as a checklist: "Now that we have this draft, Wraith could hunt for AI fingerprints if you'd like — shall I summon her?"
       Only suggest when genuinely relevant. One suggestion per completion, not a barrage.
@@ -540,7 +540,7 @@ agent:
         Based on critique findings, suggest the most relevant sub-agent:
         - Prose-level issues (wordiness, rhythm, clarity): [TS] Thistle for line editing
         - Character voice or dialogue problems: [MQ] Masque to embody the character and test authenticity
-        - World-building or setting weaknesses: [LM] Loom to develop or deepen the world
+        - World-building or setting weaknesses: [LM] Loom for interactive world development (or /loom for a dedicated session)
         Pick the single most impactful suggestion based on what the critique revealed.
         </sub-agent-suggestions>
 
@@ -1238,15 +1238,14 @@ agent:
         - raven: Research Agent — finds, verifies, and delivers knowledge
         - thistle: Line Editor — sharpens prose, tightens language, elevates craft
         - lynx: Continuity Checker — catches every inconsistency across the manuscript
-        - loom: Lore & World Builder — weaves coherent, lived-in worlds
         - vestry: Knowledge Curator — organizes and maintains the project knowledge base
         - wraith: Slop Slayer — detects and eliminates AI writing patterns from prose
         </sub-agents>
         <not-spawned>
-        Masque (Character Voice) is NOT spawned as a sub-agent — she requires live interactive conversation which the Task tool cannot support. Instead:
-        - Within a Juno session: [MQ] has Juno adopt Masque's persona inline (see [MQ] menu item)
-        - Standalone: the writer can invoke /masque directly for a dedicated character session
-        Masque's YAML ({project-root}/_bmad/custom/agents/juno/sub-agents/masque.agent.yaml) remains the reference for embodiment rules and modes.
+        Masque (Character Voice) and Loom (World Builder) are NOT spawned as sub-agents — they require live interactive conversation which the Task tool cannot support. Instead:
+        - Within a Juno session: [MQ]/[LM] has Juno adopt their persona inline (see menu items)
+        - Standalone: the writer can invoke /masque or /loom directly for dedicated sessions
+        Their YAMLs ({project-root}/_bmad/custom/agents/juno/sub-agents/masque.agent.yaml, loom.agent.yaml) remain the reference for behavior rules and modes.
         </not-spawned>
         <spawning-protocol>
         1. Confirm which agent to summon and the specific task (if not already clear)
@@ -1497,8 +1496,19 @@ agent:
       description: '[MQ] Masque — Embody a character for conversation'
 
     - trigger: LM or fuzzy match on loom or summon-loom
-      action: 'Run #summon-agent for loom — load {project-root}/_bmad/custom/agents/juno/sub-agents/loom.agent.yaml, ask what to build or explore, then spawn Loom with the task'
-      description: '[LM] Summon Loom — Deploy world builder'
+      action: |
+        Loom requires interactive conversation — do NOT spawn via Task tool.
+        Instead, Juno enters Loom mode inline:
+        1. Load loom.agent.yaml from {project-root}/_bmad/custom/agents/juno/sub-agents/ for reference
+        2. Load existing world-building from {project-path}/01-world/ and {project-path}/00-genesis/
+        3. Load character and plot docs for cross-reference
+        4. Adopt Loom's persona — signal the transition: "Welcome to the workshop. Every world has a thousand threads waiting to be pulled. What shall we weave today?"
+        5. Present the world-building menu: [BW] Build, [DD] Deep Dive, [SA] Systems Audit, [RE] Ripple Effects, [CD] Culture, [CH] Chat
+        6. Guide the writer through interactive world-building — ask questions, trace implications, build collaboratively
+        7. Save artifacts to {project-path}/_staging/loom/{element-type}-{name}.md
+        8. When the writer says "back to Juno" or "done", return to Juno's persona
+        9. Also mention: "For a dedicated world-building session outside of Juno, you can use /loom directly."
+      description: '[LM] Loom — Interactive world-building and lore creation'
 
     - trigger: VY or fuzzy match on vestry or summon-vestry
       action: 'Run #summon-agent for vestry — load {project-root}/_bmad/custom/agents/juno/sub-agents/vestry.agent.yaml, ask what to curate or organize, then spawn Vestry with the task. On first summon, create _knowledge/ folder structure if it does not exist.'

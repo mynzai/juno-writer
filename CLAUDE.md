@@ -13,6 +13,8 @@ This is a creative writing workspace powered by the BMAD framework with a custom
 /juno my-novel           # Open specific project folder
 /masque                  # Standalone character embodiment (interactive)
 /masque Elena            # Embody a specific character directly
+/loom                    # Standalone world-building session (interactive)
+/loom magic system       # Explore a specific world element directly
 ```
 
 ## Architecture
@@ -42,6 +44,7 @@ This is a creative writing workspace powered by the BMAD framework with a custom
 | `_bmad/custom/agents/juno/juno.agent.yaml` | Core agent definition with prompts and menu |
 | `.claude/commands/juno.md` | Slash command with persona and greeting |
 | `.claude/commands/masque.md` | Standalone character embodiment command |
+| `.claude/commands/loom.md` | Standalone world-building command |
 | `_bmad/_memory/juno-sidecar/` | Persistent memory across sessions |
 
 ## Key Juno Commands

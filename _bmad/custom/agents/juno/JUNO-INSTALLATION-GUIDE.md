@@ -71,6 +71,7 @@ Juno consists of three components that must be installed together:
 CLAUDE.md                          # Project instructions for Claude Code
 .claude/commands/juno.md           # Slash command — enables /juno
 .claude/commands/masque.md         # Standalone character embodiment — enables /masque
+.claude/commands/loom.md           # Standalone world-building — enables /loom
 .claude/settings.json              # Project permissions (WebSearch, WebFetch for sub-agents)
 ```
 
@@ -204,6 +205,7 @@ Install in your creative writing directory so it's available when you're in that
 mkdir -p ~/creative-writing/.claude/commands
 cp /path/to/source/.claude/commands/juno.md ~/creative-writing/.claude/commands/
 cp /path/to/source/.claude/commands/masque.md ~/creative-writing/.claude/commands/
+cp /path/to/source/.claude/commands/loom.md ~/creative-writing/.claude/commands/
 
 # Project config
 cp /path/to/source/CLAUDE.md ~/creative-writing/
@@ -220,6 +222,7 @@ Install the slash commands in your home directory so they're available everywher
 mkdir -p ~/.claude/commands
 cp /path/to/source/.claude/commands/juno.md ~/.claude/commands/
 cp /path/to/source/.claude/commands/masque.md ~/.claude/commands/
+cp /path/to/source/.claude/commands/loom.md ~/.claude/commands/
 cp /path/to/source/CLAUDE.md ~/creative-writing/
 cp /path/to/source/.claude/settings.json ~/creative-writing/.claude/
 ```
@@ -360,7 +363,8 @@ After installation, your creative writing workspace should look like this:
 │   ├── settings.json                  # Project permissions (WebSearch, WebFetch)
 │   └── commands/
 │       ├── juno.md                    # Juno orchestrator command
-│       └── masque.md                  # Standalone character embodiment command
+│       ├── masque.md                  # Standalone character embodiment command
+│       └── loom.md                    # Standalone world-building command
 ├── _bmad/
 │   ├── custom/
 │   │   ├── module.yaml                # Module config
@@ -451,6 +455,13 @@ To verify Masque standalone:
 ```
 
 Masque should greet you and list available characters (or note no active project).
+
+To verify Loom standalone:
+```
+/loom
+```
+
+Loom should greet you and present the world-building menu (or note no active project).
 
 ### Test 2: Check Memory Loading
 
@@ -586,7 +597,7 @@ cp -r ~/juno-sidecar-backup/* _bmad/_memory/juno-sidecar/
 rm -rf ~/juno-sidecar-backup
 ```
 
-**What gets updated:** Agent definition, sub-agents (raven, thistle, lynx, masque, loom, vestry, wraith), slash commands (`/juno`, `/masque`), project settings, CLAUDE.md, tools, directive templates, documentation.
+**What gets updated:** Agent definition, sub-agents (raven, thistle, lynx, masque, loom, vestry, wraith), slash commands (`/juno`, `/masque`, `/loom`), project settings, CLAUDE.md, tools, directive templates, documentation.
 
 **What is preserved:** Your memory files (project-memory.md, projects-registry.md, active-voice-profile.md, instructions.md, writing-directives.md, session-archive.md, voice-profiles/), and all writing projects (gitignored).
 
@@ -605,6 +616,7 @@ cp -r ~/creative-writing/_bmad/_memory/juno-sidecar ~/juno-sidecar-backup
 cp -r /tmp/juno-update/_bmad/custom ~/creative-writing/_bmad/
 cp /tmp/juno-update/.claude/commands/juno.md ~/creative-writing/.claude/commands/
 cp /tmp/juno-update/.claude/commands/masque.md ~/creative-writing/.claude/commands/
+cp /tmp/juno-update/.claude/commands/loom.md ~/creative-writing/.claude/commands/
 cp /tmp/juno-update/.claude/settings.json ~/creative-writing/.claude/
 cp /tmp/juno-update/CLAUDE.md ~/creative-writing/
 

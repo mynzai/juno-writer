@@ -426,7 +426,7 @@ When you feel ready to advance:
 | `[TS]` | Thistle | Deploy line editor for prose refinement |
 | `[LX]` | Lynx | Deploy continuity checker for consistency auditing |
 | `[MQ]` | Masque | Embody a character (inline), or use `/masque` standalone |
-| `[LM]` | Loom | Deploy world builder for lore and systems |
+| `[LM]` | Loom | Interactive world-building (inline), or use `/loom` standalone |
 | `[VY]` | Vestry | Deploy knowledge curator for archive management |
 | `[WH]` | Wraith | Deploy slop slayer for AI-pattern detection and elimination |
 | `[AP]` | Approve | Review and approve sub-agent work from staging |
@@ -443,9 +443,9 @@ When you feel ready to advance:
 
 ## The Sub-Agent Fleet
 
-Juno can summon specialized agents to handle focused tasks. Each agent has its own persona, expertise, and tools. Six of them (Raven, Thistle, Lynx, Loom, Vestry, Wraith) work independently in the background, writing their output to a staging area for your review. Nothing they produce enters your canonical project folders until you approve it through Juno.
+Juno can summon specialized agents to handle focused tasks. Each agent has its own persona, expertise, and tools. Five of them (Raven, Thistle, Lynx, Vestry, Wraith) work independently in the background, writing their output to a staging area for your review. Nothing they produce enters your canonical project folders until you approve it through Juno.
 
-**Masque is the exception** -- she requires live interactive conversation, so she works differently. Within Juno, `[MQ]` has Juno adopt Masque's persona inline. You can also use `/masque` as a standalone command for dedicated character sessions outside of Juno.
+**Masque and Loom are the exceptions** -- they require live interactive conversation, so they work differently. Within Juno, `[MQ]` and `[LM]` have Juno adopt their persona inline. You can also use `/masque` or `/loom` as standalone commands for dedicated sessions outside of Juno.
 
 ### The Agents
 
@@ -461,7 +461,7 @@ Juno can summon specialized agents to handle focused tasks. Each agent has its o
 
 ### How Summoning Works
 
-For background agents (Raven, Thistle, Lynx, Loom, Vestry, Wraith):
+For background agents (Raven, Thistle, Lynx, Vestry, Wraith):
 
 1. Use the agent's trigger command (e.g., `[RN]` for Raven)
 2. Juno asks what task to assign (unless already clear from context)
@@ -470,13 +470,21 @@ For background agents (Raven, Thistle, Lynx, Loom, Vestry, Wraith):
 5. When the agent finishes, Juno presents a summary
 6. Use `[AP]` Approve to review and promote the work into your project
 
-For Masque (interactive):
+For Masque (interactive character embodiment):
 
 1. Use `[MQ]` within Juno, or `/masque` standalone
 2. Specify which character to embody
 3. You converse directly with the embodied character
 4. Say "surface" to end the session and receive actor's notes
 5. Transcripts are saved to `_staging/masque/`
+
+For Loom (interactive world-building):
+
+1. Use `[LM]` within Juno, or `/loom` standalone
+2. Choose a mode: Build, Deep Dive, Systems Audit, Ripple Effects, Culture, or Chat
+3. You collaborate directly with Loom -- she asks questions, traces implications, builds with you
+4. Say "back to Juno" or "done" to end the session
+5. World-building artifacts are saved to `_staging/loom/`
 
 ### Raven -- Research Agent
 
@@ -625,11 +633,11 @@ The `/masque` command lets you go directly to character embodiment without activ
 
 ### Loom -- Lore & World Builder
 
-**Summon:** `[LM]`
+**Inline:** `[LM]` | **Standalone:** `/loom` | **Direct topic:** `/loom magic system`
 
-Loom weaves coherent worlds by thinking in systems and ripple effects. She asks the questions nobody else thinks to ask and builds worlds that feel lived-in.
+Loom weaves coherent worlds by thinking in systems and ripple effects. She asks the questions nobody else thinks to ask and builds worlds that feel lived-in. Like Masque, Loom is **interactive** -- she works with you through collaborative conversation rather than producing output in the background.
 
-**Loom's Commands:**
+**Loom's Modes:**
 
 | Command | Description |
 |---------|-------------|
@@ -638,8 +646,9 @@ Loom weaves coherent worlds by thinking in systems and ripple effects. She asks 
 | `[SA]` | Systems Audit -- Verify internal logic of world systems |
 | `[RE]` | Ripple Effects -- Trace consequences of a world choice across all domains |
 | `[CD]` | Culture -- Build a culture from the ground up |
+| `[CH]` | Chat -- Free conversation about world-building |
 
-**When to summon Loom:**
+**When to use Loom:**
 - You're building a new location, culture, or system from scratch
 - An existing world element needs more depth and detail
 - You want to verify that your world's rules are internally consistent
@@ -648,7 +657,11 @@ Loom weaves coherent worlds by thinking in systems and ripple effects. She asks 
 
 **Ripple Effects** is Loom's signature capability. Give her a world fact ("Magic requires blood sacrifice" or "The empire just fell") and she traces the consequences across daily life, economy, politics, military, religion, culture, architecture, geography, technology, and social structure.
 
-**Output:** World-building documents saved to `_staging/loom/`, ready for promotion to `01-world/`.
+**Two ways to use Loom:**
+- **Within Juno** (`[LM]`): Juno adopts Loom's persona inline. Say "back to Juno" when done.
+- **Standalone** (`/loom`): A dedicated world-building session outside of Juno. Use when you want extended, uninterrupted world-building.
+
+**Output:** World-building documents saved to `_staging/loom/`, ready for promotion to `01-world/` via `[AP]`.
 
 ### Vestry -- Knowledge Curator
 
@@ -1697,13 +1710,19 @@ Saves to `06-editing/submission/` folder. Comp titles are recent, same-genre, an
 
 ### Deep World-Building Session
 
+**Inline (within Juno):**
 1. `/juno my-novel`
-2. `[LM]` — Summon Loom
-3. Choose what to build: location, culture, magic system, institution
-4. Loom guides you through targeted questions
-5. Collaborate on the element — Loom traces ripple effects
-6. When done, Loom saves to `_staging/loom/`
-7. `[AP]` — Review and approve into `01-world/`
+2. `[LM]` — Juno becomes Loom
+3. Choose a mode: Build, Deep Dive, Systems Audit, Ripple Effects, Culture, or Chat
+4. Collaborate interactively — Loom asks questions, traces implications
+5. Say "back to Juno" when done
+6. `[AP]` — Review and approve artifacts into `01-world/`
+
+**Standalone (for dedicated sessions):**
+1. `/loom magic system` — Go directly to a topic
+2. Collaborate freely, build elements, trace ripple effects
+3. End the session when done
+4. Return to Juno later and use `[AP]` to approve
 
 ### Research and Curate
 
@@ -1814,7 +1833,7 @@ Saves to `06-editing/submission/` folder. Comp titles are recent, same-genre, an
 - **Summon for focus** -- Use sub-agents when a task needs dedicated attention, not for quick questions
 - **Review staging regularly** -- Don't let `_staging/` pile up; use `[AP]` after each agent session
 - **Masque for character depth** -- Talk to characters when they feel flat or when you're unsure how they'd react. Use `/masque` for deep sessions, `[MQ]` for quick checks mid-Juno
-- **Loom for consequences** -- Use Ripple Effects before committing to major world-building decisions
+- **Loom for consequences** -- Use Ripple Effects before committing to major world-building decisions. Use `/loom` for deep sessions, `[LM]` for quick world-building mid-Juno
 - **Raven then Vestry** -- Research flows best when Raven finds it and Vestry catalogs it
 - **Wraith after generating** -- Run Wraith on AI-generated content before polishing with Thistle; eliminate the slop first, then refine the craft
 - **Thistle after drafting** -- Don't summon Thistle mid-draft; finish the chapter, then polish
@@ -1906,7 +1925,7 @@ SUB-AGENTS
   [TS] Thistle       → Line editor
   [LX] Lynx          → Continuity checker
   [MQ] Masque        → Character embodiment (or /masque standalone)
-  [LM] Loom          → World builder
+  [LM] Loom          → World builder (or /loom standalone)
   [VY] Vestry        → Knowledge curator
   [WH] Wraith        → Slop slayer (AI-pattern detection)
   [AP] Approve       → Review staged work
