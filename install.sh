@@ -112,10 +112,17 @@ print_ok "Downloaded successfully."
 # Create destination directory
 mkdir -p "$DEST"
 
-# Install slash command
+# Install slash commands
 mkdir -p "$DEST/.claude/commands"
 cp "$SRC/.claude/commands/juno.md" "$DEST/.claude/commands/"
-print_ok "Slash command installed"
+cp "$SRC/.claude/commands/masque.md" "$DEST/.claude/commands/"
+print_ok "Slash commands installed (/juno, /masque)"
+
+# Install project settings (permissions for WebSearch/WebFetch)
+if [ -f "$SRC/.claude/settings.json" ]; then
+    cp "$SRC/.claude/settings.json" "$DEST/.claude/"
+    print_ok "Project settings installed"
+fi
 
 # Install agent definition
 mkdir -p "$DEST/_bmad/custom/agents/juno"
@@ -125,9 +132,23 @@ cp "$SRC/_bmad/custom/agents/juno/JUNO-INSTALLATION-GUIDE.md" "$DEST/_bmad/custo
 cp "$SRC/_bmad/custom/module.yaml" "$DEST/_bmad/custom/"
 print_ok "Agent definition installed"
 
+# Install sub-agents
+mkdir -p "$DEST/_bmad/custom/agents/juno/sub-agents"
+cp "$SRC/_bmad/custom/agents/juno/sub-agents/"*.yaml "$DEST/_bmad/custom/agents/juno/sub-agents/"
+print_ok "Sub-agents installed (raven, thistle, lynx, masque, loom, vestry, wraith)"
+
+# Install tools
+if [ -d "$SRC/_bmad/custom/agents/juno/tools" ]; then
+    mkdir -p "$DEST/_bmad/custom/agents/juno/tools"
+    cp "$SRC/_bmad/custom/agents/juno/tools/"* "$DEST/_bmad/custom/agents/juno/tools/"
+    chmod +x "$DEST/_bmad/custom/agents/juno/tools/"*.sh 2>/dev/null || true
+    print_ok "Tools installed (import/export scripts, stylesheets)"
+fi
+
 # Install sidecar memory (only if not updating, to preserve existing memory)
 if [ "$MODE" != "update" ]; then
     mkdir -p "$DEST/_bmad/_memory/juno-sidecar/voice-profiles"
+    mkdir -p "$DEST/_bmad/_memory/juno-sidecar/directive-templates"
     cp "$SRC/_bmad/_memory/juno-sidecar/project-memory.md" "$DEST/_bmad/_memory/juno-sidecar/"
     cp "$SRC/_bmad/_memory/juno-sidecar/projects-registry.md" "$DEST/_bmad/_memory/juno-sidecar/"
     cp "$SRC/_bmad/_memory/juno-sidecar/active-voice-profile.md" "$DEST/_bmad/_memory/juno-sidecar/"
@@ -135,9 +156,13 @@ if [ "$MODE" != "update" ]; then
     cp "$SRC/_bmad/_memory/juno-sidecar/writing-directives.md" "$DEST/_bmad/_memory/juno-sidecar/"
     cp "$SRC/_bmad/_memory/juno-sidecar/README.md" "$DEST/_bmad/_memory/juno-sidecar/"
     cp "$SRC/_bmad/_memory/juno-sidecar/voice-profiles/default.md" "$DEST/_bmad/_memory/juno-sidecar/voice-profiles/"
-    print_ok "Memory sidecar installed"
+    cp "$SRC/_bmad/_memory/juno-sidecar/directive-templates/"*.md "$DEST/_bmad/_memory/juno-sidecar/directive-templates/"
+    print_ok "Memory sidecar installed (with directive templates)"
 else
-    print_ok "Memory sidecar preserved (update mode)"
+    # Always update directive templates even in update mode (they're system files, not user data)
+    mkdir -p "$DEST/_bmad/_memory/juno-sidecar/directive-templates"
+    cp "$SRC/_bmad/_memory/juno-sidecar/directive-templates/"*.md "$DEST/_bmad/_memory/juno-sidecar/directive-templates/"
+    print_ok "Memory sidecar preserved (update mode) — directive templates refreshed"
 fi
 
 # Install CLAUDE.md (only if not present, to avoid overwriting user customizations)
