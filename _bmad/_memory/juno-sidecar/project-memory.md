@@ -1,20 +1,24 @@
 # Project Memory
 
 ## Live State
-<!-- UPDATED: 2026-02-13 | STATUS: idle | CMD: session documented -->
+<!-- UPDATED: 2026-02-13 | STATUS: idle | CMD: [TS] complete -->
 
-**Session:** 2026-02-13 | **Tasks this session:** 0
+**Session:** 2026-02-13 | **Tasks this session:** 5
 **Current task:** idle
-**Last completed:** Session documented and context prepared for fresh start
-**Files touched this session:** —
-**Words this session:** +0 (total: ~4,200)
+**Last completed:** [TS] Thistle line-edit pass — 28 edits, ~65 words cut, staged for review
+**Files touched this session:** 02-drafts/writers-workspace-draft.md (created, then polished)
+**Words this session:** +4,000 (total: ~8,200)
 **Decisions:**
-- (none this session)
+- Title: "Where Do I Actually Type? A Writer's Guide to the Juno Workspace"
+- Merged Advantages section into body (demonstrated throughout rather than listed separately)
+- Closed with callback to Article 1's "front door stuck" example
+- "What's Next" teaser points to Genesis (Article 3)
+- Polish: broke all rule-of-three instances, cut importance inflation, reduced em dashes from ~25 to ~10, cut "honest" overuse, fixed negation formula, reshaped summarizing close
 **Open threads:**
-- Choose next article in series (Article 2 selection)
+- Article 2 ready for author review (may need further passes)
+- Confirm Article 3 is Genesis in the series arc
 - Consider generating live [WR] output examples for Article 1
-- Final proofread of Writing Directives article
-**Pickup point:** Article 1 (Writing Directives) is polished and ready for final proofread or publication. Knowledge base is live with Vestry's index. Next decision: proofread Article 1 or select and begin Article 2.
+**Pickup point:** Article 2 polished draft at 02-drafts/writers-workspace-draft.md. First draft + self-audit + polish complete. Ready for author review or next round.
 
 ---
 
@@ -32,7 +36,7 @@
 
 **Target:** Ongoing series (1,500-3,000 words per article)
 **Current Total:** ~4,200 words (Writing Directives draft)
-**Next Milestone:** Final proofread of Article 1, then Article 2 selection
+**Next Milestone:** Article 2 draft
 
 ---
 
@@ -64,8 +68,10 @@ N/A — Blog series format
 - [x] Writing Directives — Polish pass complete (2026-02-13)
 - [x] Knowledge base — Raven research approved, Vestry cataloged (2026-02-13)
 - [x] Directive templates — 4 global templates created, [WD] prompt updated (2026-02-13)
-- [ ] Writing Directives — Final proofread
-- [ ] Article 2 selection and drafting
+- [x] Article 2 selected — "The Writer's Workspace" (2026-02-13)
+- [x] Article 2 outline complete (2026-02-13)
+- [x] Writing Directives — Final proofread (2026-02-13)
+- [ ] Article 2 drafting
 
 ---
 
@@ -84,8 +90,8 @@ N/A — Blog series format
 ## Previous Session Summary
 <!-- Only the LAST session's compact recap lives here. Older sessions in session-archive.md -->
 
-### 2026-02-13 — Session 2: Sidebar, Templates, Polish, Knowledge Base
-Added [WD] sidebar to article, built 4 global directive templates (starter-pack, literary-fiction, genre-thriller, nonfiction-blog), updated [WD] prompt with template loading. Polish pass fixed 5 self-violations. Approved Raven research artifacts, deployed Vestry to catalog knowledge base with master index. ~4,200 words total.
+### 2026-02-13 — Session 3: Article 2 Planning, Proofread, Research
+Created Article 2 "The Writer's Workspace" — 13-section outline covering VSCode workflow, markdown, context window, thinking levels, other editors, import/export. Final proofread of Article 1 (one fix: triple "It" pattern). Deployed Raven for 7-angle research (40 sources, 502-line dossier). Approved research into knowledge base. Series expanded to 11 articles.
 
 ---
 
