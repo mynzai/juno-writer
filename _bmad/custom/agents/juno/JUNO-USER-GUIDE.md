@@ -404,7 +404,7 @@ When you feel ready to advance:
 
 | Command | Name | Description |
 |---------|------|-------------|
-| `[WD]` | Writing Directives | Set persistent rules Juno follows when writing |
+| `[WD]` | Writing Directives | Set rules or load pre-built templates for writing |
 | `[WR]` | Write | Generate content (Write-For-Me mode) |
 | `[WA]` | Write-As | Write using a specific voice profile |
 | `[SS]` | Scene Surgery | Micro-edit a single scene |
@@ -1840,7 +1840,7 @@ PROGRESS
   [SM] Summaries     → Chapter reference cards
 
 WRITE & PRODUCE
-  [WD] Directives    → Set rules for writing
+  [WD] Directives    → Set rules or load templates
   [WR] Write         → Generate content (6 modes)
   [WA] Write-As      → Generate in specific voice
   [SS] Scene Surgery → Micro-edit (6 modes)
