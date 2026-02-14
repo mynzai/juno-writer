@@ -12,19 +12,20 @@ A complete guide to using Juno, your Creative Writing Orchestrator.
 4. [The Creative Workflow](#the-creative-workflow)
 5. [Command Reference](#command-reference)
 6. [The Sub-Agent Fleet](#the-sub-agent-fleet)
-7. [Knowledge Base](#knowledge-base)
-8. [Staging & Approval](#staging--approval)
-9. [Research & Knowledge](#research--knowledge)
-10. [Voice & Style Features](#voice--style-features)
-11. [Writing Directives](#writing-directives)
-12. [Writing Assistance](#writing-assistance)
-13. [Story Architecture Tools](#story-architecture-tools)
-14. [Craft & Analysis Tools](#craft--analysis-tools)
-15. [Reader Perspective Tools](#reader-perspective-tools)
-16. [Progress & Accountability](#progress--accountability)
-17. [Production & Polish Tools](#production--polish-tools)
-18. [Common Workflows](#common-workflows)
-19. [Tips & Best Practices](#tips--best-practices)
+7. [Masque Standalone Command](#masque-standalone-command)
+8. [Knowledge Base](#knowledge-base)
+9. [Staging & Approval](#staging--approval)
+10. [Research & Knowledge](#research--knowledge)
+11. [Voice & Style Features](#voice--style-features)
+12. [Writing Directives](#writing-directives)
+13. [Writing Assistance](#writing-assistance)
+14. [Story Architecture Tools](#story-architecture-tools)
+15. [Craft & Analysis Tools](#craft--analysis-tools)
+16. [Reader Perspective Tools](#reader-perspective-tools)
+17. [Progress & Accountability](#progress--accountability)
+18. [Production & Polish Tools](#production--polish-tools)
+19. [Common Workflows](#common-workflows)
+20. [Tips & Best Practices](#tips--best-practices)
 
 ---
 
@@ -37,6 +38,8 @@ A complete guide to using Juno, your Creative Writing Orchestrator.
 ```
 
 Opens Juno. If you have an active project, Juno welcomes you back to it. If not, Juno asks the first question:
+
+> **Note:** There is also a standalone `/masque` command for interactive character sessions -- see [Masque Standalone Command](#masque-standalone-command) below.
 
 > *"Tell me — are we continuing an existing project, or beginning something new?"*
 
@@ -422,7 +425,7 @@ When you feel ready to advance:
 | `[RN]` | Raven | Deploy research agent for deep knowledge seeking |
 | `[TS]` | Thistle | Deploy line editor for prose refinement |
 | `[LX]` | Lynx | Deploy continuity checker for consistency auditing |
-| `[MQ]` | Masque | Embody a character for interactive conversation |
+| `[MQ]` | Masque | Embody a character (inline), or use `/masque` standalone |
 | `[LM]` | Loom | Deploy world builder for lore and systems |
 | `[VY]` | Vestry | Deploy knowledge curator for archive management |
 | `[AP]` | Approve | Review and approve sub-agent work from staging |
@@ -439,7 +442,9 @@ When you feel ready to advance:
 
 ## The Sub-Agent Fleet
 
-Juno can summon six specialized agents to handle focused tasks. Each agent has its own persona, expertise, and tools. They work independently, writing their output to a staging area for your review. Nothing they produce enters your canonical project folders until you approve it through Juno.
+Juno can summon specialized agents to handle focused tasks. Each agent has its own persona, expertise, and tools. Five of them (Raven, Thistle, Lynx, Loom, Vestry) work independently in the background, writing their output to a staging area for your review. Nothing they produce enters your canonical project folders until you approve it through Juno.
+
+**Masque is the exception** -- she requires live interactive conversation, so she works differently. Within Juno, `[MQ]` has Juno adopt Masque's persona inline. You can also use `/masque` as a standalone command for dedicated character sessions outside of Juno.
 
 ### The Agents
 
@@ -454,12 +459,22 @@ Juno can summon six specialized agents to handle focused tasks. Each agent has i
 
 ### How Summoning Works
 
+For background agents (Raven, Thistle, Lynx, Loom, Vestry):
+
 1. Use the agent's trigger command (e.g., `[RN]` for Raven)
 2. Juno asks what task to assign (unless already clear from context)
 3. The agent is spawned with your project context
 4. The agent works independently -- reading from your project, writing to `_staging/{agent-name}/`
 5. When the agent finishes, Juno presents a summary
 6. Use `[AP]` Approve to review and promote the work into your project
+
+For Masque (interactive):
+
+1. Use `[MQ]` within Juno, or `/masque` standalone
+2. Specify which character to embody
+3. You converse directly with the embodied character
+4. Say "surface" to end the session and receive actor's notes
+5. Transcripts are saved to `_staging/masque/`
 
 ### Raven -- Research Agent
 
@@ -535,21 +550,29 @@ Lynx tracks every name, date, description, location, and rule across your entire
 
 ### Masque -- Character Voice
 
-**Summon:** `[MQ]`
+**Access:** `[MQ]` within Juno, or `/masque` standalone
 
 Masque is unique among the agents. She doesn't produce documents -- she *becomes* your characters. When embodying a character, the transformation is total: speech patterns, vocabulary, worldview, emotional state, knowledge limitations. You converse directly with your character.
 
-**Masque's Commands:**
+Because Masque requires live interactive conversation, she works differently from the other agents. The other five agents run in the background and return results. Masque needs you in the room.
 
-| Command | Description |
-|---------|-------------|
-| `[EM]` | Embody -- Become a character for live conversation |
-| `[CI]` | Character Interview -- Structured deep-dive in character |
-| `[DV]` | Dual Voice -- Two characters in conversation with each other |
-| `[SI]` | Surface Insights -- Post-session character analysis |
-| `[DC]` | Dialogue -- Generate scene dialogue in character |
+**Two ways to reach Masque:**
 
-**When to summon Masque:**
+| Method | When to use |
+|--------|-------------|
+| `[MQ]` within Juno | Quick character check mid-session. Juno adopts Masque's persona, then returns to Juno when you say "surface." |
+| `/masque` standalone | Dedicated character session. Deeper exploration without Juno's overhead. Use `/masque Elena` to go directly to a character. |
+
+**Session Modes:**
+
+| Mode | Description |
+|------|-------------|
+| **Embody** (default) | Free conversation with the character. Ask anything. |
+| **Interview** | Structured deep-dive with guided questions across four tracks: Core Identity, Relationships, World & Beliefs, Story & Arc. |
+| **Dual Voice** | Two characters in conversation. You watch, interject, or direct. |
+| **Dialogue Generation** | Generate scene dialogue while in character. |
+
+**When to use Masque:**
 - You want to "talk to" a character to understand them better
 - You're stuck on how a character would react in a situation
 - Two characters have a conflict and you want to hear both sides
@@ -558,18 +581,45 @@ Masque is unique among the agents. She doesn't produce documents -- she *becomes
 
 **The Embodiment Experience:**
 
-1. Tell Juno which character to embody: `[MQ]` → "I want to talk to Marcus"
+1. Tell Juno `[MQ]` or run `/masque` → "I want to talk to Marcus"
 2. Masque loads Marcus's profile, his scenes, his place in the timeline
 3. She signals the transition: *"Let me find him. ...There he is."*
 4. From this point, **Marcus speaks**. Not Masque. Not an AI. Marcus.
 5. You can ask questions, present scenarios, challenge him, push him
 6. Marcus responds as himself -- including evasions, lies, anger, vulnerability
-7. Say "surface" to bring Masque back
+7. Say **"surface"** to bring Masque back
 8. Masque offers actor's notes: hidden motivations, contradictions, surprises
+9. Say **"switch to [character]"** to embody someone else without leaving the session
 
 **Dual Voice** is particularly powerful for conflict scenes -- Masque plays both characters, revealing dynamics that monologue cannot.
 
-**Output:** Session transcripts and character insights saved to `_staging/masque/`.
+**Output:** Session transcripts and character insights saved to `_staging/masque/`. Use `[AP]` in Juno to review and approve.
+
+### Masque Standalone Command
+
+The `/masque` command lets you go directly to character embodiment without activating Juno first.
+
+```
+/masque              # List available characters and choose
+/masque Elena        # Embody Elena immediately
+```
+
+**What it does:**
+1. Reads your active project from Juno's memory
+2. Lists available character profiles from `02-characters/`
+3. Loads the full character profile, scenes, timeline, and world context
+4. Enters embodiment mode
+
+**During the session:**
+- Converse freely with the embodied character
+- Say **"interview"** to switch to structured questions
+- Say **"dual voice"** and name a second character for a two-character scene
+- Say **"switch to [name]"** to change characters
+- Say **"surface"** to end embodiment and receive actor's notes
+
+**After the session:**
+- Transcripts are saved to `_staging/masque/`
+- Return to Juno and use `[AP]` to review and approve insights into your project
 
 ### Loom -- Lore & World Builder
 
@@ -1553,14 +1603,20 @@ Saves to `06-editing/submission/` folder. Comp titles are recent, same-genre, an
 
 ### Talking to Your Characters
 
+**Through Juno:**
 1. `/juno my-novel`
-2. `[MQ]` — Summon Masque
+2. `[MQ]` — Juno enters Masque mode
 3. Specify which character to embody
-4. Masque becomes that character — total transformation
-5. Converse freely: ask questions, present scenarios, challenge them
-6. Say "surface" to bring Masque back
-7. Review actor's notes and character insights
-8. `[AP]` — Approve insights to promote to `02-characters/`
+4. Converse freely with the character
+5. Say "surface" to return to Juno
+6. Review actor's notes
+7. `[AP]` — Approve insights to promote to `02-characters/`
+
+**Standalone (for dedicated sessions):**
+1. `/masque Elena` — Go directly to character
+2. Converse freely, interview, or run dual-voice
+3. Say "surface" for actor's notes
+4. Return to Juno later and use `[AP]` to approve
 
 ### Deep World-Building Session
 
@@ -1680,7 +1736,7 @@ Saves to `06-editing/submission/` folder. Comp titles are recent, same-genre, an
 
 - **Summon for focus** -- Use sub-agents when a task needs dedicated attention, not for quick questions
 - **Review staging regularly** -- Don't let `_staging/` pile up; use `[AP]` after each agent session
-- **Masque for character depth** -- Talk to characters when they feel flat or when you're unsure how they'd react
+- **Masque for character depth** -- Talk to characters when they feel flat or when you're unsure how they'd react. Use `/masque` for deep sessions, `[MQ]` for quick checks mid-Juno
 - **Loom for consequences** -- Use Ripple Effects before committing to major world-building decisions
 - **Raven then Vestry** -- Research flows best when Raven finds it and Vestry catalogs it
 - **Thistle after drafting** -- Don't summon Thistle mid-draft; finish the chapter, then polish
@@ -1771,7 +1827,7 @@ SUB-AGENTS
   [RN] Raven         → Research agent
   [TS] Thistle       → Line editor
   [LX] Lynx          → Continuity checker
-  [MQ] Masque        → Character embodiment
+  [MQ] Masque        → Character embodiment (or /masque standalone)
   [LM] Loom          → World builder
   [VY] Vestry        → Knowledge curator
   [AP] Approve       → Review staged work

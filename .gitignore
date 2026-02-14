@@ -22,12 +22,8 @@ fluidaudio_cli/
 # BMAD output
 _bmad-output/
 
-# Writing projects — ignore ALL root-level folders except system folders
+# Writing projects — ignore root-level project folders
 # Any project created by Juno (my-novel/, blog-posts/, etc.) stays local
-/**/
+/*/
 !/_bmad/
 !/.claude/
-
-# Whitelist system files at root
-!/.gitignore
-!/CLAUDE.md
