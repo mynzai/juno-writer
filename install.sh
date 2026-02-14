@@ -155,6 +155,7 @@ if [ "$MODE" != "update" ]; then
     cp "$SRC/_bmad/_memory/juno-sidecar/active-voice-profile.md" "$DEST/_bmad/_memory/juno-sidecar/"
     cp "$SRC/_bmad/_memory/juno-sidecar/instructions.md" "$DEST/_bmad/_memory/juno-sidecar/"
     cp "$SRC/_bmad/_memory/juno-sidecar/writing-directives.md" "$DEST/_bmad/_memory/juno-sidecar/"
+    cp "$SRC/_bmad/_memory/juno-sidecar/session-archive.md" "$DEST/_bmad/_memory/juno-sidecar/"
     cp "$SRC/_bmad/_memory/juno-sidecar/README.md" "$DEST/_bmad/_memory/juno-sidecar/"
     cp "$SRC/_bmad/_memory/juno-sidecar/voice-profiles/default.md" "$DEST/_bmad/_memory/juno-sidecar/voice-profiles/"
     cp "$SRC/_bmad/_memory/juno-sidecar/directive-templates/"*.md "$DEST/_bmad/_memory/juno-sidecar/directive-templates/"
@@ -166,13 +167,9 @@ else
     print_ok "Memory sidecar preserved (update mode) — directive templates refreshed"
 fi
 
-# Install CLAUDE.md (only if not present, to avoid overwriting user customizations)
-if [ ! -f "$DEST/CLAUDE.md" ]; then
-    cp "$SRC/CLAUDE.md" "$DEST/"
-    print_ok "CLAUDE.md installed"
-else
-    print_ok "CLAUDE.md already exists (preserved)"
-fi
+# Install CLAUDE.md (always update — this is a system file with command docs)
+cp "$SRC/CLAUDE.md" "$DEST/"
+print_ok "CLAUDE.md installed"
 
 # Set permissions
 chmod -R u+rw "$DEST/_bmad"

@@ -4,10 +4,10 @@ Juno tracks all creative writing projects here.
 
 ## Active Project
 
-**Name:** Illuminating Juno
-**Path:** illuminating-juno/
-**Phase:** Drafting
-**Last Session:** 2026-02-13
+**Name:** —
+**Path:** —
+**Phase:** —
+**Last Session:** —
 
 ---
 
@@ -15,7 +15,6 @@ Juno tracks all creative writing projects here.
 
 | Project | Path | Phase | Last Touched |
 |---------|------|-------|--------------|
-| Illuminating Juno | illuminating-juno/ | Drafting | 2026-02-13 |
 
 ---
 
