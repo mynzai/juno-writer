@@ -46,6 +46,25 @@ For articles, essays, blog posts, and explanatory nonfiction: clarity, authority
 
 ---
 
+## Structural Patterns
+
+17. No thesis-example-reflection paragraphs. Don't state a claim, illustrate it, then reflect on what it means. Make the argument and move on.
+18. No mirror/antithesis sentences: "It's not about X. It's about Y." / "Not just X, but Y."
+19. Do not stack transition words at paragraph openings (However, Moreover, Furthermore, Additionally). Vary how paragraphs connect.
+20. No "And that's the thing" or "Here's what matters" pivots. The reader can tell what matters from the argument itself.
+21. No false profundity closers: ending a section with a one-liner meant to sound wise. End on substance.
+
+---
+
+## Emotional & Persuasive Patterns
+
+22. No hollow intensifiers: "truly," "incredibly," "absolutely," "remarkably." If the claim is strong, it doesn't need amplification.
+23. No filler hedging: "It's worth noting that," "It's important to remember," "Interestingly." Make the statement.
+24. No agreement escalation. Don't validate your own argument across consecutive paragraphs. State it once and defend it.
+25. No vague attribution: "experts say," "studies show," "many believe." Name the expert, cite the study, or cut the claim.
+
+---
+
 ## What I Want Instead
 
 - Concrete examples over abstract explanations. Show the thing, then name it.

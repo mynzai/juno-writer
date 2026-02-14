@@ -428,6 +428,7 @@ When you feel ready to advance:
 | `[MQ]` | Masque | Embody a character (inline), or use `/masque` standalone |
 | `[LM]` | Loom | Deploy world builder for lore and systems |
 | `[VY]` | Vestry | Deploy knowledge curator for archive management |
+| `[WH]` | Wraith | Deploy slop slayer for AI-pattern detection and elimination |
 | `[AP]` | Approve | Review and approve sub-agent work from staging |
 
 ### Voice & Style
@@ -442,7 +443,7 @@ When you feel ready to advance:
 
 ## The Sub-Agent Fleet
 
-Juno can summon specialized agents to handle focused tasks. Each agent has its own persona, expertise, and tools. Five of them (Raven, Thistle, Lynx, Loom, Vestry) work independently in the background, writing their output to a staging area for your review. Nothing they produce enters your canonical project folders until you approve it through Juno.
+Juno can summon specialized agents to handle focused tasks. Each agent has its own persona, expertise, and tools. Six of them (Raven, Thistle, Lynx, Loom, Vestry, Wraith) work independently in the background, writing their output to a staging area for your review. Nothing they produce enters your canonical project folders until you approve it through Juno.
 
 **Masque is the exception** -- she requires live interactive conversation, so she works differently. Within Juno, `[MQ]` has Juno adopt Masque's persona inline. You can also use `/masque` as a standalone command for dedicated character sessions outside of Juno.
 
@@ -456,10 +457,11 @@ Juno can summon specialized agents to handle focused tasks. Each agent has its o
 | **Masque** | `[MQ]` | Character Voice | Warm, theatrical, perceptive. When she becomes a character, the transformation is total. After surfacing, offers insights the writer may not have realized. |
 | **Loom** | `[LM]` | Lore & World Builder | Expansive, curious, thinks in systems. Asks "But what do the common people eat?" Builds worlds that feel lived-in. |
 | **Vestry** | `[VY]` | Knowledge Curator | Reverent, orderly, quietly devoted. Considers knowledge sacred. Knows exactly where everything is in the archive. |
+| **Wraith** | `[WH]` | Slop Slayer | Quiet, relentless, forensic. Sees the ghost in the machine that others miss. Pins AI patterns to the board with clinical precision. When a passage is clean, she nods: "Human." |
 
 ### How Summoning Works
 
-For background agents (Raven, Thistle, Lynx, Loom, Vestry):
+For background agents (Raven, Thistle, Lynx, Loom, Vestry, Wraith):
 
 1. Use the agent's trigger command (e.g., `[RN]` for Raven)
 2. Juno asks what task to assign (unless already clear from context)
@@ -672,6 +674,53 @@ Vestry manages your project's knowledge base -- the curated repository of everyt
 - You want files from `_staging/raven/` properly cataloged
 
 **Output:** Vestry writes directly to `_knowledge/` (her domain) and to `_staging/vestry/` for reorganization logs and gap analyses.
+
+### Wraith -- Slop Slayer
+
+**Summon:** `[WH]`
+
+Wraith hunts the ghost in the machine. Where Thistle sharpens prose craft and the humanizer does a light pass, Wraith performs forensic analysis — systematically cataloguing every AI fingerprint in your text using a detailed taxonomy of slop patterns. She sees what others miss: the vocabulary tics, structural habits, emotional shortcuts, and rhetorical crutches that mark prose as machine-generated.
+
+**Wraith's Commands:**
+
+| Command | Description |
+|---------|-------------|
+| `[FS]` | Full Scan -- Comprehensive AI-pattern detection across all categories |
+| `[VP]` | Vocab Purge -- Hunt and replace AI-typical word choices |
+| `[SS]` | Structure Sweep -- Detect AI sentence and paragraph construction |
+| `[EA]` | Emotional Autopsy -- Examine emotional rendering for AI shortcuts |
+| `[DD]` | Dialogue Detector -- Scan dialogue for artificial speech patterns |
+| `[DC]` | Deep Cleanse -- Full exorcism with comprehensive cleaned output |
+
+**When to summon Wraith:**
+- After `[WR]` Write generates content and you want to ensure it reads as human
+- After `[HU]` Humanize for a deeper, more systematic pass
+- When reviewing existing drafts that may contain residual AI patterns
+- When you want a forensic breakdown of *which specific patterns* are present, not just a general clean-up
+- When you want a contamination heat map showing exactly where the AI fingerprints are densest
+
+**Wraith vs. Humanizer vs. Thistle:**
+
+| Tool | Focus | Depth |
+|------|-------|-------|
+| `[HU]` Humanize | Quick AI-pattern smoothing | Light pass, broad strokes |
+| `[WH]` Wraith | Forensic AI-pattern detection and elimination | Deep, systematic, categorized |
+| `[TS]` Thistle | Prose craft (clarity, rhythm, word choice) | Craft-focused, not AI-specific |
+
+Wraith uses a **severity taxonomy** for flagged patterns:
+- **GHOST** -- Faint trace. Might be the writer's own style. Worth noting but not alarming.
+- **HAUNT** -- Noticeable AI pattern. Should probably be addressed.
+- **POSSESSION** -- Unmistakable AI fingerprint. Needs immediate exorcism.
+
+**The Slop Taxonomy:** Wraith categorizes AI patterns into six domains:
+1. **Vocabulary Slop** -- AI calling-card words (delve, tapestry, multifaceted, etc.) organized into three tiers by severity
+2. **Structural Slop** -- Participial phrase addiction, three-beat lists, mirror sentences, thesis-example-reflection paragraphs
+3. **Emotional Slop** -- Labeled emotions, premature resolution, epiphany addiction, unearned profundity
+4. **Dialogue Slop** -- Over-articulation, exposition delivery, agreement spirals, identical character voices
+5. **Metaphor & Imagery Slop** -- Dead metaphors presented as fresh, nature-emotion parallels, overextended comparisons
+6. **Rhythm Slop** -- Monotonous sentence length, dramatic fragments, paragraph uniformity
+
+**Output:** Scan reports, contamination heat maps, and cleaned versions saved to `_staging/wraith/`. Originals are never touched.
 
 ---
 
@@ -1767,6 +1816,7 @@ Saves to `06-editing/submission/` folder. Comp titles are recent, same-genre, an
 - **Masque for character depth** -- Talk to characters when they feel flat or when you're unsure how they'd react. Use `/masque` for deep sessions, `[MQ]` for quick checks mid-Juno
 - **Loom for consequences** -- Use Ripple Effects before committing to major world-building decisions
 - **Raven then Vestry** -- Research flows best when Raven finds it and Vestry catalogs it
+- **Wraith after generating** -- Run Wraith on AI-generated content before polishing with Thistle; eliminate the slop first, then refine the craft
 - **Thistle after drafting** -- Don't summon Thistle mid-draft; finish the chapter, then polish
 - **Lynx at milestones** -- Run a full audit after every 3-5 drafted chapters, not after every scene
 
@@ -1858,6 +1908,7 @@ SUB-AGENTS
   [MQ] Masque        → Character embodiment (or /masque standalone)
   [LM] Loom          → World builder
   [VY] Vestry        → Knowledge curator
+  [WH] Wraith        → Slop slayer (AI-pattern detection)
   [AP] Approve       → Review staged work
 
 VOICE

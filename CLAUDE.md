@@ -49,6 +49,7 @@ This is a creative writing workspace powered by the BMAD framework with a custom
 - `[GS]` Genesis — Create new project with genre-specific scaffolding
 - `[WR]` Write — Generate content (Write-For-Me mode)
 - `[HU]` Humanize — Run humanizer skill on content (optional)
+- `[WH]` Wraith — Deploy slop slayer for AI-pattern detection
 - `[RS]`/`[DR]` Research — Web search for topics
 - `[FC]` Fact Check — Verify claims against sources
 - `[CV]` Capture — Extract author DNA from text samples

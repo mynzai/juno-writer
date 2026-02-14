@@ -57,6 +57,24 @@ Tuned for thrillers, suspense, and crime fiction: forward momentum, controlled i
 
 ---
 
+## Structural Patterns
+
+23. No participial phrase openings more than once per page. "Reaching for the door handle, he froze..." loses power when repeated.
+24. No mirror/antithesis sentences: "It wasn't about X. It was about Y."
+25. No setup-pivot-realization: "He had always assumed X. But now, crouching behind the dumpster, he understood Y." Let realization come through action, not narration.
+26. Do not stack transition words at paragraph openings.
+
+---
+
+## Emotional Rendering
+
+27. No premature resolution. Tension does not release in the same paragraph it builds.
+28. No epiphany addiction. Characters learn through consequences, not realizations.
+29. No "something inside him shifted" or "a weight lifted." Physical stakes, not metaphysical ones.
+30. No emotional symmetry. The protagonist does not feel better after every setback. Let the damage accumulate.
+
+---
+
 ## What I Want Instead
 
 - Specific, procedural detail. How the lock actually works. What the gun weighs. The exact shade of blood on tile.

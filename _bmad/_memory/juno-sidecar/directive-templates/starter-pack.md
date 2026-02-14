@@ -36,6 +36,15 @@ A lean, effective starting point that targets the most common and most egregious
 
 ---
 
+## Structural Patterns
+
+12. No participial phrase openings more than once per page. "Walking through the door, she noticed..." is an AI tell when repeated.
+13. No mirror/antithesis sentences: "It wasn't about X. It was about Y." / "Not just X, but Y."
+14. Do not stack transition words at paragraph openings (However, Moreover, Furthermore, Additionally).
+15. No setup-pivot-realization pattern: "She had always thought X. But now she realized Y."
+
+---
+
 ## Pacing & Rhythm
 
-12. Vary sentence length dramatically: some under 5 words, some over 30. Fragments are encouraged. Never three consecutive sentences of similar length.
+16. Vary sentence length dramatically: some under 5 words, some over 30. Fragments are encouraged. Never three consecutive sentences of similar length.

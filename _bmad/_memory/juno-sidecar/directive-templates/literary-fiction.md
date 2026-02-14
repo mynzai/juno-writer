@@ -59,6 +59,36 @@ Builds on the Starter Pack with rules tuned for literary fiction: interiority, s
 
 ---
 
+## Structural Patterns
+
+25. No participial phrase openings more than once per page. "Walking through the door, she noticed..." is an AI calling card when repeated.
+26. No mirror/antithesis sentences: "It wasn't about X. It was about Y." / "Not just X, but Y."
+27. No thesis-example-reflection paragraphs. Don't state a claim, illustrate it, then reflect on what it means. Trust the scene.
+28. Do not stack transition words at paragraph openings (However, Moreover, Furthermore, Additionally).
+29. No setup-pivot-realization: "She had always thought X. But standing here now, she realized Y." Let understanding arrive obliquely.
+
+---
+
+## Emotional Rendering
+
+30. No premature resolution. Conflict does not resolve in the same paragraph it appears. Let it breathe.
+31. No epiphany addiction. Characters do not constantly "realize" things. Understanding arrives incompletely, sideways, or not at all.
+32. No emotional symmetry. Not every dark moment needs a balancing hopeful one. Grief does not require a silver lining.
+33. No meaningful pauses: "She paused, letting the words sink in." / "A silence stretched between them." Let the dialogue itself create the weight.
+34. No body-as-emotion-display clusters. One "his jaw tightened" per scene, maximum. Physical tells work when rare.
+35. Interior monologue inhabits the feeling, it does not describe it from above. No "She thought about how strange it was that..."
+
+---
+
+## Metaphor & Imagery
+
+36. No dead metaphors presented as fresh: "a tapestry of emotions," "threads of fate," "beacon of hope."
+37. Nature-emotion parallels must not be too neat. Storm does not equal anger. Dawn does not equal hope. If you use them, complicate them.
+38. No overextended metaphors. If a comparison needs more than one sentence, it's probably not working.
+39. No synesthesia unless the prose has earned it through sustained sensory attention.
+
+---
+
 ## What I Want Instead
 
 - Concrete, ugly, specific sensory details. The smell of burnt coffee. The sound of a shopping cart with one bad wheel.
