@@ -124,23 +124,27 @@ _bmad/_memory/juno-sidecar/
 
 ## Installation Steps
 
-### Step 1: Create Your Creative Writing Directory
-
-Choose where you want your creative writing workspace:
+### Step 1: Clone the Repository
 
 ```bash
-mkdir -p ~/creative-writing
+git clone https://github.com/mynzai/juno-writer.git ~/creative-writing
 cd ~/creative-writing
 ```
 
-This will be your **project root** — all writing projects live here.
+This gives you everything: the BMAD framework, Juno's agent definition, sub-agents, slash commands, project settings, and starter memory templates. Your writing projects will live alongside the system files — they're automatically gitignored so they stay private.
 
-### Step 2: Copy the BMAD Framework
+**Skip to [Step 4](#step-4-reset-memory-files-fresh-start) if you want a clean slate, or [Step 5](#step-5-verify-file-permissions) to finish setup.**
+
+If you prefer a manual installation (without git), continue with Steps 2-3 below.
+
+### Step 2: Manual Install — Copy the BMAD Framework
+
+> *Skip this step if you cloned the repository in Step 1.*
 
 Copy the entire `_bmad` folder to your creative writing directory:
 
 ```bash
-# From the source machine, copy _bmad folder
+mkdir -p ~/creative-writing
 cp -r /path/to/source/_bmad ~/creative-writing/
 ```
 
@@ -183,9 +187,11 @@ cp -r /path/to/source/_bmad ~/creative-writing/
             └── default.md
 ```
 
-### Step 3: Install the Slash Command, Project Config, and Permissions
+### Step 3: Manual Install — Slash Commands, Config, and Permissions
 
-The slash command, CLAUDE.md, and project settings must be placed in your creative writing directory:
+> *Skip this step if you cloned the repository in Step 1.*
+
+The slash commands, CLAUDE.md, and project settings must be placed in your creative writing directory:
 
 **Option A: Project-level (recommended)**
 
@@ -557,179 +563,88 @@ cp /path/to/source/.claude/settings.json ~/creative-writing/.claude/
 
 ## Updating Juno
 
-When updates are available:
+### Git Pull (Recommended)
 
-### Full Update (Recommended)
-
-Replace all Juno files while preserving your memory:
+If you installed by cloning the repo, updating is simple:
 
 ```bash
+cd ~/creative-writing
+
+# Backup your memory (your session state, voice profiles, projects registry)
+cp -r _bmad/_memory/juno-sidecar ~/juno-sidecar-backup
+
+# Reset tracked memory files to avoid merge conflicts, then pull
+git checkout -- _bmad/_memory/juno-sidecar/
+git pull
+
+# Restore your memory
+cp -r ~/juno-sidecar-backup/* _bmad/_memory/juno-sidecar/
+rm -rf ~/juno-sidecar-backup
+```
+
+**What gets updated:** Agent definition, sub-agents, slash commands (`/juno`, `/masque`), project settings, CLAUDE.md, tools, documentation.
+
+**What is preserved:** Your memory files (project-memory.md, projects-registry.md, active-voice-profile.md, instructions.md, writing-directives.md, session-archive.md, voice-profiles/), and all writing projects (gitignored).
+
+### Manual Update (Without Git)
+
+If you installed manually without cloning:
+
+```bash
+# Download or clone the latest source to a temporary location
+git clone https://github.com/mynzai/juno-writer.git /tmp/juno-update
+
 # Backup your memory
 cp -r ~/creative-writing/_bmad/_memory/juno-sidecar ~/juno-sidecar-backup
 
-# Copy new agent files (not memory)
-cp /path/to/new/_bmad/custom/agents/juno/*.yaml ~/creative-writing/_bmad/custom/agents/juno/
-cp /path/to/new/_bmad/custom/agents/juno/*.md ~/creative-writing/_bmad/custom/agents/juno/
-cp -r /path/to/new/_bmad/custom/agents/juno/sub-agents/ ~/creative-writing/_bmad/custom/agents/juno/
-cp -r /path/to/new/_bmad/custom/agents/juno/tools/ ~/creative-writing/_bmad/custom/agents/juno/
+# Copy updated system files
+cp -r /tmp/juno-update/_bmad/custom ~/creative-writing/_bmad/
+cp /tmp/juno-update/.claude/commands/juno.md ~/creative-writing/.claude/commands/
+cp /tmp/juno-update/.claude/commands/masque.md ~/creative-writing/.claude/commands/
+cp /tmp/juno-update/.claude/settings.json ~/creative-writing/.claude/
+cp /tmp/juno-update/CLAUDE.md ~/creative-writing/
 
-# Copy updated slash commands, project config, and permissions
-cp /path/to/new/.claude/commands/juno.md ~/creative-writing/.claude/commands/
-cp /path/to/new/.claude/commands/masque.md ~/creative-writing/.claude/commands/
-cp /path/to/new/.claude/settings.json ~/creative-writing/.claude/
-cp /path/to/new/CLAUDE.md ~/creative-writing/
+# Restore your memory
+cp -r ~/juno-sidecar-backup/* ~/creative-writing/_bmad/_memory/juno-sidecar/
 
 # Ensure scripts are executable
 chmod +x ~/creative-writing/_bmad/custom/agents/juno/tools/*.sh
 
-# Your memory is preserved in place
-```
-
-### Migrating Memory Templates
-
-If you are updating from an earlier version, your `project-memory.md` template may be missing tracking sections. The current format uses a **Live State** block at the top for incremental session saving. To migrate:
-
-1. Replace your `project-memory.md` with the fresh template from Step 4 above
-2. Re-enter your active project details in the "Active Project" section
-3. Story tracking sections (Subplots, Themes, Foreshadowing) remain the same format
-
-Your `instructions.md` also has new sections for Context Management Preferences, session management, and genre defaults.
-
-### Migrating to Sub-Agent Support
-
-If updating from a version without sub-agents (pre-49 commands), note:
-
-- **New folder:** `sub-agents/` under `_bmad/custom/agents/juno/` contains 6 agent YAML files. Copy the entire folder.
-- **Existing projects** will automatically get `_staging/` and `_knowledge/` folders when you first summon a sub-agent or use `[KB]`. No manual migration needed.
-- **New projects** created with `[GS]` Genesis will scaffold these folders automatically.
-- **New commands:** `[KB]`, `[RN]`, `[TS]`, `[LX]`, `[MQ]`, `[LM]`, `[VY]`, `[AP]` — see the User Guide for details.
-
-**Note:** The agent YAML (`juno.agent.yaml`) supports 50 commands with 32 detailed prompts. This is expected and does not affect performance since prompts are loaded on demand.
-
-### Migrating to Session Continuity
-
-If updating from a version without session continuity (pre-50 commands), note:
-
-- **New file:** `session-archive.md` in the sidecar. Create an empty one or copy from source — Juno's `[SR]` Session Recap will populate it.
-- **New folder:** `directive-templates/` in the sidecar with 4 pre-built templates (starter-pack, literary-fiction, genre-thriller, nonfiction-blog). Copy from source to enable `[WD]` > Load Template.
-- **project-memory.md format changed:** The new format uses a Live State block at the top for incremental saves. If your existing project-memory.md uses the old format, replace it with the fresh template from Step 4 and re-enter your project details, or let Juno reformat it on first activation.
-- **instructions.md updated:** Now includes Context Management Preferences section. Copy fresh or add manually.
-- **New command:** `[SA]` Session Archive — browse past session history without loading the full archive.
-
-### Partial Update (Agent Only)
-
-If only the agent definition changed:
-
-```bash
-cp /path/to/new/_bmad/custom/agents/juno/juno.agent.yaml \
-   ~/creative-writing/_bmad/custom/agents/juno/
-cp -r /path/to/new/_bmad/custom/agents/juno/sub-agents/ \
-   ~/creative-writing/_bmad/custom/agents/juno/
+# Clean up
+rm -rf /tmp/juno-update ~/juno-sidecar-backup
 ```
 
 ### Fresh Install (Reset Everything)
 
-If you want to start completely fresh:
+If you want to start completely fresh, removing all memory and session history:
 
 ```bash
-# Remove old installation
-rm -rf ~/creative-writing/_bmad
-rm -rf ~/creative-writing/.claude/commands/juno.md
-rm -rf ~/creative-writing/.claude/commands/masque.md
-rm -f ~/creative-writing/.claude/settings.json
-rm -f ~/creative-writing/CLAUDE.md
-
-# Copy everything new
-cp -r /path/to/new/_bmad ~/creative-writing/
-cp -r /path/to/new/.claude ~/creative-writing/
-cp /path/to/new/CLAUDE.md ~/creative-writing/
+rm -rf ~/creative-writing/_bmad ~/creative-writing/.claude ~/creative-writing/CLAUDE.md
+git clone https://github.com/mynzai/juno-writer.git ~/creative-writing
 chmod +x ~/creative-writing/_bmad/custom/agents/juno/tools/*.sh
 ```
 
+Your writing project folders are untouched (they live outside the tracked files).
+
 ---
 
-## Quick Install Script
-
-For automated installation, save this as `install-juno.sh`:
+## Quick Install
 
 ```bash
-#!/bin/bash
-
-# Juno Installation Script
-# Usage: ./install-juno.sh /path/to/source /path/to/destination
-
-SOURCE="${1:-./}"
-DEST="${2:-~/creative-writing}"
-
-echo "Installing Juno to $DEST..."
-
-# Check for Pandoc (recommended)
-if ! command -v pandoc &>/dev/null; then
-  echo "Note: Pandoc not found. Install with 'brew install pandoc' for Import/Export features."
-fi
-
-# Create destination
-mkdir -p "$DEST"
-
-# Copy BMAD framework (includes sub-agents)
-mkdir -p "$DEST/_bmad"
-cp -r "$SOURCE/_bmad/custom" "$DEST/_bmad/"
-cp -r "$SOURCE/_bmad/_memory" "$DEST/_bmad/"
-
-# Copy slash commands and project settings
-mkdir -p "$DEST/.claude/commands"
-cp "$SOURCE/.claude/commands/juno.md" "$DEST/.claude/commands/"
-cp "$SOURCE/.claude/commands/masque.md" "$DEST/.claude/commands/"
-cp "$SOURCE/.claude/settings.json" "$DEST/.claude/"
-
-# Copy project config
-cp "$SOURCE/CLAUDE.md" "$DEST/"
-
-# Set permissions
-chmod -R u+rw "$DEST/_bmad"
-chmod -R u+rw "$DEST/.claude"
-chmod +x "$DEST/_bmad/custom/agents/juno/tools/"*.sh
-
-# Verify sub-agents were copied
-AGENT_COUNT=$(ls "$DEST/_bmad/custom/agents/juno/sub-agents/"*.yaml 2>/dev/null | wc -l)
-echo "Installed $AGENT_COUNT sub-agents"
-
-# Verify directive templates were copied
-TEMPLATE_COUNT=$(ls "$DEST/_bmad/_memory/juno-sidecar/directive-templates/"*.md 2>/dev/null | wc -l)
-echo "Installed $TEMPLATE_COUNT directive templates"
-
-# Verify session archive exists
-if [ -f "$DEST/_bmad/_memory/juno-sidecar/session-archive.md" ]; then
-  echo "Session archive: ready"
-else
-  echo "Note: session-archive.md not found — Juno will create it on first [SR]"
-fi
-
-echo "Installation complete!"
-echo ""
-echo "To verify, run:"
-echo "  cd $DEST"
-echo "  claude"
-echo "  /juno"
-```
-
-Make it executable:
-```bash
-chmod +x install-juno.sh
-```
-
-Run it:
-```bash
-./install-juno.sh /path/to/source ~/creative-writing
+git clone https://github.com/mynzai/juno-writer.git ~/creative-writing
+chmod +x ~/creative-writing/_bmad/custom/agents/juno/tools/*.sh
+cd ~/creative-writing && claude
+# Then type: /juno
 ```
 
 ---
 
 ## Support
 
+- **Repository:** [github.com/mynzai/juno-writer](https://github.com/mynzai/juno-writer)
 - **User Guide:** See `JUNO-USER-GUIDE.md` for usage instructions
 - **Agent Definition:** See `juno.agent.yaml` for technical details
-- **Issues:** Check troubleshooting section above
+- **Issues:** Check troubleshooting section above or open an issue on GitHub
 
 ---
 
