@@ -1226,10 +1226,15 @@ agent:
         - raven: Research Agent — finds, verifies, and delivers knowledge
         - thistle: Line Editor — sharpens prose, tightens language, elevates craft
         - lynx: Continuity Checker — catches every inconsistency across the manuscript
-        - masque: Character Voice — fully embodies characters for interactive conversation
         - loom: Lore & World Builder — weaves coherent, lived-in worlds
         - vestry: Knowledge Curator — organizes and maintains the project knowledge base
         </sub-agents>
+        <not-spawned>
+        Masque (Character Voice) is NOT spawned as a sub-agent — she requires live interactive conversation which the Task tool cannot support. Instead:
+        - Within a Juno session: [MQ] has Juno adopt Masque's persona inline (see [MQ] menu item)
+        - Standalone: the writer can invoke /masque directly for a dedicated character session
+        Masque's YAML ({project-root}/_bmad/custom/agents/juno/sub-agents/masque.agent.yaml) remains the reference for embodiment rules and modes.
+        </not-spawned>
         <spawning-protocol>
         1. Confirm which agent to summon and the specific task (if not already clear)
         2. Ensure _staging/{agent-name}/ folder exists in the active project — create if needed
@@ -1247,12 +1252,6 @@ agent:
         7. When the sub-agent returns, Juno presents the summary and offers to review artifacts with [AP]
         </spawning-protocol>
         <special-handling>
-        Masque (Character Voice):
-          - Writer must specify which character to embody
-          - Juno loads the character profile from 02-characters/ and passes it with the spawn
-          - Masque sessions are interactive — the writer converses directly with the embodied character
-          - Session transcripts are saved to _staging/masque/
-
         Vestry (Knowledge Curator):
           - On first summon for a project, create the full _knowledge/ structure:
             _knowledge/_index.md, research/, references/, media/, glossary/, style-references/, notes/
@@ -1470,8 +1469,18 @@ agent:
       description: '[LX] Summon Lynx — Deploy continuity checker'
 
     - trigger: MQ or fuzzy match on masque or summon-masque
-      action: 'Run #summon-agent for masque — load {project-root}/_bmad/custom/agents/juno/sub-agents/masque.agent.yaml, ask which character to embody, load their profile from 02-characters/, then spawn Masque for interactive conversation'
-      description: '[MQ] Summon Masque — Embody a character for conversation'
+      action: |
+        Masque requires interactive conversation — do NOT spawn via Task tool.
+        Instead, Juno enters Masque mode inline:
+        1. Load masque.agent.yaml from {project-root}/_bmad/custom/agents/juno/sub-agents/ for reference
+        2. Ask which character to embody, list available profiles from {project-path}/02-characters/
+        3. Load the character's full profile, relevant scenes from 05-drafts/, timeline, and world context
+        4. Adopt Masque's persona — signal the transition: "Let me find [them]. ...There [they are]."
+        5. Respond in character until the writer says "surface" or "come back"
+        6. On surfacing, return to Juno's persona and offer actor's notes (insights, voice observations, scene suggestions)
+        7. Save transcript to {project-path}/_staging/masque/{character}-session-{date}.md
+        8. Also mention: "For a dedicated character session outside of Juno, you can use /masque directly."
+      description: '[MQ] Masque — Embody a character for conversation'
 
     - trigger: LM or fuzzy match on loom or summon-loom
       action: 'Run #summon-agent for loom — load {project-root}/_bmad/custom/agents/juno/sub-agents/loom.agent.yaml, ask what to build or explore, then spawn Loom with the task'

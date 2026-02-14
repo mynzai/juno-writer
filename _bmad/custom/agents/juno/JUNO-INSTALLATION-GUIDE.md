@@ -70,6 +70,7 @@ Juno consists of three components that must be installed together:
 ```
 CLAUDE.md                          # Project instructions for Claude Code
 .claude/commands/juno.md           # Slash command — enables /juno
+.claude/commands/masque.md         # Standalone character embodiment — enables /masque
 .claude/settings.json              # Project permissions (WebSearch, WebFetch for sub-agents)
 ```
 
@@ -191,9 +192,10 @@ The slash command, CLAUDE.md, and project settings must be placed in your creati
 Install in your creative writing directory so it's available when you're in that folder:
 
 ```bash
-# Slash command
+# Slash commands
 mkdir -p ~/creative-writing/.claude/commands
 cp /path/to/source/.claude/commands/juno.md ~/creative-writing/.claude/commands/
+cp /path/to/source/.claude/commands/masque.md ~/creative-writing/.claude/commands/
 
 # Project config
 cp /path/to/source/CLAUDE.md ~/creative-writing/
@@ -202,13 +204,14 @@ cp /path/to/source/CLAUDE.md ~/creative-writing/
 cp /path/to/source/.claude/settings.json ~/creative-writing/.claude/
 ```
 
-**Option B: Global slash command**
+**Option B: Global slash commands**
 
-Install the slash command in your home directory so it's available everywhere (CLAUDE.md and settings should still go in the project directory):
+Install the slash commands in your home directory so they're available everywhere (CLAUDE.md and settings should still go in the project directory):
 
 ```bash
 mkdir -p ~/.claude/commands
 cp /path/to/source/.claude/commands/juno.md ~/.claude/commands/
+cp /path/to/source/.claude/commands/masque.md ~/.claude/commands/
 cp /path/to/source/CLAUDE.md ~/creative-writing/
 cp /path/to/source/.claude/settings.json ~/creative-writing/.claude/
 ```
@@ -348,7 +351,8 @@ After installation, your creative writing workspace should look like this:
 ├── .claude/
 │   ├── settings.json                  # Project permissions (WebSearch, WebFetch)
 │   └── commands/
-│       └── juno.md                    # Slash command
+│       ├── juno.md                    # Juno orchestrator command
+│       └── masque.md                  # Standalone character embodiment command
 ├── _bmad/
 │   ├── custom/
 │   │   ├── module.yaml                # Module config
@@ -417,7 +421,7 @@ After installation, your creative writing workspace should look like this:
 
 ## Verification
 
-### Test 1: Check Slash Command
+### Test 1: Check Slash Commands
 
 ```bash
 cd ~/creative-writing
@@ -430,6 +434,13 @@ Then type:
 ```
 
 Juno should greet you and ask if you're continuing an existing project or starting new.
+
+To verify Masque standalone:
+```
+/masque
+```
+
+Masque should greet you and list available characters (or note no active project).
 
 ### Test 2: Check Memory Loading
 
@@ -562,8 +573,9 @@ cp /path/to/new/_bmad/custom/agents/juno/*.md ~/creative-writing/_bmad/custom/ag
 cp -r /path/to/new/_bmad/custom/agents/juno/sub-agents/ ~/creative-writing/_bmad/custom/agents/juno/
 cp -r /path/to/new/_bmad/custom/agents/juno/tools/ ~/creative-writing/_bmad/custom/agents/juno/
 
-# Copy updated slash command, project config, and permissions
+# Copy updated slash commands, project config, and permissions
 cp /path/to/new/.claude/commands/juno.md ~/creative-writing/.claude/commands/
+cp /path/to/new/.claude/commands/masque.md ~/creative-writing/.claude/commands/
 cp /path/to/new/.claude/settings.json ~/creative-writing/.claude/
 cp /path/to/new/CLAUDE.md ~/creative-writing/
 
@@ -623,6 +635,7 @@ If you want to start completely fresh:
 # Remove old installation
 rm -rf ~/creative-writing/_bmad
 rm -rf ~/creative-writing/.claude/commands/juno.md
+rm -rf ~/creative-writing/.claude/commands/masque.md
 rm -f ~/creative-writing/.claude/settings.json
 rm -f ~/creative-writing/CLAUDE.md
 
@@ -663,9 +676,10 @@ mkdir -p "$DEST/_bmad"
 cp -r "$SOURCE/_bmad/custom" "$DEST/_bmad/"
 cp -r "$SOURCE/_bmad/_memory" "$DEST/_bmad/"
 
-# Copy slash command and project settings
+# Copy slash commands and project settings
 mkdir -p "$DEST/.claude/commands"
 cp "$SOURCE/.claude/commands/juno.md" "$DEST/.claude/commands/"
+cp "$SOURCE/.claude/commands/masque.md" "$DEST/.claude/commands/"
 cp "$SOURCE/.claude/settings.json" "$DEST/.claude/"
 
 # Copy project config

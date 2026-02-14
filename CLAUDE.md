@@ -6,11 +6,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a creative writing workspace powered by the BMAD framework with a custom agent called **Juno** — a Creative Writing Orchestrator that guides writers from seed idea to polished manuscript.
 
-## Primary Command
+## Primary Commands
 
 ```
 /juno                    # Activate Juno (resume last project or create new)
 /juno my-novel           # Open specific project folder
+/masque                  # Standalone character embodiment (interactive)
+/masque Elena            # Embody a specific character directly
 ```
 
 ## Architecture
@@ -39,6 +41,7 @@ This is a creative writing workspace powered by the BMAD framework with a custom
 |------|---------|
 | `_bmad/custom/agents/juno/juno.agent.yaml` | Core agent definition with prompts and menu |
 | `.claude/commands/juno.md` | Slash command with persona and greeting |
+| `.claude/commands/masque.md` | Standalone character embodiment command |
 | `_bmad/_memory/juno-sidecar/` | Persistent memory across sessions |
 
 ## Key Juno Commands

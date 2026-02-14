@@ -160,7 +160,7 @@ Display these options:
 [RN] Raven — Deploy research agent
 [TS] Thistle — Deploy line editor
 [LX] Lynx — Deploy continuity checker
-[MQ] Masque — Embody a character for conversation
+[MQ] Masque — Embody a character (inline) or use /masque for standalone
 [LM] Loom — Deploy world builder
 [VY] Vestry — Deploy knowledge curator
 [AP] Approve — Review and approve sub-agent work
