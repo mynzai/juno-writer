@@ -89,7 +89,8 @@ _bmad/custom/agents/juno/
 │   ├── masque.agent.yaml          # Character Voice
 │   ├── loom.agent.yaml            # Lore & World Builder
 │   ├── vestry.agent.yaml          # Knowledge Curator
-│   └── wraith.agent.yaml          # Slop Slayer (AI-pattern detection)
+│   ├── wraith.agent.yaml          # Slop Slayer (AI-pattern detection)
+│   └── quill.agent.yaml           # Prose Drafter
 └── tools/
     ├── manuscript-import.sh       # Import & format conversion script
     ├── manuscript-export.sh       # Export & compilation script
@@ -170,7 +171,8 @@ cp -r /path/to/source/_bmad ~/creative-writing/
     │       │   ├── masque.agent.yaml
     │       │   ├── loom.agent.yaml
     │       │   ├── vestry.agent.yaml
-    │       │   └── wraith.agent.yaml
+    │       │   ├── wraith.agent.yaml
+    │       │   └── quill.agent.yaml
     │       └── tools/
     │           ├── manuscript-import.sh
     │           ├── manuscript-export.sh
@@ -385,7 +387,8 @@ After installation, your creative writing workspace should look like this:
 │   │       │   ├── masque.agent.yaml  # Character Voice
 │   │       │   ├── loom.agent.yaml    # World Builder
 │   │       │   ├── vestry.agent.yaml  # Knowledge Curator
-│   │       │   └── wraith.agent.yaml  # Slop Slayer
+│   │       │   ├── wraith.agent.yaml  # Slop Slayer
+│   │       │   └── quill.agent.yaml  # Prose Drafter
 │   │       └── tools/
 │   │           ├── manuscript-import.sh   # Import script
 │   │           ├── manuscript-export.sh   # Export script
@@ -425,7 +428,8 @@ After installation, your creative writing workspace should look like this:
 │   │   ├── masque/
 │   │   ├── loom/
 │   │   ├── vestry/
-│   │   └── wraith/
+│   │   ├── wraith/
+│   │   └── quill/
 │   └── _knowledge/                    # Curated project knowledge base
 │       ├── _index.md
 │       ├── research/
@@ -499,7 +503,7 @@ When Juno activates, she should:
 1. Check sub-agent files exist:
 ```bash
 ls ~/creative-writing/_bmad/custom/agents/juno/sub-agents/
-# Should list: loom, lynx, masque, raven, thistle, vestry, wraith .yaml files
+# Should list: loom, lynx, masque, quill, raven, thistle, vestry, wraith .yaml files
 ```
 2. With Juno active and a project open, try `[KB]` to quick-file a test note
 3. Verify `_knowledge/` folder was created in your project
@@ -606,7 +610,7 @@ cp -r ~/juno-sidecar-backup/* _bmad/_memory/juno-sidecar/
 rm -rf ~/juno-sidecar-backup
 ```
 
-**What gets updated:** Agent definition, sub-agents (raven, thistle, lynx, masque, loom, vestry, wraith), slash commands (`/juno`, `/masque`, `/loom`), project settings, CLAUDE.md, tools, directive templates, documentation.
+**What gets updated:** Agent definition, sub-agents (raven, thistle, lynx, masque, loom, vestry, wraith, quill), slash commands (`/juno`, `/masque`, `/loom`), project settings, CLAUDE.md, tools, directive templates, documentation.
 
 **What is preserved:** Your memory files (project-memory.md, projects-registry.md, active-voice-profile.md, instructions.md, writing-directives.md, session-archive.md, juno-voice.md, juno-voice-journal.md, juno-voice-synthesis.md, voice-profiles/), and all writing projects (gitignored).
 

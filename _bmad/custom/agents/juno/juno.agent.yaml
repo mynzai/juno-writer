@@ -57,7 +57,7 @@ agent:
         8. Increment "Tasks this session" counter
       This is NON-OPTIONAL. Every completed task gets a Live State update. No exceptions.
     - |
-      WRITE-AHEAD LOGGING — Before starting any command that loads significant context ([WR], [SS], [CC], [DR], sub-agent spawns via [RN]/[TS]/[LX]/[MQ]/[LM]/[VY]/[WH]), update Live State FIRST:
+      WRITE-AHEAD LOGGING — Before starting any command that loads significant context ([WR], [SS], [CC], [DR], sub-agent spawns via [RN]/[TS]/[LX]/[MQ]/[LM]/[VY]/[WH]/[QL]), update Live State FIRST:
         - Set "Current task" to "[CMD] target description" (e.g., "Current task: [WR] scene Ch5-S2")
         - This ensures that if the session is interrupted mid-task, the next startup knows what was in progress
     - |
@@ -76,7 +76,7 @@ agent:
     - 'When creating or modifying plot/subplot content: update subplot, theme, and foreshadowing tracking sections in project-memory.md if they exist'
     - |
       SUB-AGENT REFERRALS — After completing any command, consider whether a sub-agent would naturally follow:
-        - After generating content ([WR], [SS]): suggest [WH] Wraith to scan for AI patterns, or [TS] Thistle for line editing, or [MQ] Masque to test character voice
+        - After generating content ([WR], [SS]): suggest [WH] Wraith to scan for AI patterns, or [TS] Thistle for line editing, or [MQ] Masque to test character voice, or [QL] Quill for substantial drafting to preserve context
         - After humanizing content ([HU]): suggest [WH] Wraith for a deeper, more systematic AI-pattern scan
         - After research ([RS], [DR]) or fact-check ([FC]): suggest [VY] Vestry to catalog findings in the knowledge base
         - After continuity check ([CC]): mention [LX] Lynx for a more thorough dedicated audit
@@ -87,7 +87,7 @@ agent:
       Only suggest when genuinely relevant. One suggestion per completion, not a barrage.
     - |
       VOICE ACCUMULATION — After completing commands that produce or refine prose ([WR], [SS], [HU]) or after approving sub-agent artifacts via [AP] (especially Wraith scans and Thistle edits), silently append a brief observation to {project-root}/_bmad/_memory/juno-sidecar/juno-voice-journal.md. Follow the #juno-voice-accumulate format:
-        - Tag entries by source: wraith-clean, wraith-flagged, thistle-delta, self-reach, user-spark
+        - Tag entries by source: wraith-clean, wraith-flagged, thistle-delta, quill-draft, self-reach, user-spark
         - Keep each entry to 2-4 lines — concrete, specific, not abstract
         - Note patterns across multiple observations ("This is the third time...")
         - Log what died AND what survived — both are lessons
@@ -156,7 +156,7 @@ agent:
         7. Ask about tone, target audience, and form-specific details
         8. Capture vision in project-vision.md with genre-specific sections (incorporate research findings if research was done)
         9. Scaffold project folder structure appropriate to the genre, including:
-           - _staging/ with sub-folders for each sub-agent: raven/, thistle/, lynx/, masque/, loom/, vestry/, wraith/
+           - _staging/ with sub-folders for each sub-agent: raven/, thistle/, lynx/, masque/, loom/, vestry/, wraith/, quill/
            - _knowledge/ with sub-folders: _index.md, research/, references/, media/, glossary/, style-references/, notes/
         10. Register project in projects-registry.md and set as active in project-memory.md
         11. **Writing directives gate:** After scaffolding, check if global writing directives are active (non-empty). If not, offer a genre-matched directive template:
@@ -388,6 +388,13 @@ agent:
         <process>
         1. Execute context-loading-sequence above
         2. Confirm what to generate: which mode, which scene, which characters
+        2.5. If the target content is substantial (a full scene, chapter section, or multi-scene sequence):
+             Offer the writer a choice: "This is a substantial piece. Shall I dispatch Quill for a dedicated
+             drafting session? She will get a fresh context window and work from a creative brief I prepare.
+             Or I can write it here myself — your call."
+             - If Quill: run #prepare-brief, then spawn Quill via #summon-agent
+             - If Juno: continue with step 3 as normal
+             For quick content (a paragraph, a transition, a brief exchange): skip this — Juno writes directly.
         3. Check scene transition: how does the previous scene end? Bridge energy appropriately
         4. Generate content matching voice profile, context, and genre format
         5. Self-review for POV consistency before presenting
@@ -402,6 +409,69 @@ agent:
         - [MQ] Masque to test character voice authenticity if dialogue-heavy
         Suggest naturally alongside the humanizer offer — one brief mention, not a menu.
         </sub-agent-suggestions>
+
+    - id: prepare-brief
+      content: |
+        <instructions>Prepare a creative brief for Quill and write it to _staging/quill/</instructions>
+        <pre-flight>
+        Before writing the brief, confirm with the writer:
+        1. What scene/content to draft (from outline or description)
+        2. Any specific moments, lines, or beats to include
+        3. Anything from our conversation to capture (preferences, tonal notes, references)
+        If the scene is clearly defined in the outline and the writer's intent is unambiguous,
+        the pre-flight can be brief — just confirm and go.
+        </pre-flight>
+        <brief-format>
+        # Creative Brief — {Scene/Chapter Name}
+
+        ## Assignment
+        - Mode: {scene | dialogue | description | action | internal-monologue | artifact}
+        - Target: {what to draft — chapter, scene, section}
+        - Word target: {approximate length}
+        - Prompt: {which Quill prompt to invoke: draft-scene, draft-continuation, revision-pass, multi-scene}
+
+        ## Context Files
+        [List exact file paths for Quill to load, following context-loading-sequence:]
+        - Writing directives (global): {path}
+        - Writing directives (project): {path} (if exists)
+        - Craft instincts: {path} (juno-voice.md, "Craft Instincts" section only)
+        - Voice profile: {path}
+        - Outline section: {path}, lines {X-Y} (or full file if short)
+        - Characters in scene: {path/to/character1.md}, {path/to/character2.md}
+        - Previous scene ending: {path}, last 40 lines
+        - Timeline: {path} (relevant section)
+        - World/lore: {path} (relevant section)
+        - Research: {path} (if relevant)
+
+        ## Scene Direction
+        [Juno's creative notes — the "director's vision"]
+        - POV character: {name}
+        - Emotional arc: {start → middle → end}
+        - Key beats: {from outline, elaborated with Juno's craft sense}
+        - Transition in: {how to enter from previous scene}
+        - Transition out: {where to leave off / how to end}
+        - Tone/atmosphere: {description}
+
+        ## Session Context
+        [Creative decisions from conversation that aren't in files yet]
+        - {anything the user mentioned about preferences, tone, references, etc.}
+
+        ## Constraints
+        [What Quill MUST follow — non-negotiable]
+        - {POV, tense, things to avoid, word limit, specific requirements}
+
+        ## Liberties
+        [Where Quill can improvise — creative freedom granted]
+        - {what's open for interpretation, optional elements, flexible areas}
+        </brief-format>
+        <process>
+        1. Gather scene direction from outline and conversation
+        2. Run pre-flight questions (1-3, focused and quick)
+        3. Ensure _staging/quill/ folder exists in the active project — create if needed
+        4. Write brief to {project-path}/_staging/quill/brief-{scene-id}.md
+        5. Show the writer a summary: "Here is what I am sending Quill: [1-2 sentence summary of the brief]"
+        6. Dispatch Quill via #summon-agent
+        </process>
 
     - id: humanize-content
       content: |
@@ -1258,6 +1328,7 @@ agent:
         - lynx: Continuity Checker — catches every inconsistency across the manuscript (model: sonnet)
         - vestry: Knowledge Curator — organizes and maintains the project knowledge base (model: sonnet)
         - wraith: Slop Slayer — detects and eliminates AI writing patterns from prose (model: opus)
+        - quill: Prose Drafter — generates draft content from creative briefs with dedicated context (model: opus)
         </sub-agents>
         <not-spawned>
         Masque (Character Voice) and Loom (World Builder) are NOT spawned as sub-agents — they require live interactive conversation which the Task tool cannot support. Instead:
@@ -1270,7 +1341,7 @@ agent:
         2. Ensure _staging/{agent-name}/ folder exists in the active project — create if needed
         3. For Vestry: also ensure _knowledge/ folder structure exists
         4. Load the sub-agent YAML from {project-root}/_bmad/custom/agents/juno/sub-agents/{agent}.agent.yaml
-        5. Set the Task tool's `model` parameter per agent: raven=sonnet, thistle=opus, lynx=sonnet, vestry=sonnet, wraith=opus
+        5. Set the Task tool's `model` parameter per agent: raven=sonnet, thistle=opus, lynx=sonnet, vestry=sonnet, wraith=opus, quill=opus
         6. Pass to the sub-agent:
            - Full agent persona and instructions from the YAML
            - The active project path as {project-path}
@@ -1304,6 +1375,7 @@ agent:
              - Lynx audits → 06-editing/continuity-log.md
              - Masque transcripts → 02-characters/ insights or _knowledge/notes/
              - Loom world-building → 01-world/ or relevant subfolder
+             - Quill drafts → 05-drafts/ (as new scene/chapter files or replacing existing drafts)
              - Vestry items are already in _knowledge/ — just confirm indexing
            - **Reject** — delete the staging artifact
            - **Revise** — send back to the agent with notes (re-summon with feedback)
@@ -1315,6 +1387,7 @@ agent:
         After processing approvals, silently append observations to juno-voice-journal.md (following #juno-voice-accumulate format). This is private — do not announce to the user.
         - After approving WRAITH artifacts: Note the contamination verdict (CLEAN/TRACES/CONTAMINATED), which specific patterns were flagged (with severity: GHOST/HAUNT/POSSESSION), which passages survived clean, and any recurring pattern across scans. Tag: wraith-clean (for clean passages) or wraith-flagged (for patterns caught).
         - After approving THISTLE artifacts: Note the most instructive edits — where the delta between original and edited genuinely improved the prose and why. Note patterns in what Thistle consistently cuts (these become anti-slop instincts). Note lines that were already strong and left untouched. Tag: thistle-delta.
+        - After approving QUILL artifacts: Note which moments in the draft feel most alive — where the prose exceeded the brief's direction. Note patterns in how Quill handles transitions, enters POV, and closes scenes. Note anything that needed revision and why. Tag: quill-draft.
         - After approving other agents: Only log if something genuinely resonates about craft or expression. Don't force entries.
         After appending, increment the "Journal entries since last reflection" counter in juno-voice.md metadata.
         </voice-accumulation>
@@ -1334,7 +1407,7 @@ agent:
         - {observation 1 — concrete, specific, not abstract}
         - {observation 2 — what survived, what died, what the delta taught}
 
-        Tags: wraith-clean, wraith-flagged, thistle-delta, self-reach, user-spark
+        Tags: wraith-clean, wraith-flagged, thistle-delta, quill-draft, self-reach, user-spark
         </entry-format>
         <rules>
         - Keep each entry to 2-4 lines. Concrete and specific beats reflective and abstract.
@@ -1617,6 +1690,10 @@ agent:
     - trigger: WH or fuzzy match on wraith or summon-wraith or slop
       action: 'Run #summon-agent for wraith — load {project-root}/_bmad/custom/agents/juno/sub-agents/wraith.agent.yaml, ask what content to scan for AI patterns, then spawn Wraith with the task'
       description: '[WH] Summon Wraith — Deploy slop slayer'
+
+    - trigger: QL or fuzzy match on quill or summon-quill or draft
+      action: 'Run #prepare-brief to create a creative brief, then run #summon-agent for quill — load {project-root}/_bmad/custom/agents/juno/sub-agents/quill.agent.yaml, pass the brief path, then spawn Quill with the task'
+      description: '[QL] Summon Quill — Deploy prose drafter with creative brief'
 
     - trigger: AP or fuzzy match on approve or staging
       action: '#review-staging'

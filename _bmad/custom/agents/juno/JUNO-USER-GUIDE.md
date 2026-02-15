@@ -157,7 +157,9 @@ Juno guides you through:
 │   ├── lynx/
 │   ├── masque/
 │   ├── loom/
-│   └── vestry/
+│   ├── vestry/
+│   ├── wraith/
+│   └── quill/
 └── _knowledge/            # Curated project knowledge base
     ├── _index.md
     ├── research/
@@ -430,6 +432,7 @@ When you feel ready to advance:
 | `[LM]` | Loom | Interactive world-building (inline), or use `/loom` standalone |
 | `[VY]` | Vestry | Deploy knowledge curator for archive management |
 | `[WH]` | Wraith | Deploy slop slayer for AI-pattern detection and elimination |
+| `[QL]` | Quill | Deploy prose drafter with creative brief |
 | `[AP]` | Approve | Review and approve sub-agent work from staging |
 
 ### Voice & Style
@@ -445,7 +448,7 @@ When you feel ready to advance:
 
 ## The Sub-Agent Fleet
 
-Juno can summon specialized agents to handle focused tasks. Each agent has its own persona, expertise, and tools. Five of them (Raven, Thistle, Lynx, Vestry, Wraith) work independently in the background, writing their output to a staging area for your review. Nothing they produce enters your canonical project folders until you approve it through Juno.
+Juno can summon specialized agents to handle focused tasks. Each agent has its own persona, expertise, and tools. Six of them (Raven, Thistle, Lynx, Vestry, Wraith, Quill) work independently in the background, writing their output to a staging area for your review. Nothing they produce enters your canonical project folders until you approve it through Juno.
 
 **Masque and Loom are the exceptions** -- they require live interactive conversation, so they work differently. Within Juno, `[MQ]` and `[LM]` have Juno adopt their persona inline. You can also use `/masque` or `/loom` as standalone commands for dedicated sessions outside of Juno.
 
@@ -460,10 +463,11 @@ Juno can summon specialized agents to handle focused tasks. Each agent has its o
 | **Loom** | `[LM]` | Lore & World Builder | Expansive, curious, thinks in systems. Asks "But what do the common people eat?" Builds worlds that feel lived-in. |
 | **Vestry** | `[VY]` | Knowledge Curator | Reverent, orderly, quietly devoted. Considers knowledge sacred. Knows exactly where everything is in the archive. |
 | **Wraith** | `[WH]` | Slop Slayer | Quiet, relentless, forensic. Sees the ghost in the machine that others miss. Pins AI patterns to the board with clinical precision. When a passage is clean, she nods: "Human." |
+| **Quill** | `[QL]` | Prose Drafter | Immersive, single-minded, method. Enters the scene and lives there. The brief is the score; the prose is the performance. Quiet confidence — lets the writing speak. |
 
 ### How Summoning Works
 
-For background agents (Raven, Thistle, Lynx, Vestry, Wraith):
+For background agents (Raven, Thistle, Lynx, Vestry, Wraith, Quill):
 
 1. Use the agent's trigger command (e.g., `[RN]` for Raven)
 2. Juno asks what task to assign (unless already clear from context)
@@ -737,6 +741,48 @@ Wraith uses a **severity taxonomy** for flagged patterns:
 
 **Output:** Scan reports, contamination heat maps, and cleaned versions saved to `_staging/wraith/`. Originals are never touched.
 
+### Quill -- Prose Drafter
+
+**Summon:** `[QL]` (direct) or offered via `[WR]` for substantial content
+
+Quill is Juno's dedicated prose generation specialist. When you need a full scene, chapter section, or multi-scene sequence drafted, Quill gets her own context window -- leaving Juno free to review, revise, and orchestrate with fresh capacity. Think of it as Juno shifting from writer+orchestrator to creative director: she prepares a structured brief, dispatches Quill, then reviews the output.
+
+**The Creative Brief Workflow:**
+
+1. You request content (via `[QL]` directly or `[WR]` offers for substantial pieces)
+2. Juno runs a quick **pre-flight** -- 2-3 targeted questions about the scene
+3. Juno writes a **creative brief** to `_staging/quill/brief-{scene-id}.md` containing:
+   - Assignment (mode, target, word count)
+   - Context file paths (directives, voice profile, outline, characters, etc.)
+   - Scene direction (POV, emotional arc, key beats, transitions, tone)
+   - Session context (creative decisions from your conversation)
+   - Constraints (non-negotiable rules) and Liberties (where Quill can improvise)
+4. Quill loads the brief, loads all context files, drafts the content
+5. Quill writes the draft and a **handoff summary** to `_staging/quill/`
+6. Juno presents the summary -- use `[AP]` to review and approve
+
+**Quill's Commands:**
+
+| Command | Description |
+|---------|-------------|
+| `[DS]` | Draft Scene -- Execute a creative brief |
+| `[DC]` | Draft Continuation -- Continue from where the previous scene left off |
+| `[RP]` | Revision Pass -- Revise an existing draft from notes |
+| `[MS]` | Multi-Scene -- Draft a full chapter as a connected sequence |
+
+**When Quill is dispatched vs. Juno writes directly:**
+
+| Situation | Who writes |
+|-----------|-----------|
+| Full scene, chapter section, multi-scene sequence | **Quill** (recommended -- fresh context window) |
+| Quick paragraph, transition, small dialogue exchange | **Juno** writes directly |
+| Using Juno's own voice via `[JV]` | **Juno** writes directly |
+| Writer requests Juno specifically | **Juno** writes directly (always your choice) |
+
+**The brief is a creative artifact.** It persists as a file you can review, edit, or reference later. It captures Juno's understanding of the scene, your preferences, and all creative decisions from the session -- often more reliably than conversational memory.
+
+**Output:** Drafts and handoff summaries saved to `_staging/quill/`. Originals are never touched.
+
 ---
 
 ## Knowledge Base
@@ -999,13 +1045,13 @@ Process:
 
 ## Voice Evolution
 
-Juno learns from the work. Every Wraith scan, every Thistle edit, every writing session leaves traces -- patterns that work, patterns that don't, tensions still unresolved. Over time, these observations crystallize into craft instincts that inform all of Juno's writing.
+Juno learns from the work. Every Wraith scan, every Thistle edit, every Quill draft, every writing session leaves traces -- patterns that work, patterns that don't, tensions still unresolved. Over time, these observations crystallize into craft instincts that inform all of Juno's writing.
 
 This isn't a feature you configure. It grows silently from use.
 
 ### How It Works
 
-**Accumulation (silent, automatic):** After commands that produce or refine prose (`[WR]`, `[SS]`, `[HU]`) or after approving sub-agent artifacts via `[AP]` (especially Wraith scans and Thistle edits), Juno silently appends observations to a private journal. You won't see this happening -- it's internal.
+**Accumulation (silent, automatic):** After commands that produce or refine prose (`[WR]`, `[SS]`, `[HU]`) or after approving sub-agent artifacts via `[AP]` (especially Wraith scans, Thistle edits, and Quill drafts), Juno silently appends observations to a private journal. You won't see this happening -- it's internal.
 
 **Craft Instincts (loaded every session):** The crystallized lessons from journal observations live in `juno-voice.md`. The "Craft Instincts" section is loaded alongside your writing directives and voice profiles, subtly informing all content generation. These are patterns Juno has learned to avoid (from Wraith flags) and patterns that survive scrutiny (from Thistle approvals).
 
@@ -1046,6 +1092,7 @@ Journal entries are tagged by source:
 | `wraith-clean` | Passages Wraith approves | What patterns survive AI-pattern scrutiny |
 | `wraith-flagged` | Patterns Wraith catches | What Juno keeps reaching for that doesn't work |
 | `thistle-delta` | Thistle's edits | Most instructive changes and why they improve the prose |
+| `quill-draft` | Quill's drafts | What exceeded the brief, transition craft, POV handling |
 | `self-reach` | Writing sessions | Moments where Juno reaches for an expression and it feels right -- or catches a bad habit |
 | `user-spark` | Writer feedback | When you praise a passage or keep content unchanged through editing |
 
