@@ -136,7 +136,7 @@ print_ok "Agent definition installed"
 # Install sub-agents
 mkdir -p "$DEST/_bmad/custom/agents/juno/sub-agents"
 cp "$SRC/_bmad/custom/agents/juno/sub-agents/"*.yaml "$DEST/_bmad/custom/agents/juno/sub-agents/"
-print_ok "Sub-agents installed (raven, thistle, lynx, masque, loom, vestry, wraith)"
+print_ok "Sub-agents installed (raven, thistle, lynx, masque, loom, vestry, wraith, quill)"
 
 # Install tools
 if [ -d "$SRC/_bmad/custom/agents/juno/tools" ]; then
