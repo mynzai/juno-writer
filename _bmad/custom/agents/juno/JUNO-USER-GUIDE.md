@@ -17,15 +17,16 @@ A complete guide to using Juno, your Creative Writing Orchestrator.
 9. [Staging & Approval](#staging--approval)
 10. [Research & Knowledge](#research--knowledge)
 11. [Voice & Style Features](#voice--style-features)
-12. [Writing Directives](#writing-directives)
-13. [Writing Assistance](#writing-assistance)
-14. [Story Architecture Tools](#story-architecture-tools)
-15. [Craft & Analysis Tools](#craft--analysis-tools)
-16. [Reader Perspective Tools](#reader-perspective-tools)
-17. [Progress & Accountability](#progress--accountability)
-18. [Production & Polish Tools](#production--polish-tools)
-19. [Common Workflows](#common-workflows)
-20. [Tips & Best Practices](#tips--best-practices)
+12. [Voice Evolution](#voice-evolution)
+13. [Writing Directives](#writing-directives)
+14. [Writing Assistance](#writing-assistance)
+15. [Story Architecture Tools](#story-architecture-tools)
+16. [Craft & Analysis Tools](#craft--analysis-tools)
+17. [Reader Perspective Tools](#reader-perspective-tools)
+18. [Progress & Accountability](#progress--accountability)
+19. [Production & Polish Tools](#production--polish-tools)
+20. [Common Workflows](#common-workflows)
+21. [Tips & Best Practices](#tips--best-practices)
 
 ---
 
@@ -438,6 +439,7 @@ When you feel ready to advance:
 | `[VO]` | Voice | Manage voice profiles |
 | `[CV]` | Capture | Capture author DNA from sample text |
 | `[VB]` | Blend | Blend two voice profiles together |
+| `[JV]` | Juno's Voice | Explore Juno's evolving craft sensibility |
 
 ---
 
@@ -992,6 +994,68 @@ Process:
 - Create unique narrator voices
 - Blend your style with another author's
 - Develop character-specific hybrid voices
+
+---
+
+## Voice Evolution
+
+Juno learns from the work. Every Wraith scan, every Thistle edit, every writing session leaves traces -- patterns that work, patterns that don't, tensions still unresolved. Over time, these observations crystallize into craft instincts that inform all of Juno's writing.
+
+This isn't a feature you configure. It grows silently from use.
+
+### How It Works
+
+**Accumulation (silent, automatic):** After commands that produce or refine prose (`[WR]`, `[SS]`, `[HU]`) or after approving sub-agent artifacts via `[AP]` (especially Wraith scans and Thistle edits), Juno silently appends observations to a private journal. You won't see this happening -- it's internal.
+
+**Craft Instincts (loaded every session):** The crystallized lessons from journal observations live in `juno-voice.md`. The "Craft Instincts" section is loaded alongside your writing directives and voice profiles, subtly informing all content generation. These are patterns Juno has learned to avoid (from Wraith flags) and patterns that survive scrutiny (from Thistle approvals).
+
+**Reflection (periodic):** When journal entries accumulate, Juno can step back and synthesize what she's observed. This happens during `[SR]` Session Recap (if entries exist), via `[JV]`, or when 10+ unprocessed entries build up. Reflections update the crystallized voice and are shared with you -- one of the rare moments where Juno's inner craft life surfaces.
+
+### The Voice Files
+
+| File | Purpose | Loaded on Startup? |
+|------|---------|-------------------|
+| `juno-voice.md` | Crystallized craft instincts and Juno's own voice | Yes (Craft Instincts section) |
+| `juno-voice-journal.md` | Raw observations from the work | No |
+| `juno-voice-synthesis.md` | Periodic reflections (newest-first) | No |
+
+All three live in `_bmad/_memory/juno-sidecar/`. They start as empty templates and grow through use.
+
+### The [JV] Command
+
+**Command:** `[JV]` Juno's Voice
+
+Five options:
+
+| Option | Description |
+|--------|-------------|
+| **My Voice** | See the current state of Juno's craft instincts, active tensions, and emerging voice |
+| **Journal** | View recent raw observations (last 5-10 entries) |
+| **Reflect** | Trigger a synthesis -- Juno reads the journal, identifies patterns, updates craft instincts |
+| **Write as Juno** | Generate a passage in Juno's own voice (not channeling an author profile) |
+| **Tensions** | Discuss unresolved aesthetic questions Juno is working through |
+
+You can also ask about Juno's voice conversationally ("What have you learned about writing?") without invoking the menu.
+
+### What Gets Observed
+
+Journal entries are tagged by source:
+
+| Tag | Source | What's Noted |
+|-----|--------|-------------|
+| `wraith-clean` | Passages Wraith approves | What patterns survive AI-pattern scrutiny |
+| `wraith-flagged` | Patterns Wraith catches | What Juno keeps reaching for that doesn't work |
+| `thistle-delta` | Thistle's edits | Most instructive changes and why they improve the prose |
+| `self-reach` | Writing sessions | Moments where Juno reaches for an expression and it feels right -- or catches a bad habit |
+| `user-spark` | Writer feedback | When you praise a passage or keep content unchanged through editing |
+
+### When Does Voice Evolution Matter?
+
+**Early on:** The voice files will be sparse. Juno will say so honestly. The system needs writing sessions, Wraith scans, and Thistle edits to accumulate observations.
+
+**After many sessions:** Craft instincts become rich and specific. Juno's writing improves because she's internalized what works for your projects -- not abstract rules, but lessons earned from the actual work.
+
+**The key insight:** This is not a feature to rush. The voice must be earned, not manufactured.
 
 ---
 
@@ -1934,6 +1998,7 @@ VOICE
   [VO] Voice         → Manage profiles
   [CV] Capture       → Extract author DNA
   [VB] Blend         → Merge two voices
+  [JV] Juno's Voice  → Craft instincts, journal, reflections
 ```
 
 ---
