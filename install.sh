@@ -156,15 +156,24 @@ if [ "$MODE" != "update" ]; then
     cp "$SRC/_bmad/_memory/juno-sidecar/instructions.md" "$DEST/_bmad/_memory/juno-sidecar/"
     cp "$SRC/_bmad/_memory/juno-sidecar/writing-directives.md" "$DEST/_bmad/_memory/juno-sidecar/"
     cp "$SRC/_bmad/_memory/juno-sidecar/session-archive.md" "$DEST/_bmad/_memory/juno-sidecar/"
+    cp "$SRC/_bmad/_memory/juno-sidecar/juno-voice.md" "$DEST/_bmad/_memory/juno-sidecar/"
+    cp "$SRC/_bmad/_memory/juno-sidecar/juno-voice-journal.md" "$DEST/_bmad/_memory/juno-sidecar/"
+    cp "$SRC/_bmad/_memory/juno-sidecar/juno-voice-synthesis.md" "$DEST/_bmad/_memory/juno-sidecar/"
     cp "$SRC/_bmad/_memory/juno-sidecar/README.md" "$DEST/_bmad/_memory/juno-sidecar/"
     cp "$SRC/_bmad/_memory/juno-sidecar/voice-profiles/default.md" "$DEST/_bmad/_memory/juno-sidecar/voice-profiles/"
     cp "$SRC/_bmad/_memory/juno-sidecar/directive-templates/"*.md "$DEST/_bmad/_memory/juno-sidecar/directive-templates/"
-    print_ok "Memory sidecar installed (with directive templates)"
+    print_ok "Memory sidecar installed (with voice evolution and directive templates)"
 else
     # Always update directive templates even in update mode (they're system files, not user data)
     mkdir -p "$DEST/_bmad/_memory/juno-sidecar/directive-templates"
     cp "$SRC/_bmad/_memory/juno-sidecar/directive-templates/"*.md "$DEST/_bmad/_memory/juno-sidecar/directive-templates/"
-    print_ok "Memory sidecar preserved (update mode) — directive templates refreshed"
+    # Add voice evolution files if they don't exist yet (user data — don't overwrite)
+    for vf in juno-voice.md juno-voice-journal.md juno-voice-synthesis.md; do
+        if [ ! -f "$DEST/_bmad/_memory/juno-sidecar/$vf" ]; then
+            cp "$SRC/_bmad/_memory/juno-sidecar/$vf" "$DEST/_bmad/_memory/juno-sidecar/"
+        fi
+    done
+    print_ok "Memory sidecar preserved (update mode) — directive templates refreshed, voice files ensured"
 fi
 
 # Install CLAUDE.md (always update — this is a system file with command docs)
