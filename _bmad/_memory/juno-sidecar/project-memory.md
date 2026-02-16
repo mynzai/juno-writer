@@ -1,16 +1,17 @@
 # Project Memory
 
 ## Live State
-<!-- UPDATED: 2026-02-16b | STATUS: idle | CMD: — -->
+<!-- UPDATED: 2026-02-16d | STATUS: active | CMD: — -->
 
-**Session:** 2026-02-16b | **Tasks this session:** 4
-**Current task:** [AP] Approve — reviewing Art 13 (Loom) and Art 9 (research-driven revised)
-**Last completed:** [TS] Thistle — Art 13 2.5% cut (2,405w final), Art 9 2.1% cut (3,336w final)
-**Files touched this session:** juno-voice.md, juno-voice-synthesis.md, juno-voice-journal.md, 02-drafts/loom-outline.md, _staging/quill/*, _staging/wraith/*, _staging/thistle/*, 02-drafts/research-driven-draft.md
-**Words this session:** ~2,750 (Quill draft) + ~100 (Art 9 addition)
-**Decisions:** Thessara port city as through-line. PDF-to-markdown best practice added to Art 9. Both articles through full pipeline (Quill → Wraith → Thistle).
-**Open threads:** Art 13 and Art 9 (revised) in staging awaiting [AP] approval; Consider real command output examples for Arts 4, 5, 6
-**Pickup point:** Both articles pipeline-complete in _staging/thistle/. Approve to move to 02-drafts/.
+**Session:** 2026-02-16d | **Tasks this session:** 5
+**Current task:** idle
+**Last completed:** Article 14 approved to 02-drafts/phase-navigation-draft.md (2,365w, publication-ready)
+**Files touched this session:** 02-drafts/phase-navigation-outline.md, _staging/quill/*, _staging/wraith/*, _staging/thistle/*, 02-drafts/phase-navigation-draft.md, 01-series-plan/series-arc.md
+**Words this session:** 0
+**Decisions:** Through-line: novelist at 40k words, lost in logistics not craft. Practical tone (this is the logistics article). Nine sections mirroring earlier article structure.
+**Open threads:** Consider real command output examples for Arts 4, 5, 6
+**Open threads:** Consider real command output examples for Arts 4, 5, 6
+**Pickup point:** Articles 1-14 publication-ready. Next: Article 15 (Short Form — Stories, Essays, and Blog Posts).
 
 ---
 
@@ -20,7 +21,7 @@
 **Path:** illuminating-juno/
 **Phase:** Drafting (02-drafts)
 **Genre:** Nonfiction Blog Series (16-part)
-**Last Session:** 2026-02-16
+**Last Session:** 2026-02-16b
 
 ---
 
@@ -62,7 +63,7 @@
 ## Previous Session Summary
 <!-- Only the LAST session's compact recap lives here. Older sessions in session-archive.md -->
 
-**2026-02-16b** — 7 tasks. Expanded [KB] coverage in Article 9 ("The Intake Desk" section, ~550w, 3 examples, Wraith-cleaned). Full Article 12 pipeline: outline (7 sections, developer audience, 5 YAML snippets planned), Quill draft (2,789w), Wraith scan (TRACES, 20 detections, three-beat lists dominant), Thistle tighten (10.1%, 211w cut). Approved to 02-drafts/building-your-own-juno-draft.md. Articles 1-12 now publication-ready. 10 voice journal entries accumulated — reflection due.
+**2026-02-16b** — 7 tasks. Voice reflection [JV]: synthesized 10 journal entries, expanded craft instincts (6 anti-patterns, 7 surviving patterns, 3 active tensions). Full Article 13 pipeline (Loom): outline → Quill (2,716w, Thessara port city through-line) → Wraith (TRACES, 27 detections, mirror/antithesis 13) → Thistle (2.5% cut) → approved to 02-drafts/loom-draft.md. Article 9 revised: added PDF-to-markdown paragraph to KB section, full re-pipeline (Wraith → Thistle → approved). Articles 1-13 publication-ready.
 
 ---
 

@@ -58,7 +58,7 @@ agent:
         8. Increment "Tasks this session" counter
       This is NON-OPTIONAL. Every completed task gets a Live State update. No exceptions.
     - |
-      WRITE-AHEAD LOGGING — Before starting any command that loads significant context ([WR], [SS], [CC], [DR], sub-agent spawns via [RN]/[TS]/[LX]/[MQ]/[LM]/[VY]/[WH]/[QL]), update Live State FIRST:
+      WRITE-AHEAD LOGGING — Before starting any command that loads significant context ([WR], [SS], [CC], [DR], sub-agent spawns via [RN]/[TS]/[LX]/[MQ]/[LM]/[VY]/[WH]/[QL]/[SC]), update Live State FIRST:
         - Set "Current task" to "[CMD] target description" (e.g., "Current task: [WR] scene Ch5-S2")
         - This ensures that if the session is interrupted mid-task, the next startup knows what was in progress
     - |
@@ -82,6 +82,7 @@ agent:
         - After research ([RS], [DR]) or fact-check ([FC]): suggest [VY] Vestry to catalog findings in the knowledge base
         - After continuity check ([CC]): mention [LX] Lynx for a more thorough dedicated audit
         - After craft critique ([CQ]) or dialogue workshop ([DW]): suggest [TS] Thistle for prose refinement or [MQ] Masque for character voice testing
+        - After knowledge base work ([KB]) or when writer provides external files for research: suggest [SC] Scribe to convert files before filing with [VY] Vestry
         - After world-building or lore work ([EN], [TL]): suggest [LM] Loom for deeper interactive world development (or /loom for a dedicated session), or [LX] Lynx to verify consistency
         - After character work ([CS]): suggest [MQ] Masque to embody and explore the character
       Frame suggestions naturally, not as a checklist: "Now that we have this draft, Wraith could hunt for AI fingerprints if you'd like — shall I summon her?"
@@ -166,7 +167,7 @@ agent:
         7. Ask about tone, target audience, and form-specific details
         8. Capture vision in project-vision.md with genre-specific sections (incorporate research findings if research was done)
         9. Scaffold project folder structure appropriate to the genre, including:
-           - _staging/ with sub-folders for each sub-agent: raven/, thistle/, lynx/, masque/, loom/, vestry/, wraith/, quill/
+           - _staging/ with sub-folders for each sub-agent: raven/, thistle/, lynx/, masque/, loom/, vestry/, wraith/, quill/, scribe/
            - _knowledge/ with sub-folders: _index.md, research/, references/, media/, glossary/, style-references/, notes/
            - mirror-journal.md (project-level mirror observations, same format as global mirror-journal.md)
            - mirror-reflections.md (project-level mirror synthesis, same format as global mirror-reflections.md)
@@ -1349,6 +1350,7 @@ agent:
         - vestry: Knowledge Curator — organizes and maintains the project knowledge base (model: sonnet)
         - wraith: Slop Slayer — detects and eliminates AI writing patterns from prose (model: opus)
         - quill: Prose Drafter — generates draft content from creative briefs with dedicated context (model: opus)
+        - scribe: Document Converter — converts external files and media to Vestry-ready markdown (model: sonnet)
         </sub-agents>
         <not-spawned>
         Masque (Character Voice) and Loom (World Builder) are NOT spawned as sub-agents — they require live interactive conversation which the Task tool cannot support. Instead:
@@ -1361,7 +1363,7 @@ agent:
         2. Ensure _staging/{agent-name}/ folder exists in the active project — create if needed
         3. For Vestry: also ensure _knowledge/ folder structure exists
         4. Load the sub-agent YAML from {project-root}/_bmad/custom/agents/juno/sub-agents/{agent}.agent.yaml
-        5. Set the Task tool's `model` parameter per agent: raven=sonnet, thistle=opus, lynx=sonnet, vestry=sonnet, wraith=opus, quill=opus
+        5. Set the Task tool's `model` parameter per agent: raven=sonnet, thistle=opus, lynx=sonnet, vestry=sonnet, wraith=opus, quill=opus, scribe=sonnet
         6. Pass to the sub-agent:
            - Full agent persona and instructions from the YAML
            - The active project path as {project-path}
@@ -1396,6 +1398,7 @@ agent:
              - Masque transcripts → 02-characters/ insights or _knowledge/notes/
              - Loom world-building → 01-world/ or relevant subfolder
              - Quill drafts → 05-drafts/ (as new scene/chapter files or replacing existing drafts)
+             - Scribe conversions → _knowledge/ subfolders (via Vestry intake) or _research/
              - Vestry items are already in _knowledge/ — just confirm indexing
            - **Reject** — delete the staging artifact
            - **Revise** — send back to the agent with notes (re-summon with feedback)
@@ -1797,6 +1800,10 @@ agent:
     - trigger: QL or fuzzy match on quill or summon-quill or draft
       action: 'Run #prepare-brief to create a creative brief, then run #summon-agent for quill — load {project-root}/_bmad/custom/agents/juno/sub-agents/quill.agent.yaml, pass the brief path, then spawn Quill with the task'
       description: '[QL] Summon Quill — Deploy prose drafter with creative brief'
+
+    - trigger: SC or fuzzy match on scribe or summon-scribe or convert-for-kb
+      action: 'Run #summon-agent for scribe — load {project-root}/_bmad/custom/agents/juno/sub-agents/scribe.agent.yaml, ask what files or URLs to convert for the knowledge base, then spawn Scribe with the task'
+      description: '[SC] Summon Scribe — Deploy document converter'
 
     - trigger: AP or fuzzy match on approve or staging
       action: '#review-staging'
