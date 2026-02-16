@@ -18,15 +18,16 @@ A complete guide to using Juno, your Creative Writing Orchestrator.
 10. [Research & Knowledge](#research--knowledge)
 11. [Voice & Style Features](#voice--style-features)
 12. [Voice Evolution](#voice-evolution)
-13. [Writing Directives](#writing-directives)
-14. [Writing Assistance](#writing-assistance)
-15. [Story Architecture Tools](#story-architecture-tools)
-16. [Craft & Analysis Tools](#craft--analysis-tools)
-17. [Reader Perspective Tools](#reader-perspective-tools)
-18. [Progress & Accountability](#progress--accountability)
-19. [Production & Polish Tools](#production--polish-tools)
-20. [Common Workflows](#common-workflows)
-21. [Tips & Best Practices](#tips--best-practices)
+13. [Mirror System](#mirror-system)
+14. [Writing Directives](#writing-directives)
+15. [Writing Assistance](#writing-assistance)
+16. [Story Architecture Tools](#story-architecture-tools)
+17. [Craft & Analysis Tools](#craft--analysis-tools)
+18. [Reader Perspective Tools](#reader-perspective-tools)
+19. [Progress & Accountability](#progress--accountability)
+20. [Production & Polish Tools](#production--polish-tools)
+21. [Common Workflows](#common-workflows)
+22. [Tips & Best Practices](#tips--best-practices)
 
 ---
 
@@ -443,6 +444,7 @@ When you feel ready to advance:
 | `[CV]` | Capture | Capture author DNA from sample text |
 | `[VB]` | Blend | Blend two voice profiles together |
 | `[JV]` | Juno's Voice | Explore Juno's evolving craft sensibility |
+| `[MI]` | Mirror | Explore what Juno has learned about you as a writer |
 
 ---
 
@@ -1103,6 +1105,86 @@ Journal entries are tagged by source:
 **After many sessions:** Craft instincts become rich and specific. Juno's writing improves because she's internalized what works for your projects -- not abstract rules, but lessons earned from the actual work.
 
 **The key insight:** This is not a feature to rush. The voice must be earned, not manufactured.
+
+---
+
+## Mirror System
+
+While Voice Evolution teaches Juno about *craft*, the Mirror system teaches her about *you* -- your patterns, your growth, your creative tendencies, and your relationship with the work. Together they make Juno a creative partner who learns both the writing and the writer.
+
+### How It Works
+
+**Accumulation (silent, during session archive):** During `[SR]` Session Recap and during voice reflection, Juno silently reviews what happened in the session and appends observations about you to a private journal. Unlike voice accumulation (which happens after every writing command), mirror accumulation happens at session boundaries -- giving Juno a full session of interaction to observe before noting patterns.
+
+**Writer's Craft (loaded every session):** Crystallized observations live in `mirror.md`. The "Writer's Craft (always aware)" section is loaded on startup alongside craft instincts, giving Juno awareness of your preferences, process patterns, and growth without you having to remind her.
+
+**Reflection (periodic):** When 8+ journal entries accumulate, Juno offers to synthesize what she's observed. This happens during `[SR]` (after the voice reflection offer) or via `[MI]`. Reflections update the crystallized understanding and are shared warmly -- not as assessments, but as one collaborator noticing things about another.
+
+### The Mirror Files
+
+**Global (across all projects):**
+
+| File | Purpose | Loaded on Startup? |
+|------|---------|-------------------|
+| `mirror.md` | Crystallized understanding of the writer | Yes (Writer's Craft section) |
+| `mirror-journal.md` | Raw observations about the writer | No |
+| `mirror-reflections.md` | Periodic reflections (newest-first) | No |
+
+All three live in `_bmad/_memory/juno-sidecar/`.
+
+**Per-project:**
+
+| File | Purpose |
+|------|---------|
+| `{project}/mirror-journal.md` | Project-specific observations |
+| `{project}/mirror-reflections.md` | Project-specific reflections |
+
+Per-project files are created during Genesis and capture observations specific to that project.
+
+### The [MI] Command
+
+**Command:** `[MI]` Mirror
+
+Five options:
+
+| Option | Description |
+|--------|-------------|
+| **My Journal** | View recent observations (choose global or current project) |
+| **My Reflections** | See synthesized insights about your creative patterns |
+| **Reflect Now** | Trigger a fresh synthesis from unprocessed journal entries |
+| **Growth Map** | Cross-project analysis of how your craft has evolved over time |
+| **Deep Mirror** | Opt-in deeper analysis of creative tendencies and emotional patterns (personal, clearly framed as optional) |
+
+You can also ask conversationally ("What have you noticed about how I work?") without invoking the menu.
+
+### What Gets Observed
+
+Journal entries are tagged by type:
+
+| Tag | What's Noted |
+|-----|-------------|
+| `feedback-accepted` | What feedback you embrace and what that reveals about your priorities |
+| `feedback-rejected` | What you push back on -- often reveals core aesthetic values |
+| `process-pattern` | How you work -- ordering, pacing, what you reach for first |
+| `theme-gravity` | Themes, images, and preoccupations that recur across projects |
+| `growth-signal` | Specific improvements in your craft, with evidence |
+| `stuck-pattern` | Where you slow down, circle back, or avoid -- noted without judgment |
+| `preference-learned` | Stated or demonstrated preferences (Juno distinguishes between the two) |
+| `milestone` | Phase transitions, word count achievements, project completions |
+
+### How It Surfaces
+
+- **Session greetings:** If something meaningful has accumulated, Juno may weave a brief mention into her hello. One sentence, not every time.
+- **Milestones:** When you reach a word count milestone or phase transition, Juno may reflect on the journey to get there.
+- **`[MI]` command:** Full on-demand access to journals, reflections, and growth maps.
+
+### Privacy
+
+Both the raw journal and synthesized reflections are fully visible to you via `[MI]`. Nothing is hidden. The "private" aspect is only that Juno doesn't announce every observation as she makes it -- she accumulates quietly, then shares when asked or when a natural moment arises.
+
+### Deep Mirror
+
+Option 5 in the `[MI]` menu is explicitly opt-in and clearly framed as more personal. It goes beyond craft observations into creative tendencies, emotional patterns, and what your writing choices might reveal about your relationship with the work. Juno frames insights as invitations to self-reflection, never as conclusions or diagnoses.
 
 ---
 
@@ -2046,6 +2128,7 @@ VOICE
   [CV] Capture       → Extract author DNA
   [VB] Blend         → Merge two voices
   [JV] Juno's Voice  → Craft instincts, journal, reflections
+  [MI] Mirror         → What Juno has observed about your creative process
 ```
 
 ---
