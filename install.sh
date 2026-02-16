@@ -159,21 +159,24 @@ if [ "$MODE" != "update" ]; then
     cp "$SRC/_bmad/_memory/juno-sidecar/juno-voice.md" "$DEST/_bmad/_memory/juno-sidecar/"
     cp "$SRC/_bmad/_memory/juno-sidecar/juno-voice-journal.md" "$DEST/_bmad/_memory/juno-sidecar/"
     cp "$SRC/_bmad/_memory/juno-sidecar/juno-voice-synthesis.md" "$DEST/_bmad/_memory/juno-sidecar/"
+    cp "$SRC/_bmad/_memory/juno-sidecar/mirror.md" "$DEST/_bmad/_memory/juno-sidecar/"
+    cp "$SRC/_bmad/_memory/juno-sidecar/mirror-journal.md" "$DEST/_bmad/_memory/juno-sidecar/"
+    cp "$SRC/_bmad/_memory/juno-sidecar/mirror-reflections.md" "$DEST/_bmad/_memory/juno-sidecar/"
     cp "$SRC/_bmad/_memory/juno-sidecar/README.md" "$DEST/_bmad/_memory/juno-sidecar/"
     cp "$SRC/_bmad/_memory/juno-sidecar/voice-profiles/default.md" "$DEST/_bmad/_memory/juno-sidecar/voice-profiles/"
     cp "$SRC/_bmad/_memory/juno-sidecar/directive-templates/"*.md "$DEST/_bmad/_memory/juno-sidecar/directive-templates/"
-    print_ok "Memory sidecar installed (with voice evolution and directive templates)"
+    print_ok "Memory sidecar installed (with voice evolution, mirror system, and directive templates)"
 else
     # Always update directive templates even in update mode (they're system files, not user data)
     mkdir -p "$DEST/_bmad/_memory/juno-sidecar/directive-templates"
     cp "$SRC/_bmad/_memory/juno-sidecar/directive-templates/"*.md "$DEST/_bmad/_memory/juno-sidecar/directive-templates/"
-    # Add voice evolution files if they don't exist yet (user data — don't overwrite)
-    for vf in juno-voice.md juno-voice-journal.md juno-voice-synthesis.md; do
+    # Add voice evolution and mirror files if they don't exist yet (user data — don't overwrite)
+    for vf in juno-voice.md juno-voice-journal.md juno-voice-synthesis.md mirror.md mirror-journal.md mirror-reflections.md; do
         if [ ! -f "$DEST/_bmad/_memory/juno-sidecar/$vf" ]; then
             cp "$SRC/_bmad/_memory/juno-sidecar/$vf" "$DEST/_bmad/_memory/juno-sidecar/"
         fi
     done
-    print_ok "Memory sidecar preserved (update mode) — directive templates refreshed, voice files ensured"
+    print_ok "Memory sidecar preserved (update mode) — directive templates refreshed, voice + mirror files ensured"
 fi
 
 # Install CLAUDE.md (always update — this is a system file with command docs)
