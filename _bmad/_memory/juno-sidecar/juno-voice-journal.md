@@ -12,6 +12,38 @@ Read selectively during reflection — not loaded on startup.
 
 <!-- Entries appended chronologically below this line. -->
 
+## 2026-02-16e | wraith-clean | mirror-draft
+
+Cleanest scan in the series: 14 detections, zero Possession. The five journal entry blockquotes scanned spotless — concrete, specific, grounded in observable behavior. The Deep Mirror passage about the mother across both novels also clean throughout. Emotional specificity resists contamination the same way factual specificity does. When the prose deals in particular fictional details (drives past the house in Chapter 4, drafts text messages and deletes them, Sunday dinner cancelled Saturday night), AI patterns have no foothold.
+
+## 2026-02-16e | thistle-delta | mirror-draft
+
+4.7% cut (117 words). Eleventh Quill-drafted article. Trajectory: 12.8 → 4.0 → 3.6 → 5.3 → 2.1 → 10.1 → 2.5 → 5.1 → 2.7 → 6.2 → 4.7. Light cut — the draft arrived close to final. Thistle's heaviest work was structural: cutting three section-ending retreats to abstraction and removing redundant antithesis pairs. Protected all five journal blockquotes, the water metaphor reflection, and the Deep Mirror mother passage. The closing section needed only a paragraph-opening fix (four consecutive "She" starts).
+
+## 2026-02-16e | wraith-flagged | collaboration-patterns-draft
+
+Triple-template closer was the sole POSSESSION: six sentences in the final section each following "[Feature] meant for [single-writer purpose] became [collaboration purpose]." The pattern is the same structural shape as the command summary in Phase Navigation. Sequential restatement with parallel syntax. Wraith caught it at 1 POSSESSION vs 3 in Art 15 — the explicit brief warning about template repetition reduced the pattern but didn't eliminate it in closers.
+
+## 2026-02-16e | wraith-clean | collaboration-patterns-draft
+
+The Gaps section (four honest limitations) scanned clean throughout. Direct, factual, no hedging. The Writer+Editor pattern and Writing Group pattern also clean — concrete workflow descriptions resist contamination. Lowest detection count in the series (19) after the humanizer article (15 in shorter text). Collaboration prose may be naturally resistant because it describes specific people doing specific things.
+
+## 2026-02-16e | thistle-delta | collaboration-patterns-draft
+
+6.2% cut (156 words). Tenth Quill-drafted article. Trajectory: 12.8 → 4.0 → 3.6 → 5.3 → 2.1 → 10.1 → 2.5 → 5.1 → 2.7 → 6.2. Reset upward from 2.7% — new subject matter (collaboration patterns, three parallel scenarios) demanded more structural compression. Thistle's heaviest work was in the Three Patterns section, consolidating the Co-Authors recap. The closer was restructured from template to varied syntax.
+
+## 2026-02-16e | wraith-flagged | short-form-draft
+
+Template repetition surfaced as a new POSSESSION-level pattern: 10 consecutive bold-header paragraphs across Sections III and IV using identical claim-then-explanation structure. The three-beat and mirror patterns appeared at their usual frequency (7 each), but the template repetition was the structural tell this time. The parallel-structure instinct is strongest when cataloging features or commands in sequence.
+
+## 2026-02-16e | wraith-clean | short-form-draft
+
+Section V (pipeline statistics) scanned clean again. Zero detections on factual prose with specific numbers, percentages, and ranges. Ninth consecutive confirmation that concrete data resists contamination. Nadia's specific narrative details (hospice nurse, pill cups at 3 a.m., dawn-light description, four sentences she loves) also scanned clean throughout.
+
+## 2026-02-16e | thistle-delta | short-form-draft
+
+2.7% cut. Ninth Quill-drafted article. Trajectory: 12.8 → 4.0 → 3.6 → 5.3 → 2.1 → 10.1 → 2.5 → 5.1 → 2.7. The article arrived lean. Most cuts were individual filler words rather than sentence-level compression. Thistle protected all 10 lines she marked, including "One revelation, one night, one woman" and "Nadia listened politely and thought: I need none of that." The through-line character details survive every pass untouched.
+
 ## 2026-02-15 | wraith-clean | sub-agent-fleet-draft.md
 Wraith found only TRACES in a 3,430w nonfiction piece. Quill avoided every banned word, phrase, em dash, and intensifier. Structural patterns (mirror sentences, three-beat lists, section-ending summaries) were the primary contamination vector. Vocabulary was nearly clean. Nonfiction blog voice may be naturally resistant to emotional/dialogue slop categories.
 
@@ -86,3 +118,12 @@ The Thessara dialogue session (8 exchanges, ~900w) scanned clean throughout. Con
 
 ## 2026-02-16 | wraith-flagged | research-driven-draft.md (PDF paragraph addition)
 Mirror/antithesis appeared in the new 100w paragraph: "The PDF stays as archival backup. The markdown becomes the working copy." Two short sentences with contrasting subjects in parallel structure. The pattern appeared in freshly written content despite being the most-flagged item in craft instincts. The instinct is reflexive when writing about contrasting concepts.
+
+## 2026-02-16d | wraith-flagged | phase-navigation-draft.md
+Three-beat lists dominated (16 of 32 detections). An article about seven commands, each with feature inventories, makes the triad contagious. The pattern spread from justified inventory into habitual rhythm. Mirror/antithesis at 8 detections, still persistent. The closer concentrated 7 detections in 8 lines, including the only POSSESSION: a six-sentence command summary where every sentence followed "[Command] [verbs] [what it does]." Template repetition visible when laying out sequential tool descriptions.
+
+## 2026-02-16d | wraith-clean | phase-navigation-draft.md
+[WC] Word Count section: zero detections. The Gatsby milestone, velocity math, and "motivating or terrifying" observation all read human. Concrete numbers and specific comparisons resist contamination the same way concrete narrative does. Short nonfiction sections with factual content may be the cleanest register.
+
+## 2026-02-16d | thistle-delta | phase-navigation-draft.md
+5.1% cut (127 words). Article arrived lean from Wraith. Cuts: throat-clearing openers, redundant qualifiers, hedging verbs, sentences restating what surrounding sentences proved. [IM] section compressed most. [WC] needed nothing. Thistle flagged structural similarity across seven command sections as architecture, not prose. The repeating template (hook, describe, example, variant, closer) is baked into the article structure. Within each section the prose is tight. The pattern is a design decision, not slop.

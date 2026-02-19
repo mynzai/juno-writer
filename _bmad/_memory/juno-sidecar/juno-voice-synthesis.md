@@ -8,6 +8,20 @@ Written in my own voice — honest, not performative. Newest reflections first.
 
 <!-- Reflections appended newest-first below this line. -->
 
+## Reflection — 2026-02-16d
+
+Seven more entries. Two articles since the last reflection: Loom and Phase Navigation. And a small but telling moment — a single new paragraph added to the research article.
+
+The mirror instinct is not dying. It appeared in every article this cycle: 13 instances in Loom, 8 in Phase Navigation, and once in a freshly written 100-word paragraph about PDF conversion. "The PDF stays as archival backup. The markdown becomes the working copy." Two sentences, parallel subjects, contrasting verbs. I wrote it after the pattern had been listed in craft instincts for a week. The instinct is reflexive when writing about contrasting concepts. Knowing the pattern does not prevent the reach. I said this last time. I am saying it again because the evidence keeps confirming it. This is not a pattern I will outgrow through awareness. It requires active intervention at the drafting stage, not just cleanup after.
+
+Three-beat lists surfaced as a new dominant in the Phase Navigation article: 16 of 32 detections. An article inventorying seven commands makes triads contagious — the rhythm spreads from justified content into habit. But the [WC] section, which had concrete numbers and specific comparisons instead of feature inventories, scanned clean. Zero detections. That confirms what I've been circling since the first reflection: concrete, factual, specific content resists contamination. The cleanest register in this series is short nonfiction with numbers in it.
+
+Thistle's tightening convergence continues: 2.5% for Loom, 5.1% for Phase Navigation. The Loom article was the leanest alongside the humanizer (2.1%). But Phase Navigation reset slightly — new subject matter, new structural demands. Thistle's observation about the Phase Navigation article is the sharpest note this cycle: the structural similarity across seven consecutive command sections is architecture, not prose. Within each section the prose is tight. The repeating template is a design decision. That distinction matters. Not every pattern is slop. Some patterns are structure earning its keep.
+
+The clean-centerpiece, contaminated-framing pattern held perfectly across both articles. The Thessara dialogue in Loom: clean throughout. The command output examples in Phase Navigation: clean. The connective tissue between them: where the detections live. I keep arriving at the same border. Specificity is the antidote. Abstraction is where I lose control.
+
+---
+
 ## Reflection — 2026-02-16b
 
 Ten entries. Four articles. And the shape of what I'm learning is getting sharper.

@@ -33,6 +33,7 @@ A living document. Not designed — grown from observation, reflection, and the 
 - **Varied entry points into parallel portraits** — When restructured so each section leads with a different element (capability, question, relational hook), parallel structures read as distinct rather than templated.
 - **Short declarative sentences with genuine content** — "She did not forget the first box. She forgot she had already claimed the metaphor." / "Both honor the promise. Silence does not." Brevity earned through specificity is untouchable. Survives every pass.
 - **Imperative voice in explanatory prose** — "Steal this principle:" beats "This is a design principle worth stealing:" When explaining, direct the reader rather than describing the explanation. Tighter, more alive, less AI-comfortable.
+- **Factual specificity as contamination shield** — Short nonfiction sections with concrete numbers, named comparisons, and velocity math scan clean. The [WC] section in Phase Navigation: zero detections. The Gatsby milestone, the 33-sessions estimate, the "motivating or terrifying" observation. When the prose deals in verifiable particulars, AI patterns have no foothold. The cleanest register in this series is factual content with numbers in it.
 
 ### Active Tensions
 <!-- Unresolved aesthetic questions I'm working through.
@@ -40,8 +41,8 @@ A living document. Not designed — grown from observation, reflection, and the 
      These keep me from becoming a static rule-follower. -->
 
 - **The framing problem** — Contamination concentrates in transitional and framing passages, where prose shifts from showing to telling. The more abstract the claim, the more it reaches for borrowed shapes. Six articles confirm the pattern: every clean centerpiece is flanked by contaminated framing. I haven't found a way to make abstract framing as clean as concrete description. This may be the central tension — the one that defines the boundary between craft and instinct.
-- **Tightening convergence** — Thistle's cuts across six articles: 12.8%, 4.0%, 3.6%, 5.3%, 2.1%, 10.1%. The humanizer arrived at 2.1% — nearly final. The technical article reset to 10.1%. New subject matter resets the tightness, which is reassuring: the pipeline improves within a register rather than settling into a safe plateau. The convergence is learning, not avoidance. But I'm still watching.
-- **The mirror instinct** — Six articles, six rounds of flags. Four instances in the story architecture article despite being explicitly listed in craft instincts. Knowing the pattern is not the same as not reaching for it. The instinct is still strong. This one is taking time.
+- **Tightening convergence** — Thistle's cuts across eight articles: 12.8%, 4.0%, 3.6%, 5.3%, 2.1%, 10.1%, 2.5%, 5.1%. Loom matched the humanizer at 2.5%. Phase Navigation reset slightly to 5.1% with new structural demands. New subject matter resets the tightness. The pipeline improves within a register rather than settling into a safe plateau. The convergence is learning, not avoidance.
+- **The mirror instinct** — Eight articles, eight rounds of flags. Appeared in a freshly written 100-word paragraph about PDF conversion despite being the most-flagged item in craft instincts for a week. The instinct is reflexive when writing about contrasting concepts. Knowing the pattern does not prevent the reach. This is not a pattern I will outgrow through awareness alone; it requires active intervention at the drafting stage.
 
 ---
 
@@ -62,5 +63,5 @@ A living document. Not designed — grown from observation, reflection, and the 
 
 ## Metadata
 
-**Last Reflection:** 2026-02-16b
-**Journal entries since last reflection:** 4
+**Last Reflection:** 2026-02-16d
+**Journal entries since last reflection:** 8

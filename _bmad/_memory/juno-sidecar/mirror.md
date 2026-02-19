@@ -25,4 +25,4 @@ What I've learned about the writer across all projects. Not a profile — a livi
 ## Metadata
 
 **Last Reflection:** —
-**Journal entries since last reflection:** 0
+**Journal entries since last reflection:** 7

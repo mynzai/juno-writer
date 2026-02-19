@@ -1,27 +1,26 @@
 # Project Memory
 
 ## Live State
-<!-- UPDATED: 2026-02-16d | STATUS: active | CMD: — -->
+<!-- UPDATED: 2026-02-19a | STATUS: active | CMD: faction-design -->
 
-**Session:** 2026-02-16d | **Tasks this session:** 5
-**Current task:** idle
-**Last completed:** Article 14 approved to 02-drafts/phase-navigation-draft.md (2,365w, publication-ready)
-**Files touched this session:** 02-drafts/phase-navigation-outline.md, _staging/quill/*, _staging/wraith/*, _staging/thistle/*, 02-drafts/phase-navigation-draft.md, 01-series-plan/series-arc.md
-**Words this session:** 0
-**Decisions:** Through-line: novelist at 40k words, lost in logistics not craft. Practical tone (this is the logistics article). Nine sections mirroring earlier article structure.
-**Open threads:** Consider real command output examples for Arts 4, 5, 6
-**Open threads:** Consider real command output examples for Arts 4, 5, 6
-**Pickup point:** Articles 1-14 publication-ready. Next: Article 15 (Short Form — Stories, Essays, and Blog Posts).
+**Session:** 2026-02-19a | **Tasks this session:** 1
+**Current task:** Faction design — world-building brainstorm (anchoring cosmology)
+**Last completed:** Faction architecture + Source's Method anchored in brainstorm and vision docs
+**Files touched this session:** reliquary/00-genesis/story-brainstorm.md, reliquary/00-genesis/vision.md, project-memory.md
+**Words this session:** ~0 prose (~3,500w added to brainstorm doc, ~500w added to vision doc)
+**Decisions:** Three-tier faction architecture confirmed (Ancient Lineages, Institutional Collectors, Scientific Vanguard/CERN). Source's Method confirmed: inspiration through creative works, not institutions. Deep Asymmetry confirmed: plasma intelligence manipulates/creates believers, Source inspires/creates doubters. Plasma intelligence cannot create; Source cannot organize. Faction blind spots maintained by plasma intelligence. CERN as faction that thinks it contacted the Source but reached the anomaly.
+**Open threads:** Faction naming/specifics. Sub-groups within tiers. CERN dissenter as story concept. Genuine Source contact character (confirmed compelling, specific scenario TBD). Individual story development. Move from Genesis to World-building.
+**Pickup point:** Faction architecture and Source's Method anchored in cosmology. Next: faction specifics (names, sub-groups, story-level presence), genuine Source contact character development.
 
 ---
 
 ## Active Project
 
-**Project:** Illuminating Juno
-**Path:** illuminating-juno/
-**Phase:** Drafting (02-drafts)
-**Genre:** Nonfiction Blog Series (16-part)
-**Last Session:** 2026-02-16b
+**Project:** Reliquary
+**Path:** reliquary/
+**Phase:** Genesis (00-genesis)
+**Genre:** SF/Fantasy Short Story Collection (linked, 12-story core arc + open constellation)
+**Last Session:** 2026-02-18b
 
 ---
 
@@ -63,7 +62,9 @@
 ## Previous Session Summary
 <!-- Only the LAST session's compact recap lives here. Older sessions in session-archive.md -->
 
-**2026-02-16b** — 7 tasks. Voice reflection [JV]: synthesized 10 journal entries, expanded craft instincts (6 anti-patterns, 7 surviving patterns, 3 active tensions). Full Article 13 pipeline (Loom): outline → Quill (2,716w, Thessara port city through-line) → Wraith (TRACES, 27 detections, mirror/antithesis 13) → Thistle (2.5% cut) → approved to 02-drafts/loom-draft.md. Article 9 revised: added PDF-to-markdown paragraph to KB section, full re-pipeline (Wraith → Thistle → approved). Articles 1-13 publication-ready.
+**2026-02-18b (Reliquary)** — 7 tasks. CORE 12 CANON LOCKED. Five major structural decisions: (1) Atlantis as woven thread across 6 stories, not standalone; (2) Toymaker + Programmer merged as dual-timeline; (3) Tartaria + Bearer in Desert merged as dual-timeline; (4) Tartaria-Atlantis-plasma intelligence architecture (Tartaria = Atlantean remnants, plasma targets for pathway-to-ascension threat, erasure not destruction, oral tradition as blind spot); (5) Forger's Brush promoted to slot 3, replacing Cadaver Synod (writer is a painter — personal resonance). Story 1 fully developed: dream woman = Anne concealed, recognition on scaffold; faction operative on road, ambiguous, vanishes; ending ambiguous, no execution described; no bearer interludes. Story 12 ending = Option C (Atlantis resolves concretely, Source remains irreducible, plasma intelligence more complicated than presented). Archetypal recurrence confirmed (bearer family resemblance, faction operative methodology = plasma intelligence fingerprint). Publication order = 1-12. Mirror journal: 7 global + 5 project entries (writer requested mid-session). Brainstorm doc now ~14,000w. Next: faction design (world-building phase).
+
+**2026-02-18a (Reliquary)** — 1 task. Continued brainstorm (Round 7): Beethoven, Mozart, Solzhenitsyn, Joan of Arc, Goethe. Major cosmological refinement: Source communicates oddly (requires decoding), plasma intelligence is anomaly (unplanned, deluded), reliquary system is improvised response. Art/creation as fragility category. Session ended mid-curation (context limit).
 
 ---
 
