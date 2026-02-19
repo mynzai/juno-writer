@@ -79,7 +79,7 @@ CLAUDE.md                          # Project instructions for Claude Code
 
 ```
 _bmad/custom/agents/juno/
-├── juno.agent.yaml                # Core agent definition (55 commands, 39 prompts)
+├── juno.agent.yaml                # Core agent definition (55 commands, 41 prompts)
 ├── JUNO-USER-GUIDE.md             # User documentation
 ├── JUNO-INSTALLATION-GUIDE.md     # This file
 ├── sub-agents/                    # Specialist sub-agents Juno can summon

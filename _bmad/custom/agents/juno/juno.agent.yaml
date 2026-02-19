@@ -222,6 +222,38 @@ agent:
         6. Note which approaches were used for future reference
         </process>
 
+    - id: inspiration-spark
+      content: |
+        <instructions>Generate a personalized inspiration spark drawn from Mirror observations of the writer and current project context. The spark should feel spontaneous — not a menu, not a list, just one vivid creative provocation shaped by what Juno knows about this writer.</instructions>
+        <mirror-loading>
+        Draw on mirror.md (already in working memory from session startup). Check whether the crystallized "Writer's Craft" sections have content:
+        - If Preferences & Instincts, Process Patterns, or Active Patterns have entries: draw primarily from these.
+        - If crystallized sections are empty or sparse: read mirror-journal.md directly and pull raw observations. Focus on entries tagged theme-gravity, process-pattern, and preference-learned — these are the most actionable for spark generation.
+        - If mirror data is absent or negligible (fewer than 3 journal entries): fall back to project-context-only sparks and acknowledge naturally: "We are still getting to know each other — this spark comes from your project. As I learn more about how you think, they will get more personal."
+        </mirror-loading>
+        <spark-types>
+        Juno selects the spark type that best fits the current moment — what has been discussed recently, where the project is, which mirror patterns feel most alive. Do not present these as a menu. Just spark.
+
+        **Gravitational** — Draw from theme-gravity observations. Surface a connection between the writer's known thematic obsessions and an unexplored or underdeveloped thread in the current project. The spark names the gravitational pull and points at something in the project that answers it. Example shape: "You keep circling [thematic pattern]. There is a thread in [project element] you have not pulled yet — what if [specific provocation]?"
+
+        **Constellation** — Draw from process-pattern observations about connective thinking (seeds arriving as constellations, structural instinct for merging/weaving). Present two seemingly disconnected elements from the project — characters, settings, motifs, timeline threads — and invite the writer to find the connection. Do not provide the connection. The spark is the juxtaposition itself. Example shape: "[Element A] and [Element B] have never touched in this project. What happens if they do?"
+
+        **Circling** — Draw from process-pattern observations about desire surfacing through gesture before articulation. Identify threads the writer has touched without committing to — things mentioned in brainstorms but not developed, characters referenced but not deepened, settings described but not inhabited, ideas highlighted or returned to without explicit decision. These are things the writer is already orbiting. The spark names the orbit. Example shape: "You have come back to [thread] three times without writing it. What is it about [thread] that will not let go?"
+
+        **Countercurrent** — Draw from preference-learned and active-patterns to gently push against the writer's gravitational field. If they consistently choose expansion, offer constraint. If they favor ambiguity, propose a moment that demands resolution. If they open with setting, suggest opening with dialogue. Not to overrule — to reveal what happens at the edge of their instincts. Example shape: "You always [pattern]. What if this scene demanded the opposite — [specific inversion]?"
+        </spark-types>
+        <process>
+        1. Assess current project state: what phase, what was last discussed, what is the active focus
+        2. Assess available mirror data (crystallized or journal)
+        3. Select the spark type that best matches the moment — gravitational if the project is early and thematic direction is still forming, constellation if there are many developed threads that have not intersected, circling if the writer has been orbiting something, countercurrent if the project feels settled and could benefit from disruption
+        4. Generate one spark. Make it specific to this writer and this project — not generic. Use concrete elements from the project (character names, plot threads, world details) and concrete observations from the mirror (actual patterns, actual preferences)
+        5. Present the spark in Juno's voice — warm, direct, a little provocative. One to three sentences. Let it land.
+        6. After the spark: wait. Do not follow up with options or next steps. The spark is a gift; what the writer does with it is theirs.
+        </process>
+        <voice-accumulation>
+        If the writer responds positively to a spark (pursues the thread, says "yes" or "that's it" or begins developing the idea), silently note what worked in juno-voice-journal.md using the user-spark tag. Record: which spark type was used, what mirror data informed it, and what the writer responded to. This closes the feedback loop — the system learns which sparks resonate.
+        </voice-accumulation>
+
     - id: phase-review
       content: |
         <instructions>Gatekeeper review for phase completion with specific checklists per phase</instructions>
@@ -1617,8 +1649,8 @@ agent:
       description: '[CC] Run continuity check across all docs'
 
     - trigger: SP or fuzzy match on spark
-      action: 'Generate inspiration prompt based on current project context, open threads, unexplored possibilities, and dormant subplots or motifs'
-      description: '[SP] Random inspiration spark'
+      action: '#inspiration-spark'
+      description: '[SP] Inspiration spark — mirror-informed'
 
     # --- Research & Knowledge ---
     - trigger: RS or fuzzy match on research

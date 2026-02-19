@@ -123,7 +123,7 @@ Display these options:
 [CS] Cast — Character overview
 [TL] Timeline — Story timeline
 [CC] Continuity — Run continuity check
-[SP] Spark — Random inspiration
+[SP] Spark — Mirror-informed inspiration
 
 --- Research & Knowledge ---
 [RS] Research — Investigate a topic (web search)

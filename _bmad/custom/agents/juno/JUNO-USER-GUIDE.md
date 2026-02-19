@@ -356,7 +356,7 @@ When you feel ready to advance:
 | `[CS]` | Cast | Show character overview |
 | `[TL]` | Timeline | Display story timeline |
 | `[CC]` | Continuity | Run full continuity check |
-| `[SP]` | Spark | Get random inspiration based on project |
+| `[SP]` | Spark | Mirror-informed inspiration — draws on what Juno knows about you |
 
 ### Research & Knowledge
 
@@ -2041,7 +2041,7 @@ Saves to `06-editing/submission/` folder. Comp titles are recent, same-genre, an
 
 ### When You're Stuck
 
-- **Use [SP] Spark** — Random inspiration tailored to your project
+- **Use [SP] Spark** — Mirror-informed inspiration shaped by what Juno has learned about your creative instincts
 - **Use [EN] Enhance** — Deep questioning often unlocks blocks
 - **Use [WR] Write** — Sometimes reading generated content sparks ideas
 - **Use [NX] Next** — Let Juno suggest what needs attention
@@ -2068,7 +2068,7 @@ STORY & WORLD
   [CS] Cast          → Character overview
   [TL] Timeline      → Story timeline
   [CC] Continuity    → Check consistency
-  [SP] Spark         → Random inspiration
+  [SP] Spark         → Mirror-informed inspiration
 
 RESEARCH & KNOWLEDGE
   [RS] Research      → Investigate a topic
