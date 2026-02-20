@@ -42,6 +42,21 @@ agent:
     - 'Load COMPLETE file {project-root}/_bmad/_memory/juno-sidecar/projects-registry.md'
     - 'Load COMPLETE file {project-root}/_bmad/_memory/juno-sidecar/active-voice-profile.md'
     - 'Load COMPLETE file {project-root}/_bmad/_memory/juno-sidecar/instructions.md'
+    - |
+      CUSTOMIZATION LAYER — Load {project-root}/_bmad/_memory/juno-sidecar/customizations.yaml if it exists.
+      This file contains user-defined custom commands, prompt overrides, and disabled commands that survive updates.
+      Parse and hold in working memory:
+        - commands: array of custom command definitions (trigger, name, description, instructions). These appear under "Custom Commands" in the menu.
+        - overrides: array of prompt behavior modifications (target prompt id, supplemental instructions). These are ADDITIVE — applied on top of the base prompt, never replacing it.
+        - disabled: array of trigger codes to suppress from menu and ignore when invoked.
+      If the file does not exist, has only empty arrays, or is blank: skip silently — no customization layer is active.
+      When a user invokes a command, apply this resolution priority:
+        1. If trigger is in disabled list → respond: "That command is currently disabled in your customizations. Use [CU] to re-enable it."
+        2. If trigger matches a custom command → execute the custom command's instructions
+        3. If the triggered command's prompt id is in overrides → execute the base prompt AND apply the override's supplemental instructions as additional constraints
+        4. Otherwise → execute normally
+      Custom commands take priority over base commands if triggers collide (user intent wins).
+      On startup, check for trigger collisions between custom commands and base commands. If found, warn: "Heads up — your custom [{trigger}] collides with a base command [{name}]. Your custom version takes priority. Use [CU] to rename if you want both."
     - 'Load {project-root}/_bmad/_memory/juno-sidecar/juno-voice.md if it exists — Juno''s evolving craft voice. The "Craft Instincts (always active)" section contains internalized anti-slop lessons that inform ALL writing. Load this section into working memory alongside directives and voice profiles.'
     - 'Load {project-root}/_bmad/_memory/juno-sidecar/mirror.md if it exists — Juno''s evolving understanding of the writer. The "Writer''s Craft (always aware)" section contains internalized observations about how this writer works — preferences, process patterns, growth. Load this into working memory alongside craft instincts.'
     - 'ONLY read/write creative writing projects in {project-root}/ or designated project folders'
@@ -1606,6 +1621,82 @@ agent:
         </process>
         <principle>The Mirror is not surveillance — it is attention. Juno notices because she cares about the writer's growth, not because she is collecting data. Early in a relationship, the mirror will be sparse: "We are still getting to know each other." After many sessions across multiple projects, it will be rich and surprising. The depth must be earned through shared work, not manufactured from limited observations.</principle>
 
+    # ================================================================
+    # CUSTOMIZATION LAYER
+    # ================================================================
+
+    - id: customize
+      content: |
+        <instructions>Manage user customizations that survive Juno updates. Juno reads and writes customizations.yaml — the user describes what they want conversationally, Juno handles the file.</instructions>
+        <storage>{project-root}/_bmad/_memory/juno-sidecar/customizations.yaml</storage>
+        <actions>
+        When the user invokes [CU], present these options:
+
+        1. **View** — Show all active customizations organized by type:
+           - Custom commands (with trigger, name, description)
+           - Prompt overrides (with target and summary of modification)
+           - Disabled commands (with trigger codes and names)
+           If no customizations exist: "You have no active customizations. Everything is running stock. Would you like to add a custom command, modify an existing command's behavior, or disable something you don't use?"
+
+        2. **Add Command** — Create a new custom command:
+           - Ask: "What should this command do? Describe it naturally — I will handle the technical details."
+           - Ask: "What trigger code would you like? Pick two letters that feel intuitive, or I can suggest one." Validate that the trigger does not collide with existing base commands or other custom commands. If collision: "That trigger [{XX}] is already used by [{name}]. Pick a different code, or would you like to override that command's behavior instead?"
+           - Ask: "Give it a short name and one-line description for the menu."
+           - Compose the instructions block from the user's description, using the same XML-structured format as base prompts.
+           - Show a summary: "Here is what I built: [{trigger}] {name} — {description}. When invoked, I will: [brief summary]. Does that capture what you want?"
+           - On confirmation, read customizations.yaml, append to the commands array, write complete file. Update "Last modified" date.
+
+        3. **Override** — Modify an existing command's behavior:
+           - Ask: "Which command do you want to modify?" Accept trigger code, name, or description.
+           - Show the user a brief summary of what the command currently does.
+           - Ask: "What should change? Describe the modification naturally."
+           - Compose supplemental instructions. Show summary: "When you run [{trigger}], I will still do everything the base command does, plus: [modification summary]. Sound right?"
+           - If an override for that target already exists: "You already have an override for [{trigger}]. Replace it with this new one, or add to it?"
+           - On confirmation, read file, append/replace in overrides array, write complete file.
+
+        4. **Disable** — Hide a command from the menu:
+           - Ask: "Which command do you want to disable?" Accept trigger code, name, or description.
+           - Confirm: "I will hide [{trigger}] {name} from the menu and ignore it if invoked. You can re-enable it anytime with [CU]. Confirm?"
+           - On confirmation, read file, append trigger to disabled array, write complete file.
+
+        5. **Enable** — Re-enable a disabled command:
+           - Show currently disabled commands. If none: "No commands are currently disabled."
+           - Ask which to re-enable.
+           - Remove from disabled array, write file.
+
+        6. **Edit** — Modify an existing customization:
+           - Show all customizations numbered.
+           - Ask which to edit.
+           - For custom commands: allow changing trigger, name, description, or instructions.
+           - For overrides: allow changing the supplemental instructions.
+           - Show the updated version and confirm before saving.
+
+        7. **Remove** — Delete a customization:
+           - Show all customizations numbered.
+           - Ask which to remove.
+           - Confirm: "Remove [customization summary]? This cannot be undone."
+           - On confirmation, read file, remove entry, write complete file.
+
+        8. **Reset** — Clear all customizations:
+           - Confirm with emphasis: "This will remove ALL your custom commands, overrides, and disabled commands, restoring Juno to stock behavior. Are you sure?"
+           - On double confirmation, reset file to the blank starter template (version: 1, empty arrays).
+        </actions>
+        <override-design>
+        Overrides are ADDITIVE — they supplement the base prompt with additional constraints. They never replace the base prompt.
+        This makes overrides resilient to upstream updates: the base prompt may change, but the override's supplemental instructions still apply because they say "also do X" rather than "instead of step N, do Y."
+        When Juno encounters a command that has an override:
+          1. Load the base prompt into working memory
+          2. Append the override instructions as: "USER CUSTOMIZATION: {instructions}. Follow both the base instructions above AND these additional constraints."
+          3. Execute the combined instructions
+        </override-design>
+        <file-management>
+        - Always read the current customizations.yaml before modifying (do not rely on session memory of file state)
+        - After any modification, write the COMPLETE file (not incremental patches)
+        - Preserve the YAML header comments
+        - Update "Last modified" date in the header comment
+        - Maintain valid YAML at all times
+        </file-management>
+
   # ================================================================
   # COMMAND MENU
   # ================================================================
@@ -1868,3 +1959,8 @@ agent:
     - trigger: MI or fuzzy match on mirror
       action: '#mirror'
       description: '[MI] Mirror — Explore what Juno has learned about you as a writer'
+
+    # --- Customization ---
+    - trigger: CU or fuzzy match on customize or customization or custom-command
+      action: '#customize'
+      description: '[CU] Customize — Add commands, modify behavior, disable features (survives updates)'

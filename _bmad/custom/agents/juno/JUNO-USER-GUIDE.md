@@ -446,6 +446,12 @@ When you feel ready to advance:
 | `[JV]` | Juno's Voice | Explore Juno's evolving craft sensibility |
 | `[MI]` | Mirror | Explore what Juno has learned about you as a writer |
 
+### Customization
+
+| Command | Name | Description |
+|---------|------|-------------|
+| `[CU]` | Customize | Add custom commands, modify behavior, disable features (survives updates) |
+
 ---
 
 ## The Sub-Agent Fleet
@@ -1974,6 +1980,58 @@ Saves to `06-editing/submission/` folder. Comp titles are recent, same-genre, an
 
 ---
 
+## Customization Layer
+
+Juno's behavior can be customized without editing system files. Your customizations live in `_bmad/_memory/juno-sidecar/customizations.yaml` — a file that survives updates. You never edit this file directly; Juno manages it for you through the `[CU]` command.
+
+### What You Can Customize
+
+| Capability | Description |
+|------------|-------------|
+| **Custom Commands** | Add entirely new commands with your own triggers |
+| **Prompt Overrides** | Modify how existing commands behave (additive — supplements, never replaces) |
+| **Disable Commands** | Hide commands you never use from the menu |
+
+### The [CU] Command
+
+| Option | Description |
+|--------|-------------|
+| **View** | See all active customizations |
+| **Add Command** | Create a new custom command — describe what you want, Juno builds it |
+| **Override** | Modify an existing command's behavior |
+| **Disable** | Hide a command from the menu |
+| **Enable** | Re-enable a previously disabled command |
+| **Edit** | Modify an existing customization |
+| **Remove** | Delete a specific customization |
+| **Reset** | Clear all customizations (restore stock behavior) |
+
+### Examples
+
+**Adding a custom command:**
+> "I want a command that generates a chapter-end cliffhanger based on the next chapter's outline."
+
+Juno will ask for a trigger code, name, and description, then build the instructions from your description and save to customizations.yaml.
+
+**Overriding a command:**
+> "When I use [WR] Write, I always want first-person POV unless I say otherwise."
+
+Juno will add a supplemental instruction to the write-content prompt that defaults to first-person POV. The base behavior stays intact — your override adds to it.
+
+**Disabling a command:**
+> "I never use [SN] Sensitivity scan. Hide it."
+
+Juno removes it from the menu. Use [CU] Enable to bring it back anytime.
+
+### Customizations Survive Updates
+
+When you update Juno (via `git pull` or manual copy), the update process backs up and restores the sidecar folder. Your customizations.yaml is part of this folder, so all your custom commands, overrides, and disabled commands carry forward automatically.
+
+If a new Juno version adds a command whose trigger collides with one of your custom commands, Juno warns you at startup and offers to rename your custom trigger. Your custom command always takes priority until you resolve the conflict.
+
+Prompt overrides continue to work after updates because they are additive — they add constraints to the base prompt rather than replacing it. Even if the base prompt changes, your override's supplemental instructions still apply.
+
+---
+
 ## Tips & Best Practices
 
 ### Project Organization
@@ -2038,6 +2096,12 @@ Saves to `06-editing/submission/` folder. Comp titles are recent, same-genre, an
 - **Don't overthink categorization** -- `[KB]` handles filing; Vestry can reorganize later
 - **Run gap analysis periodically** -- Summon Vestry to see what's missing before it becomes a problem
 - **Everything goes through the knowledge base** -- If you'll need it again, file it; don't rely on memory
+
+### Customizing Juno
+
+- **Start with overrides** — Before creating a custom command, see if an override on an existing command does what you need
+- **Use descriptive triggers** — Pick two letters that remind you of the command's purpose
+- **Review after updates** — Run `[CU] View` after updating Juno to confirm your customizations still make sense
 
 ### When You're Stuck
 
@@ -2129,6 +2193,9 @@ VOICE
   [VB] Blend         → Merge two voices
   [JV] Juno's Voice  → Craft instincts, journal, reflections
   [MI] Mirror         → What Juno has observed about your creative process
+
+CUSTOMIZATION
+  [CU] Customize     → Add commands, modify behavior, disable features
 ```
 
 ---

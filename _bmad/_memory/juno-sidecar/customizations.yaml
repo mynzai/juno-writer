@@ -1,0 +1,42 @@
+# Juno Customizations
+# Managed via [CU] Customize — Juno writes this file for you.
+# This file survives updates. Your customizations are always safe.
+#
+# Last modified: —
+# Modified by: —
+
+version: 1
+
+# ─── CUSTOM COMMANDS ───────────────────────────────────────
+# New commands that appear under "Custom Commands" in the menu.
+# Use [CU] Add Command to create these conversationally.
+#
+# Example:
+#   - trigger: XX or fuzzy match on my-thing
+#     name: My Thing
+#     description: Does something custom
+#     instructions: |
+#       <instructions>What Juno does when this command is invoked.</instructions>
+commands: []
+
+# ─── PROMPT OVERRIDES ──────────────────────────────────────
+# Supplemental instructions applied on top of existing commands.
+# These are additive — they add constraints, they never replace.
+# Use [CU] Override to create these conversationally.
+#
+# Example:
+#   - target: write-content
+#     note: Always default to first-person POV
+#     instructions: |
+#       Before generating, verify the scene uses first-person POV.
+#       If not explicitly requested otherwise, default to first person.
+overrides: []
+
+# ─── DISABLED COMMANDS ─────────────────────────────────────
+# Trigger codes of commands hidden from the menu.
+# Use [CU] Disable to add entries conversationally.
+#
+# Example:
+#   - SN   # Sensitivity scan
+#   - KD   # Kill darlings
+disabled: []

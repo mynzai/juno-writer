@@ -121,6 +121,7 @@ _bmad/_memory/juno-sidecar/
 ├── mirror.md                      # Juno's understanding of the writer (loaded on startup)
 ├── mirror-journal.md              # Raw observations about the writer (grows over time)
 ├── mirror-reflections.md          # Periodic reflections on the writer (newest-first)
+├── customizations.yaml            # User customizations — custom commands, overrides, disabled (survives updates)
 ├── README.md                      # Sidecar documentation
 ├── directive-templates/           # Pre-built writing directive templates
 │   ├── starter-pack.md
@@ -198,6 +199,7 @@ cp -r /path/to/source/_bmad ~/creative-writing/
         ├── mirror.md
         ├── mirror-journal.md
         ├── mirror-reflections.md
+        ├── customizations.yaml
         ├── README.md
         ├── directive-templates/
         │   ├── starter-pack.md
@@ -421,6 +423,7 @@ After installation, your creative writing workspace should look like this:
 │       ├── mirror.md                  # Writer understanding (loaded on startup)
 │       ├── mirror-journal.md          # Writer observations (grows over time)
 │       ├── mirror-reflections.md      # Writer reflections
+│       ├── customizations.yaml       # User customizations (survives updates)
 │       ├── directive-templates/       # Pre-built writing directive sets
 │       │   ├── starter-pack.md
 │       │   ├── literary-fiction.md
@@ -633,7 +636,7 @@ rm -rf ~/juno-sidecar-backup
 
 **What gets updated:** Agent definition, sub-agents (raven, thistle, lynx, masque, loom, vestry, wraith, quill, scribe, cipher), slash commands (`/juno`, `/masque`, `/loom`), project settings, CLAUDE.md, tools, directive templates, voice profile templates, documentation.
 
-**What is preserved:** Your memory files (project-memory.md, projects-registry.md, active-voice-profile.md, instructions.md, writing-directives.md, session-archive.md, juno-voice.md, juno-voice-journal.md, juno-voice-synthesis.md, mirror.md, mirror-journal.md, mirror-reflections.md, voice-profiles/), and all writing projects (gitignored).
+**What is preserved:** Your memory files (project-memory.md, projects-registry.md, active-voice-profile.md, instructions.md, writing-directives.md, customizations.yaml, session-archive.md, juno-voice.md, juno-voice-journal.md, juno-voice-synthesis.md, mirror.md, mirror-journal.md, mirror-reflections.md, voice-profiles/), and all writing projects (gitignored).
 
 ### Manual Update (Without Git)
 
