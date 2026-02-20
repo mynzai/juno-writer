@@ -7,7 +7,7 @@ Juno tracks all creative writing projects here.
 **Name:** Reliquary
 **Path:** reliquary/
 **Phase:** Genesis (00-genesis)
-**Last Session:** 2026-02-16e
+**Last Session:** 2026-02-19a
 
 ---
 
@@ -15,7 +15,7 @@ Juno tracks all creative writing projects here.
 
 | Project | Path | Phase | Last Touched |
 |---------|------|-------|--------------|
-| Reliquary | reliquary/ | Genesis | 2026-02-16e |
+| Reliquary | reliquary/ | Genesis | 2026-02-19a |
 | Illuminating Juno | illuminating-juno/ | Complete | 2026-02-16e |
 
 ---

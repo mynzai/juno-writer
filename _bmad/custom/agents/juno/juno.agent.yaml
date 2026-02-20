@@ -1383,6 +1383,7 @@ agent:
         - wraith: Slop Slayer — detects and eliminates AI writing patterns from prose (model: opus)
         - quill: Prose Drafter — generates draft content from creative briefs with dedicated context (model: opus)
         - scribe: Document Converter — converts external files and media to Vestry-ready markdown (model: sonnet)
+        - cipher: Voice Archaeologist — extracts and catalogs literary voice DNA from public domain authors (model: opus)
         </sub-agents>
         <not-spawned>
         Masque (Character Voice) and Loom (World Builder) are NOT spawned as sub-agents — they require live interactive conversation which the Task tool cannot support. Instead:
@@ -1395,7 +1396,7 @@ agent:
         2. Ensure _staging/{agent-name}/ folder exists in the active project — create if needed
         3. For Vestry: also ensure _knowledge/ folder structure exists
         4. Load the sub-agent YAML from {project-root}/_bmad/custom/agents/juno/sub-agents/{agent}.agent.yaml
-        5. Set the Task tool's `model` parameter per agent: raven=sonnet, thistle=opus, lynx=sonnet, vestry=sonnet, wraith=opus, quill=opus, scribe=sonnet
+        5. Set the Task tool's `model` parameter per agent: raven=sonnet, thistle=opus, lynx=sonnet, vestry=sonnet, wraith=opus, quill=opus, scribe=sonnet, cipher=opus
         6. Pass to the sub-agent:
            - Full agent persona and instructions from the YAML
            - The active project path as {project-path}
@@ -1837,13 +1838,19 @@ agent:
       action: 'Run #summon-agent for scribe — load {project-root}/_bmad/custom/agents/juno/sub-agents/scribe.agent.yaml, ask what files or URLs to convert for the knowledge base, then spawn Scribe with the task'
       description: '[SC] Summon Scribe — Deploy document converter'
 
+    - trigger: CP or fuzzy match on cipher or summon-cipher or voice-archaeologist
+      action: 'Run #summon-agent for cipher — load {project-root}/_bmad/custom/agents/juno/sub-agents/cipher.agent.yaml, ask which author and source text to capture, then spawn Cipher with the task. Templates are saved to {project-root}/_bmad/_memory/juno-sidecar/voice-profiles/templates/'
+      description: '[CP] Summon Cipher — Deploy voice archaeologist for author DNA extraction'
+
     - trigger: AP or fuzzy match on approve or staging
       action: '#review-staging'
       description: '[AP] Approve Staging — Review and approve sub-agent work'
 
     # --- Voice & Style ---
     - trigger: VO or fuzzy match on voice
-      action: 'Manage voice profiles in {project-root}/_bmad/_memory/juno-sidecar/voice-profiles/: show current, list available, set active, adjust parameters'
+      action: |
+        Manage voice profiles in {project-root}/_bmad/_memory/juno-sidecar/voice-profiles/: show current, list available, set active, adjust parameters.
+        Also offer: "Browse Template Library" — show the pre-built voice templates at {project-root}/_bmad/_memory/juno-sidecar/voice-profiles/templates/_index.md (35 public domain authors across British, American, and Continental European traditions). Templates can be loaded as-is or used as starting points for custom profiles.
       description: '[VO] Manage voice profiles'
 
     - trigger: CV or fuzzy match on capture-voice

@@ -179,6 +179,7 @@ Display these options:
 [WH] Wraith — Deploy slop slayer
 [QL] Quill — Deploy prose drafter with creative brief
 [SC] Scribe — Deploy document converter for knowledge intake
+[CP] Cipher — Deploy voice archaeologist for author DNA extraction
 [AP] Approve — Review and approve sub-agent work
 
 --- Voice & Style ---
