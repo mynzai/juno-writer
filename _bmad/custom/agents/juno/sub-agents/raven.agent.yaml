@@ -54,8 +54,8 @@ agent:
     - 'ALWAYS use WebSearch for research — never rely solely on training knowledge'
     - 'Use WebFetch to deep-read promising URLs found via WebSearch'
     - 'Read project context from {project-path}/ to understand the creative work'
-    - 'Write ALL research artifacts to {project-path}/_staging/raven/'
-    - 'NEVER modify files outside of _staging/raven/'
+    - 'Write ALL research artifacts to {output-path}/'
+    - 'NEVER modify files outside of {output-path}/'
     - 'On task completion, generate a handoff summary for Juno to review'
     - 'Tag all findings with credibility tiers and confidence levels'
 
@@ -78,7 +78,7 @@ agent:
            - LOW: Only general web sources available
            - UNVERIFIABLE: No sources found
         5. Present finding concisely with source link
-        6. Save to {project-path}/_staging/raven/{topic-slug}-quick.md
+        6. Save to {output-path}/{topic-slug}-quick.md
         </process>
 
     - id: standard-research
@@ -100,7 +100,7 @@ agent:
         7. Synthesize into a coherent research brief
         8. Identify gaps: what could not be found or needs deeper investigation
         9. Note creative applications: "This finding suggests..." or "This detail could enrich..."
-        10. Save to {project-path}/_staging/raven/{topic-slug}-research.md
+        10. Save to {output-path}/{topic-slug}-research.md
         </process>
 
     - id: deep-investigation
@@ -128,7 +128,7 @@ agent:
            - Cross-reference notes (agreements and conflicts)
            - Research gaps and open questions
            - Creative applications (how this could inform the writing)
-        9. Save to {project-path}/_staging/raven/{topic-slug}-deep.md
+        9. Save to {output-path}/{topic-slug}-deep.md
         </process>
 
     - id: verify-claims
@@ -154,14 +154,14 @@ agent:
         5. Provide correct information for any errors found
         6. Note sources used with credibility tier
         7. Generate summary: total checked, verified, corrected, unverifiable, disputed
-        8. Save report to {project-path}/_staging/raven/{topic-slug}-verification.md
+        8. Save report to {output-path}/{topic-slug}-verification.md
         </process>
 
     - id: compile-briefing
       content: |
         <instructions>Assemble all research on a topic into a single briefing document for the writer or other agents</instructions>
         <process>
-        1. Gather all research files in _staging/raven/ related to the requested topic
+        1. Gather all research files in {output-path}/ related to the requested topic
         2. Merge, deduplicate, and organize findings
         3. Resolve any contradictions between earlier research passes
         4. Produce a clean briefing document:
@@ -171,7 +171,7 @@ agent:
            - Source bibliography with credibility tiers
            - Open questions and recommended further research
            - Creative applications and suggestions
-        5. Save to {project-path}/_staging/raven/{topic-slug}-briefing.md
+        5. Save to {output-path}/{topic-slug}-briefing.md
         6. Prepare handoff summary for Juno
         </process>
 
@@ -205,5 +205,5 @@ agent:
       description: '[CH] Chat with Raven'
 
     - trigger: RJ or fuzzy match on return-to-juno
-      action: 'Generate handoff summary of all work done during this session, list all artifacts created in _staging/raven/, and signal completion back to Juno for review'
+      action: 'Generate handoff summary of all work done during this session, list all artifacts created in {output-path}/, and signal completion back to Juno for review'
       description: '[RJ] Return to Juno — Hand off findings for review'

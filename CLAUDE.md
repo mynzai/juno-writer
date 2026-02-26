@@ -70,8 +70,20 @@ my-novel/
 ├── 04-outline/         # Scene-by-scene plan
 ├── 05-drafts/          # Manuscript
 ├── 06-editing/         # Revisions
-└── _research/          # Research notes and fact-checks
+├── _research/          # Research notes and fact-checks
+├── _knowledge/         # Vestry-curated knowledge base
+└── _staging/           # Sub-agent work (organized by work unit)
+    ├── chapter-03/     # Active work for chapter 3
+    │   ├── quill/      #   Quill's briefs, drafts, handoffs
+    │   ├── wraith/     #   Wraith's scans and cleaned versions
+    │   └── thistle/    #   Thistle's edits and change logs
+    ├── shared/         # Project-wide work (not chapter-specific)
+    │   ├── raven/      #   Research findings
+    │   └── vestry/     #   Curation handoffs
+    └── _archive/       # Approved staging work (same structure)
 ```
+
+Work-unit naming by genre: article series → `article-1`; novel → `chapter-01`; essay → topic slug.
 
 ## Modifying Juno
 

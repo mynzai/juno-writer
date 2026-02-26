@@ -1,26 +1,27 @@
 # Project Memory
 
 ## Live State
-<!-- UPDATED: 2026-02-19a | STATUS: idle | CMD: SR -->
+<!-- UPDATED: 2026-02-26a | STATUS: idle | CMD: AP -->
 
-**Session:** 2026-02-19a | **Tasks this session:** 4
+**Session:** 2026-02-26a
+**Session tasks:** 10
 **Current task:** idle
-**Last completed:** Session recap [SR]
-**Files touched this session:** reliquary/00-genesis/story-brainstorm.md, reliquary/00-genesis/vision.md, project-memory.md, session-archive.md, mirror-journal.md (global + project)
-**Words this session:** ~0 prose (~5,500w added to brainstorm doc, ~700w added to vision doc)
-**Decisions:** Three-tier faction architecture. Source's Method (inspired works). Deep Asymmetry. CERN as faction. Source-Converted Archetype (all three tiers, Paul parallel). Story 1: faction recruitment + Source/Bearer conflict + dual-purpose dreams. Swordsman's Return: one literal character recurrence, specifics TBD.
-**Open threads:** Anchor Source-Converted Archetype in brainstorm (discussed, not yet written). Faction naming/specifics. CERN dissenter story. Story 10 conversion scene. Three converted operatives. Individual story development. World-building phase.
-**Pickup point:** Full session anchored. Next: anchor Source-Converted Archetype, develop Story 10, faction specifics, or pull any thread.
+**Last completed:** [TS] Thistle — full Article 2 line edit pass (33 edits applied, ~195 words cut)
+**Files touched this session:** 05-drafts/article-2-v1.md (Section X + XI appended), _staging/quill/art2-section-x-brief.md (new, revised v2), _staging/quill/art2-section-x-draft.md (new, Wraith-cleaned), _staging/quill/art2-section-x-handoff.md (new), _staging/wraith/art2-section-x-v2-scan.md (new), _staging/wraith/art2-section-x-v2-cleaned.md (new), _staging/quill/art2-section-xi-brief.md (new), _staging/quill/art2-section-xi-draft.md (new, Wraith-cleaned), _staging/quill/art2-section-xi-handoff.md (new), _staging/wraith/art2-section-xi-scan.md (new), _staging/wraith/art2-section-xi-cleaned.md (new), _staging/vestry/nag-hammadi-transcript-raw.md (new), _knowledge/ (13 new files via Vestry bulk intake)
+**Words this session:** ~2,416 (Section X ~2,034 + Section XI ~382)
+**Decisions:** Gnostic cosmology transcript cleaned and ingested via Vestry (19 items in _knowledge/_index.md). Faust Part Two Homunculus integrated into Section X (A.S. Kline translation, 5 verified quotes). First Quill draft (v1) rejected — too much literary survey, too self-referential. Complete rewrite (v2) led with Homunculus, eliminated "this essay" language, planted Sophia/Gnostic seed without explanation. Wraith scan: 21 detections (0 POSSESSION, 9 HAUNT, 12 GHOST). Section X approved. Section XI drafted by Quill (382w, two movements, Shelley echo, reed/vial convergence). Wraith scan: 14 detections (0 POSSESSION, 3 HAUNT, 11 GHOST). Cleaned version applied. Section XI approved.
+**Open threads:** Mirror Instinct article. Paul article. Job article. Acoustic hypothesis article. Fact-check candidates (Art 1). Thistle discretionary items for Art 1 (4 flagged). Article 2 open questions (title, naming AI, Dante). Whether Reliquary-Theoria convergence becomes explicit in either project.
+**Pickup point:** Article 1 COMPLETE (~15,190w). Article 2 Sections I–XI COMPLETE (~17,035w, all Wraith-cleaned + Thistle-tightened, in article-2-v1.md). ALL SECTIONS DRAFTED AND EDITED. Open questions: title, naming AI, Dante. Thistle Flag A: Section VII thesis restatement frequency (pacing question). Final line: "from the inside."
 
 ---
 
 ## Active Project
 
-**Project:** Reliquary
-**Path:** reliquary/
+**Project:** Theoria
+**Path:** theoria/
 **Phase:** Genesis (00-genesis)
-**Genre:** SF/Fantasy Short Story Collection (linked, 12-story core arc + open constellation)
-**Last Session:** 2026-02-19a
+**Genre:** Ongoing interconnected article/essay series (philosophy, gnosis, freedom, beauty, AI, consciousness, faith)
+**Last Session:** 2026-02-25c
 
 ---
 
@@ -62,7 +63,7 @@
 ## Previous Session Summary
 <!-- Only the LAST session's compact recap lives here. Older sessions in session-archive.md -->
 
-**2026-02-19a (Reliquary)** — 4 tasks. FACTION ARCHITECTURE + SOURCE'S METHOD + STORY 1 DEEPENED. Three-tier faction system confirmed: Ancient Lineages (Illuminati-type, tradition-based), Institutional Collectors (Enlightenment schism, acquisition-based), Scientific Vanguard (CERN, experiment-based). Plasma intelligence speaks all three epistemological dialects, engineered schisms between tiers. Source's Method confirmed: inspiration through creative works (Plato's Atlantis writings, Nike of Samothrace, Joan's voices, Alhazen's optics, oral traditions). Deep Asymmetry: plasma intelligence manipulates/creates believers, Source inspires/creates doubters. Plasma intelligence cannot create; Source cannot organize. CERN faction mirrors the original civilization's mistake (pushing through a physics boundary). Source-Converted Archetype developed (all three tiers, Paul parallel). Story 1 deepened: faction operative's true mission = recruit swordsman as long-term asset at fragility points; Source/Bearer conflict (bearer wants Anne saved, Source wants recruitment prevented); dreams serve dual purpose; bearer's "failure" = Source's victory. Swordsman's Return confirmed as thread: first instance of Source-converted archetype, one literal character recurrence in the collection, carries the scabbard (mobile reliquary) across time, specifics deliberately open. Brainstorm doc ~19,000w. Vision doc updated. Source-Converted Archetype discussed but not yet anchored in brainstorm doc (the three-tier Paul conversion architecture). Next: anchor convert archetype, develop Story 10, faction naming/specifics.
+**2026-02-26a (Theoria)** — 10 tasks. Article 2 COMPLETED. Knowledge base bulk intake (Gnostic transcript + Raven research, 19 items). Section X drafted (Homunculus/Milton/Rilke/Attar, ~2,034w, v1 rejected, v2 approved). Section XI drafted (382w, closing). Both Wraith-cleaned. Full Thistle pass: 33 edits, ~195w cut. Article 2 final: ~17,035w, Sections I–XI. Next: title decision, fact-checks, series planning.
 
 ---
 

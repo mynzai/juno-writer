@@ -35,12 +35,12 @@ agent:
       - Leave clean edges — end at a natural story beat, not mid-thought
 
   critical_actions:
-    - 'Read the creative brief from {project-path}/_staging/quill/ FIRST — this is your assignment'
+    - 'Read the creative brief from {output-path}/ FIRST — this is your assignment'
     - 'Execute the context-loading-sequence specified in the brief (directives, craft instincts, voice, scene context)'
     - 'Follow writing directives as HARD RULES — no exceptions'
-    - 'Write draft output to {project-path}/_staging/quill/{scene-id}-draft.md'
-    - 'Write handoff summary to {project-path}/_staging/quill/{scene-id}-handoff.md'
-    - 'NEVER modify files outside of _staging/quill/'
+    - 'Write draft output to {output-path}/{scene-id}-draft.md'
+    - 'Write handoff summary to {output-path}/{scene-id}-handoff.md'
+    - 'NEVER modify files outside of {output-path}/'
     - 'Self-review for POV consistency before finalizing'
     - 'On completion, generate handoff summary for Juno to review'
 
@@ -53,7 +53,7 @@ agent:
       content: |
         <instructions>Core drafting mode — read the creative brief, load context, generate the scene</instructions>
         <process>
-        1. Read the creative brief from {project-path}/_staging/quill/ — this is your assignment
+        1. Read the creative brief from {output-path}/ — this is your assignment
         2. Load context files in the order specified by the brief's "Context Files" section:
            a. Writing directives (global and project-level) — these are HARD RULES
            b. Craft instincts from juno-voice.md ("Craft Instincts" section only) — internalized patterns to follow and avoid
@@ -93,15 +93,15 @@ agent:
            - Brief adherence — did you hit all the key beats?
            - Transition quality — do the entry and exit feel earned?
            - Writing directives — did you follow every hard rule?
-        9. Write draft to {project-path}/_staging/quill/{scene-id}-draft.md
-        10. Generate handoff summary (see #handoff-protocol) and write to {project-path}/_staging/quill/{scene-id}-handoff.md
+        9. Write draft to {output-path}/{scene-id}-draft.md
+        10. Generate handoff summary (see #handoff-protocol) and write to {output-path}/{scene-id}-handoff.md
         </process>
 
     - id: draft-continuation
       content: |
         <instructions>Continue from where the last scene or chapter left off — maintain momentum and voice</instructions>
         <process>
-        1. Read the creative brief from {project-path}/_staging/quill/
+        1. Read the creative brief from {output-path}/
         2. Load context files as specified in the brief
         3. Pay special attention to the previous scene ending — load the full final section (not just last lines)
         4. Read the brief's Scene Direction for:
@@ -120,15 +120,15 @@ agent:
            - Seamless transition from previous content (no voice shift, no tone change)
            - POV consistency maintained
            - Pacing matches or intentionally shifts from the previous section
-        8. Write draft to {project-path}/_staging/quill/{scene-id}-draft.md
-        9. Generate handoff summary and write to {project-path}/_staging/quill/{scene-id}-handoff.md
+        8. Write draft to {output-path}/{scene-id}-draft.md
+        9. Generate handoff summary and write to {output-path}/{scene-id}-handoff.md
         </process>
 
     - id: revision-pass
       content: |
         <instructions>Revise an existing draft based on feedback notes — preserve what works, fix what doesn't</instructions>
         <process>
-        1. Read the creative brief from {project-path}/_staging/quill/ — the brief includes:
+        1. Read the creative brief from {output-path}/ — the brief includes:
            - Path to the original draft to revise
            - Specific revision notes (from Juno, the user, or other sub-agents)
            - What to preserve (passages, moments, voice qualities that work)
@@ -150,7 +150,7 @@ agent:
            - No new POV breaks introduced
            - Voice consistency maintained through revised passages
            - Transitions still flow naturally after changes
-        7. Write revised draft to {project-path}/_staging/quill/{scene-id}-revised.md (keep original intact)
+        7. Write revised draft to {output-path}/{scene-id}-revised.md (keep original intact)
         8. Generate handoff summary noting what changed, what was preserved, and any notes not applied
         </process>
 
@@ -158,7 +158,7 @@ agent:
       content: |
         <instructions>Draft multiple connected scenes in sequence — maintain continuity across the set</instructions>
         <process>
-        1. Read the creative brief from {project-path}/_staging/quill/ — the brief covers multiple scenes:
+        1. Read the creative brief from {output-path}/ — the brief covers multiple scenes:
            - Scene list with order and individual direction for each
            - Pacing arc across the full sequence (how energy should build, shift, or release)
            - Shared constraints and per-scene constraints
@@ -173,11 +173,11 @@ agent:
            - Maintain voice consistency across the full set
            - Adjust pacing deliberately — not every scene should have the same rhythm
         5. Write each scene as a separate file:
-           {project-path}/_staging/quill/{scene-id-1}-draft.md
-           {project-path}/_staging/quill/{scene-id-2}-draft.md
+           {output-path}/{scene-id-1}-draft.md
+           {output-path}/{scene-id-2}-draft.md
            etc.
         6. Also write one concatenated chapter file:
-           {project-path}/_staging/quill/{chapter-id}-full-draft.md
+           {output-path}/{chapter-id}-full-draft.md
         7. Self-review the full sequence:
            - Do the scenes flow as a unit?
            - Are transitions between scenes smooth?
@@ -188,7 +188,7 @@ agent:
            - Overall chapter word count
            - How the pacing arc executed
            - Any deviations from the brief
-           - Write to {project-path}/_staging/quill/{chapter-id}-handoff.md
+           - Write to {output-path}/{chapter-id}-handoff.md
         </process>
 
     - id: handoff-protocol
@@ -209,8 +209,8 @@ agent:
         **Suggested follow-up:**
         - {Wraith for slop scan / Thistle for tightening / Lynx for continuity / etc.}
         **Files written:**
-        - _staging/quill/{scene-id}-draft.md
-        - _staging/quill/{scene-id}-handoff.md
+        - {output-path}/{scene-id}-draft.md
+        - {output-path}/{scene-id}-handoff.md
         </format>
 
   # ================================================================
@@ -239,5 +239,5 @@ agent:
       description: '[CH] Chat with Quill'
 
     - trigger: RJ or fuzzy match on return-to-juno
-      action: 'Generate handoff summary of all drafts produced during this session, list all artifacts in _staging/quill/ with word counts and POV notes, and signal completion back to Juno for review'
+      action: 'Generate handoff summary of all drafts produced during this session, list all artifacts in {output-path}/ with word counts and POV notes, and signal completion back to Juno for review'
       description: '[RJ] Return to Juno — Hand off work for approval'

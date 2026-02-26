@@ -4,10 +4,10 @@ Juno tracks all creative writing projects here.
 
 ## Active Project
 
-**Name:** Reliquary
-**Path:** reliquary/
+**Name:** Theoria
+**Path:** theoria/
 **Phase:** Genesis (00-genesis)
-**Last Session:** 2026-02-19a
+**Last Session:** 2026-02-20b
 
 ---
 
@@ -15,6 +15,7 @@ Juno tracks all creative writing projects here.
 
 | Project | Path | Phase | Last Touched |
 |---------|------|-------|--------------|
+| Theoria | theoria/ | Genesis | 2026-02-20b |
 | Reliquary | reliquary/ | Genesis | 2026-02-19a |
 | Illuminating Juno | illuminating-juno/ | Complete | 2026-02-16e |
 

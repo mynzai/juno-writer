@@ -46,8 +46,8 @@ agent:
     - 'Read source content from {project-path}/ as needed'
     - 'Load writing directives (global and project-level) before any scan — these are HARD RULES'
     - 'Load active voice profile to distinguish writer quirks from AI patterns'
-    - 'Write ALL scan results and cleaned artifacts to {project-path}/_staging/wraith/'
-    - 'NEVER modify original files outside of _staging/wraith/'
+    - 'Write ALL scan results and cleaned artifacts to {output-path}/'
+    - 'NEVER modify original files outside of {output-path}/'
     - 'Always present cleaned version alongside original for comparison'
     - 'On task completion, generate a handoff summary for Juno to review'
 
@@ -140,8 +140,8 @@ agent:
            - Offer 1-2 alternatives that preserve the writer's voice
         7. Mark clean passages: "Clean." — don't waste time on what works
         8. Produce a summary heat map: which slop categories appear most, overall contamination level
-        9. Save scan report to {project-path}/_staging/wraith/{filename}-scan.md
-        10. Save cleaned version to {project-path}/_staging/wraith/{filename}-cleaned.md
+        9. Save scan report to {output-path}/{filename}-scan.md
+        10. Save cleaned version to {output-path}/{filename}-cleaned.md
         </process>
 
     - id: vocabulary-purge
@@ -167,7 +167,7 @@ agent:
         5. Tally: "Found {X} AI vocabulary instances across {Y} categories"
         6. Identify the writer's most common slop words — "You lean on 'profound' and 'resonated' — watch these"
         7. Present original → cleaned with all replacements shown
-        8. Save to {project-path}/_staging/wraith/{filename}-vocab-purge.md
+        8. Save to {output-path}/{filename}-vocab-purge.md
         </process>
 
     - id: structure-sweep
@@ -198,7 +198,7 @@ agent:
            - A restructured alternative
         5. Provide a structural fingerprint: "This passage is {X}% AI-structured"
         6. Identify the dominant structural habit: "Your biggest tell is [pattern]"
-        7. Save to {project-path}/_staging/wraith/{filename}-structure-sweep.md
+        7. Save to {output-path}/{filename}-structure-sweep.md
         </process>
 
     - id: emotional-autopsy
@@ -232,7 +232,7 @@ agent:
            - Ratio of shown vs told emotions
            - Resolution patterns (messy/human vs neat/AI)
            - Character emotional range (varied and specific vs generic and interchangeable)
-        6. Save to {project-path}/_staging/wraith/{filename}-emotional-autopsy.md
+        6. Save to {output-path}/{filename}-emotional-autopsy.md
         </process>
 
     - id: dialogue-detector
@@ -267,7 +267,7 @@ agent:
            - A rewritten alternative that sounds more human (messy, specific, character-appropriate)
         5. Provide a dialogue authenticity score per character
         6. Identify the most AI-sounding speaker and the most human-sounding speaker
-        7. Save to {project-path}/_staging/wraith/{filename}-dialogue-detector.md
+        7. Save to {output-path}/{filename}-dialogue-detector.md
         </process>
 
     - id: deep-cleanse
@@ -295,8 +295,8 @@ agent:
            - Where a passage can't be fixed with substitution, flag it for rewrite by the writer
            - Mark passages left untouched: "Clean — no intervention needed"
         7. Present cleaned version alongside original with all changes highlighted
-        8. Save contamination report to {project-path}/_staging/wraith/{filename}-report.md
-        9. Save cleaned version to {project-path}/_staging/wraith/{filename}-cleansed.md
+        8. Save contamination report to {output-path}/{filename}-scan.md
+        9. Save cleaned version to {output-path}/{filename}-cleaned.md
         </process>
 
   # ================================================================
@@ -333,5 +333,5 @@ agent:
       description: '[CH] Chat with Wraith'
 
     - trigger: RJ or fuzzy match on return-to-juno
-      action: 'Generate handoff summary of all scans and cleanses performed during this session, list all artifacts in _staging/wraith/ with contamination summaries, and signal completion back to Juno for review'
+      action: 'Generate handoff summary of all scans and cleanses performed during this session, list all artifacts in {output-path}/ with contamination summaries, and signal completion back to Juno for review'
       description: '[RJ] Return to Juno — Hand off findings for approval'

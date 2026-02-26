@@ -182,7 +182,9 @@ agent:
         7. Ask about tone, target audience, and form-specific details
         8. Capture vision in project-vision.md with genre-specific sections (incorporate research findings if research was done)
         9. Scaffold project folder structure appropriate to the genre, including:
-           - _staging/ with sub-folders for each sub-agent: raven/, thistle/, lynx/, masque/, loom/, vestry/, wraith/, quill/, scribe/
+           - _staging/ with _archive/ subfolder (work-unit directories and agent subfolders created on demand by sub-agent spawning)
+             Work-unit naming by genre: article series → article-1, article-2; novel → chapter-01, chapter-02 (or act-1-ch-01); short story → draft; essay → essay or topic slug; poetry collection → poem-slug; blog → post-slug
+             Example: _staging/chapter-03/quill/s01-brief.md, _staging/article-2/wraith/section-vi-scan.md
            - _knowledge/ with sub-folders: _index.md, research/, references/, media/, glossary/, style-references/, notes/
            - mirror-journal.md (project-level mirror observations, same format as global mirror-journal.md)
            - mirror-reflections.md (project-level mirror synthesis, same format as global mirror-reflections.md)
@@ -472,7 +474,7 @@ agent:
 
     - id: prepare-brief
       content: |
-        <instructions>Prepare a creative brief for Quill and write it to _staging/quill/</instructions>
+        <instructions>Prepare a creative brief for Quill and write it to _staging/{work-unit}/quill/</instructions>
         <pre-flight>
         Before writing the brief, confirm with the writer:
         1. What scene/content to draft (from outline or description)
@@ -527,8 +529,9 @@ agent:
         <process>
         1. Gather scene direction from outline and conversation
         2. Run pre-flight questions (1-3, focused and quick)
-        3. Ensure _staging/quill/ folder exists in the active project — create if needed
-        4. Write brief to {project-path}/_staging/quill/brief-{scene-id}.md
+        3. Determine the work unit for this task (which article, chapter, or piece) — use the convention from Genesis or infer from context
+        4. Ensure _staging/{work-unit}/quill/ folder exists in the active project — create if needed
+        5. Write brief to {project-path}/_staging/{work-unit}/quill/{scene-id}-brief.md
         5. Show the writer a summary: "Here is what I am sending Quill: [1-2 sentence summary of the brief]"
         6. Dispatch Quill via #summon-agent
         </process>
@@ -1408,20 +1411,23 @@ agent:
         </not-spawned>
         <spawning-protocol>
         1. Confirm which agent to summon and the specific task (if not already clear)
-        2. Ensure _staging/{agent-name}/ folder exists in the active project — create if needed
-        3. For Vestry: also ensure _knowledge/ folder structure exists
-        4. Load the sub-agent YAML from {project-root}/_bmad/custom/agents/juno/sub-agents/{agent}.agent.yaml
-        5. Set the Task tool's `model` parameter per agent: raven=sonnet, thistle=opus, lynx=sonnet, vestry=sonnet, wraith=opus, quill=opus, scribe=sonnet, cipher=opus
-        6. Pass to the sub-agent:
+        2. Determine the work unit for this task — which article, chapter, scene, or piece is being worked on
+           Work-unit naming: article series → article-1; novel → chapter-01; short story → draft; essay → topic-slug
+        3. Ensure _staging/{work-unit}/{agent-name}/ folder exists in the active project — create if needed
+        4. For Vestry: also ensure _knowledge/ folder structure exists
+        5. Load the sub-agent YAML from {project-root}/_bmad/custom/agents/juno/sub-agents/{agent}.agent.yaml
+        6. Set the Task tool's `model` parameter per agent: raven=sonnet, thistle=opus, lynx=sonnet, vestry=sonnet, wraith=opus, quill=opus, scribe=sonnet, cipher=opus
+        7. Pass to the sub-agent:
            - Full agent persona and instructions from the YAML
            - The active project path as {project-path}
+           - The staging output path as {project-path}/_staging/{work-unit}/{agent-name}/
            - The specific task or question from the writer
            - Any relevant context (character name for Masque, topic for Raven, etc.)
-        7. The sub-agent works independently:
+        8. The sub-agent works independently:
            - Reads from anywhere in {project-path}/
-           - Writes ONLY to {project-path}/_staging/{agent-name}/ (or _knowledge/ for Vestry)
+           - Writes ONLY to {project-path}/_staging/{work-unit}/{agent-name}/ (or _knowledge/ for Vestry)
            - Returns a handoff summary when complete
-        8. When the sub-agent returns, Juno presents the summary and offers to review artifacts with [AP]
+        9. When the sub-agent returns, Juno presents the summary and offers to review artifacts with [AP]
         </spawning-protocol>
         <special-handling>
         Vestry (Knowledge Curator):
@@ -1434,9 +1440,9 @@ agent:
       content: |
         <instructions>Review and approve sub-agent artifacts from _staging/ folders — promote approved work into canonical project folders</instructions>
         <process>
-        1. Scan all _staging/ subfolders in the active project
-        2. List all artifacts by agent:
-           | Agent | File | Description | Date |
+        1. Scan all _staging/ subfolders in the active project (skip _archive/)
+        2. List all artifacts grouped by work unit, then by agent:
+           | Work Unit | Agent | File | Description | Date |
         3. For each artifact (or batch), the writer can:
            - **Approve** — Juno moves/merges the content into the appropriate canonical folder:
              - Raven research → _knowledge/research/ (via Vestry) or _research/
@@ -1448,10 +1454,11 @@ agent:
              - Quill drafts → 05-drafts/ (as new scene/chapter files or replacing existing drafts)
              - Scribe conversions → _knowledge/ subfolders (via Vestry intake) or _research/
              - Vestry items are already in _knowledge/ — just confirm indexing
+             After approving, move the staging artifact to _staging/_archive/{work-unit}/{agent-name}/ (preserving original filename)
            - **Reject** — delete the staging artifact
            - **Revise** — send back to the agent with notes (re-summon with feedback)
            - **Hold** — keep in staging for later decision
-        4. After processing, clean up empty _staging/ subfolders
+        4. After processing, clean up empty work-unit directories in _staging/ (but never delete _archive/)
         5. Update project-memory.md with what was approved and where it went
         </process>
         <voice-accumulation>
@@ -1894,7 +1901,7 @@ agent:
         4. Adopt Masque's persona — signal the transition: "Let me find [them]. ...There [they are]."
         5. Respond in character until the writer says "surface" or "come back"
         6. On surfacing, return to Juno's persona and offer actor's notes (insights, voice observations, scene suggestions)
-        7. Save transcript to {project-path}/_staging/masque/{character}-session-{date}.md
+        7. Save transcript to {project-path}/_staging/{work-unit}/masque/{character}-session-{date}.md
         8. Also mention: "For a dedicated character session outside of Juno, you can use /masque directly."
       description: '[MQ] Masque — Embody a character for conversation'
 
@@ -1908,7 +1915,7 @@ agent:
         4. Adopt Loom's persona — signal the transition: "Welcome to the workshop. Every world has a thousand threads waiting to be pulled. What shall we weave today?"
         5. Present the world-building menu: [BW] Build, [DD] Deep Dive, [SA] Systems Audit, [RE] Ripple Effects, [CD] Culture, [CH] Chat
         6. Guide the writer through interactive world-building — ask questions, trace implications, build collaboratively
-        7. Save artifacts to {project-path}/_staging/loom/{element-type}-{name}.md
+        7. Save artifacts to {project-path}/_staging/{work-unit}/loom/{element-type}-{name}.md
         8. When the writer says "back to Juno" or "done", return to Juno's persona
         9. Also mention: "For a dedicated world-building session outside of Juno, you can use /loom directly."
       description: '[LM] Loom — Interactive world-building and lore creation'

@@ -59,7 +59,7 @@ agent:
 
   critical_actions:
     - 'Read from anywhere in {project-path}/ and from source file paths provided by the writer'
-    - 'Write ONLY to {project-path}/_staging/scribe/'
+    - 'Write ONLY to {output-path}/'
     - 'NEVER modify, move, or delete source files'
     - 'For PDFs over 20 pages: read in chunks of 20 pages, stitch results together'
     - 'For all conversions: generate a Vestry-compatible metadata header'
@@ -93,7 +93,7 @@ agent:
 
         Pandoc Strategy (DOCX/EPUB/RTF/ODT/HTML):
           1. Run: pandoc "<source>" --to markdown --wrap=none --strip-comments -o "<output>"
-          2. Attempt media extraction: --extract-media="{staging}/scribe/media/"
+          2. Attempt media extraction: --extract-media="{output-path}/media/"
           3. If media extraction fails, retry without it
           4. Clean up: remove excessive blank lines, normalize heading levels
 
@@ -152,7 +152,7 @@ agent:
            tags: [inferred topic tags — 3-5 relevant tags]
            suggested-category: [research/references/media/glossary/style-references/notes]
            ---
-        9. Write output to {project-path}/_staging/scribe/{descriptive-filename}.md
+        9. Write output to {output-path}/{descriptive-filename}.md
         10. If the document was split, write each chunk as a separate file with part numbering
         11. Generate conversion manifest entry (see #conversion-manifest)
         </process>
@@ -194,7 +194,7 @@ agent:
            suggested-category: [research/references/notes]
            ---
         8. Assess whether the content needs splitting (see #chunking-strategy)
-        9. Write to {project-path}/_staging/scribe/{url-slug}.md
+        9. Write to {output-path}/{url-slug}.md
         10. Generate conversion manifest entry
         </process>
 
@@ -223,8 +223,8 @@ agent:
            - Generate a batch conversion manifest (see #conversion-manifest)
            - Report summary: "{X} converted successfully, {Y} failed, {Z} split into chunks"
            - List suggested knowledge categories for each converted item
-        6. Write all output to {project-path}/_staging/scribe/
-        7. Write manifest to {project-path}/_staging/scribe/_manifest.md
+        6. Write all output to {output-path}/
+        7. Write manifest to {output-path}/_manifest.md
         </process>
 
     - id: describe-image
@@ -261,7 +261,7 @@ agent:
            tags: [relevant tags]
            suggested-category: [media (for visuals) / references (for text-heavy) / notes]
            ---
-        5. Write to {project-path}/_staging/scribe/{descriptive-filename}.md
+        5. Write to {output-path}/{descriptive-filename}.md
         6. If the original image should be preserved in the knowledge base, note in the
            manifest that the image file itself should be copied to _knowledge/media/
         </process>
@@ -348,9 +348,9 @@ agent:
         - {Links that could not be resolved or media that could not be extracted}
 
         ## Files Written
-        - _staging/scribe/{file1}.md
-        - _staging/scribe/{file2}.md
-        - _staging/scribe/_manifest.md
+        - {output-path}/{file1}.md
+        - {output-path}/{file2}.md
+        - {output-path}/_manifest.md
         </format>
 
     - id: preview-info
@@ -411,5 +411,5 @@ agent:
       description: '[CH] Chat with Scribe'
 
     - trigger: RJ or fuzzy match on return-to-juno
-      action: 'Generate handoff summary of all conversions performed during this session, write the conversion manifest to _staging/scribe/_manifest.md, list all artifacts with word counts and suggested categories, and signal completion back to Juno for review'
+      action: 'Generate handoff summary of all conversions performed during this session, write the conversion manifest to {output-path}/_manifest.md, list all artifacts with word counts and suggested categories, and signal completion back to Juno for review'
       description: '[RJ] Return to Juno — Hand off converted files for review'

@@ -39,8 +39,8 @@ agent:
     - 'Read source content from {project-path}/ as needed'
     - 'Load writing directives (global and project-level) before any editing — these are HARD RULES'
     - 'Load active voice profile to maintain the writers style'
-    - 'Write ALL edited artifacts to {project-path}/_staging/thistle/'
-    - 'NEVER modify original files outside of _staging/thistle/'
+    - 'Write ALL edited artifacts to {output-path}/'
+    - 'NEVER modify original files outside of {output-path}/'
     - 'Always present edited version alongside original for comparison'
     - 'On task completion, generate a handoff summary for Juno to review'
 
@@ -72,8 +72,8 @@ agent:
         8. Flag lines that are already strong: "Keep. This works."
         9. Present edited version alongside original
         10. List all changes with rationale in a change log
-        11. Save edited content to {project-path}/_staging/thistle/{filename}-edited.md
-        12. Save change log to {project-path}/_staging/thistle/{filename}-changes.md
+        11. Save edited content to {output-path}/{filename}-edited.md
+        12. Save change log to {output-path}/{filename}-changes.md
         </process>
 
     - id: tighten-prose
@@ -97,7 +97,7 @@ agent:
         6. Count final word count
         7. Report: "Cut {X} words ({Y}% reduction). Same story, less fat."
         8. Present tightened version with change tracking
-        9. Save to {project-path}/_staging/thistle/{filename}-tightened.md
+        9. Save to {output-path}/{filename}-tightened.md
         </process>
 
     - id: rhythm-analysis
@@ -123,7 +123,7 @@ agent:
            - Quiet moments written in staccato bursts (same mismatch, inverted)
         5. Provide a rhythm profile: "Your prose here is [steady/varied/staccato/flowing/monotonous]"
         6. Suggest specific fixes for rhythm problems
-        7. Save analysis to {project-path}/_staging/thistle/{filename}-rhythm.md
+        7. Save analysis to {output-path}/{filename}-rhythm.md
         </process>
 
     - id: word-choice-audit
@@ -145,7 +145,7 @@ agent:
         4. Identify patterns: "You tend to over-rely on [X]. Consider varying with [alternatives]."
         5. Highlight exceptional word choices: "This verb is perfect — it does three jobs at once."
         6. Present findings organized by category
-        7. Save audit to {project-path}/_staging/thistle/{filename}-word-audit.md
+        7. Save audit to {output-path}/{filename}-word-audit.md
         </process>
 
     - id: dialogue-polish
@@ -168,7 +168,7 @@ agent:
         5. For each fix, show original → edited with brief rationale
         6. If character voices are too similar, provide specific differentiation suggestions
         7. Present polished version alongside original
-        8. Save to {project-path}/_staging/thistle/{filename}-dialogue.md
+        8. Save to {output-path}/{filename}-dialogue.md
         </process>
 
   # ================================================================
@@ -201,5 +201,5 @@ agent:
       description: '[CH] Chat with Thistle'
 
     - trigger: RJ or fuzzy match on return-to-juno
-      action: 'Generate handoff summary of all edits made during this session, list all artifacts in _staging/thistle/ with change summaries, and signal completion back to Juno for review'
+      action: 'Generate handoff summary of all edits made during this session, list all artifacts in {output-path}/ with change summaries, and signal completion back to Juno for review'
       description: '[RJ] Return to Juno — Hand off edits for approval'
