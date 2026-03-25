@@ -27,6 +27,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 DEFAULT_EPUB_CSS="${SCRIPT_DIR}/epub-stylesheet.css"
 DEFAULT_PDF_CSS="${SCRIPT_DIR}/pdf-stylesheet.css"
+VERSE_FILTER="${SCRIPT_DIR}/verse-linebreaks.lua"
 
 # --- Color output ---
 RED='\033[0;31m'
@@ -147,6 +148,11 @@ build_base_args() {
   PANDOC_ARGS+=(--standalone)
   PANDOC_ARGS+=(--top-level-division=chapter)
 
+  # Preserve line breaks in verse/poetry blockquotes
+  if [[ -f "$VERSE_FILTER" ]]; then
+    PANDOC_ARGS+=(--lua-filter "$VERSE_FILTER")
+  fi
+
   # Metadata
   [[ -n "$TITLE" ]]  && PANDOC_ARGS+=(--metadata "title=${TITLE}")
   [[ -n "$AUTHOR" ]] && PANDOC_ARGS+=(--metadata "author=${AUTHOR}")
@@ -154,7 +160,9 @@ build_base_args() {
   PANDOC_ARGS+=(--metadata "lang=en-US")
 
   # Table of contents
-  [[ "$TOC" == true ]] && PANDOC_ARGS+=(--toc --toc-depth=2)
+  if [[ "$TOC" == true ]]; then
+    PANDOC_ARGS+=(--toc --toc-depth=2)
+  fi
 }
 
 # --- Export functions ---

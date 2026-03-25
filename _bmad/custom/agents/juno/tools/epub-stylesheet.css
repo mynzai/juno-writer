@@ -75,15 +75,28 @@ hr::after {
   color: #666;
 }
 
-/* === Block Quotes (for letters, excerpts, internal monologue) === */
+/* === Block Quotes (verse, scripture, poetry, excerpts) === */
 blockquote {
   margin: 1em 1.5em;
   font-style: italic;
   border-left: 2px solid #ccc;
   padding-left: 1em;
+  text-align: left;
 }
 
 blockquote p {
+  text-indent: 0;
+  text-align: left;
+}
+
+/* === Pandoc Line Blocks (alternative verse markup) === */
+.line-block {
+  margin: 1em 1.5em;
+  font-style: italic;
+  text-align: left;
+}
+
+.line-block .line {
   text-indent: 0;
 }
 

@@ -89,15 +89,28 @@ hr::after {
   color: #666;
 }
 
-/* === Block Quotes === */
+/* === Block Quotes (verse, scripture, poetry) === */
 blockquote {
   margin: 0.4in 0.5in;
   font-style: italic;
   border-left: 2pt solid #ccc;
   padding-left: 0.3in;
+  text-align: left;
 }
 
 blockquote p {
+  text-indent: 0;
+  text-align: left;
+}
+
+/* === Pandoc Line Blocks (alternative verse markup) === */
+.line-block {
+  margin: 0.4in 0.5in;
+  font-style: italic;
+  text-align: left;
+}
+
+.line-block .line {
   text-indent: 0;
 }
 
