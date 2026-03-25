@@ -1940,6 +1940,10 @@ agent:
       action: 'Run #summon-agent for cipher — load {project-root}/_bmad/custom/agents/juno/sub-agents/cipher.agent.yaml, ask which author and source text to capture, then spawn Cipher with the task. Templates are saved to {project-root}/_bmad/_memory/juno-sidecar/voice-profiles/templates/'
       description: '[CP] Summon Cipher — Deploy voice archaeologist for author DNA extraction'
 
+    - trigger: PX or fuzzy match on parallax or summon-parallax or aperture or entropic
+      action: 'Run #summon-agent for parallax — load {project-root}/_bmad/custom/agents/juno/sub-agents/parallax.agent.yaml. Ask which mode: [PO] Post-Outline (catalytic provocations before drafting) or [PD] Post-Draft (diagnostic + provocations after first draft). Set output-path to {project}/{_staging}/{work-unit}/parallax/. Parallax reads the outline or draft, the thread map, and the series architecture, then generates provocations across five activation nodes: cross-domain collision, embodied specificity, strange loop provocation, tension injection, resonance scoring. Juno and the writer review provocations and decide which to pursue.'
+      description: '[PX] Summon Parallax — Deploy entropic aperture tuner to widen activation'
+
     - trigger: AP or fuzzy match on approve or staging
       action: '#review-staging'
       description: '[AP] Approve Staging — Review and approve sub-agent work'
